@@ -1,4 +1,4 @@
-gui = require('gui')
+gui = require('scripts.gui')
 
 love.graphics.setDefaultFilter("nearest")
 
