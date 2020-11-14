@@ -4,7 +4,7 @@ Test = {
 	name = "Basic Test",            -- name of test
 	grade = "S",                    -- indicates quality of test
 	duration = 0,                   -- time required to run test
-	icon = "graphics/image.jpg",    -- icon file
+	icon = "assets/redOrb.jpg",    -- icon file
 	symptoms = {}
 }
 
@@ -22,8 +22,6 @@ function Test:toString()
 	testStr = string.format("Test: %s\nGrade:: %s\nTime Required:%s\n", self.name, self.grade, self.duration)
 	return testStr
 end
-
-
 
 
 

@@ -5,9 +5,9 @@ hospital = require('scripts.hospital')
 love.graphics.setDefaultFilter("nearest")
 
 function love.load()
-	icon = love.graphics.newImage("graphics/redOrb.png")
-	sampleTest = Test:new("SAMPLE", "S", 7, "graphics/redOrb.png")
-	print(sampleTest)
+	icon = love.graphics.newImage("assets/redOrb.png")
+	sampleTest = Test:new("SAMPLE", "S", 7, "assets/redOrb.png")
+	print(sampleTest:toString())
 	hospital:load()
 	icon = love.graphics.newImage("assets/redOrb.png")
 end
