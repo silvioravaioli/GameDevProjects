@@ -1,6 +1,7 @@
 gui = require('scripts.gui')
 tests = require('scripts.test')
 hospital = require('scripts.hospital')
+patients = require('scripts.patients')
 
 love.graphics.setDefaultFilter("nearest")
 
@@ -20,6 +21,7 @@ function love.draw()
 	love.graphics.setBackgroundColor(1,1,1);
 	gui:draw()
 	hospital:draw()
+	patients:draw({name="Bob Ross",bio="Likes to paint"})
 end
 
 function love.mousepressed(x, y, button, isTouch)
