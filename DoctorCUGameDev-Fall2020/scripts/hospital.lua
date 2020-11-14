@@ -14,8 +14,8 @@ end
 
 function hospital:draw()
 	for i = 1, #self.patients do
-		local patient = self.patients[i]
-		love.graphics.draw(patient, 100+patient:getWidth()*2*(i - 1), 500, 0, 1, 1)
+		local patientSprite = self.patients[i]
+		love.graphics.draw(patient, 100+patientSprite:getWidth()*2*(i - 1), 500, 0, 1, 1)
 	end
 	-- love.graphics.draw()
 end
