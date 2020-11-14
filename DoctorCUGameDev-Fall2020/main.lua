@@ -21,3 +21,7 @@ function love.draw()
 	gui:draw()
 	hospital:draw()
 end
+
+function love.mousepressed(x, y, button, isTouch)
+	hospital:mousepressed(x, y)
+end

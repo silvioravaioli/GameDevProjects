@@ -20,4 +20,8 @@ function hospital:draw()
 	-- love.graphics.draw()
 end
 
+function hospital:mousepressed(x, y)
+	
+end
+
 return hospital
