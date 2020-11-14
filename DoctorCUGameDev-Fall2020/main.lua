@@ -1,9 +1,12 @@
 gui = require('scripts.gui')
+tests = require('scripts.test')
 
 love.graphics.setDefaultFilter("nearest")
 
 function love.load()
-	icon = love.graphics.newImage("redOrb.png")
+	icon = love.graphics.newImage("graphics/redOrb.png")
+	sampleTest = Test:new("SAMPLE", "S", 7, "graphics/redOrb.png")
+	print(sampleTest)
 end
 
 function love.update(dt)
