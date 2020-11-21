@@ -26,16 +26,17 @@ end
 function love.draw()
 	-- gui:draw()
 	-- hospital:draw()
-	-- patients:draw({name="Bob Ross",bio="Likes to paint"})
-	manual:draw()
-	drawTopAndBottomDisplay()
 	
+	-- manual:draw()
+	-- patients:draw({ name="Bob Ross", bio="Likes to paint", exp= 1, photo=love.graphics.newImage("assets/greenOrb.png"),symptoms={{1, 50},{2, 100}},})
+	drawTopAndBottomDisplay()
+
 end
 
 
 function love.mousepressed(x, y, button, isTouch)
 	hospital:mousepressed(x, y)
-	manual:mousepressed(x,y)
+	--manual:mousepressed(x,y)
 end
 
 
