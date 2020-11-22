@@ -36,7 +36,7 @@ manual.treatments = {
 }
 
 
---want to make sympotms gui
+--want to make symptoms gui
 --ideas: map a specific symptom to an image, 
 --probability, update probability, 
 -- how likely you have the disease given the symptons :table (4 levels, very likely, not likely...)
