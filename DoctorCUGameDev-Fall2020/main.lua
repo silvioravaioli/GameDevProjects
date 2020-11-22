@@ -21,7 +21,8 @@ function love.load()
 
 	-- hospital:load()
 	love.graphics.setBackgroundColor(1,1,1);
-	font = setFont(30)
+	defaultFontSize = 30
+	font = setFont(defaultFontSize)
 
 	textHeight = font:getHeight()
 
@@ -94,6 +95,7 @@ function drawTopAndBottomDisplay()
 	squareScale = squareWidth / square:getWidth()
 	-- draw tests
 
+	setFont(25)
 	textWidth = font:getWidth("TEST N")
 
 	for i = 1, numberOfTests do
@@ -104,14 +106,14 @@ function drawTopAndBottomDisplay()
 
 		-- print the test names
 		setColorBlack()
-		love.graphics.print("TEST" .. tostring(i),
+		love.graphics.print("TEST " .. tostring(i),
 			xpos+squareWidth/2-textWidth/2,
-			ypos+squareWidth/2-textHeight/2,
-			0, 1, 1)
+			ypos+squareWidth/2-textHeight/2)
 	end
 
+	setFont(defaultFontSize)
+
 	setColorWhite()
-	
 	scaleX = bottomBarHeight / square:getWidth()
 	love.graphics.draw(square, x1, testBarY, 0, scaleX, scaleX)
 	love.graphics.draw(square, x2, testBarY, 0, scaleX, scaleX)
