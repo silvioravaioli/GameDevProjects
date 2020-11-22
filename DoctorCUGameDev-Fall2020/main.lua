@@ -2,6 +2,7 @@ gui = require('scripts.gui')
 tests = require('scripts.test')
 hospital = require('scripts.hospital')
 patients = require('scripts.patients')
+manual = require('scripts.manual')
 
 love.graphics.setDefaultFilter("nearest")
 
@@ -11,6 +12,7 @@ function love.load()
 	screenHeight = love.graphics.getHeight()
 	screenOffsetFactor = 0.01
 	numberOfTests = 6
+	manual:setup()
 	-- load all the image assets
 	square = love.graphics.newImage("assets/bluesquare.png")
 	rectangle = love.graphics.newImage("assets/bluerectangle.png")
@@ -40,14 +42,17 @@ end
 function love.draw()
 	-- gui:draw()
 	-- hospital:draw()
-	-- patients:draw({name="Bob Ross",bio="Likes to paint"})
-	drawTopAndBottomDisplay()
 	
+	-- manual:draw()
+	-- patients:draw({ name="Bob Ross", bio="Likes to paint", exp= 1, photo=love.graphics.newImage("assets/greenOrb.png"),symptoms={{1, 50},{2, 100}},})
+	drawTopAndBottomDisplay()
+
 end
 
 
 function love.mousepressed(x, y, button, isTouch)
 	hospital:mousepressed(x, y)
+	--manual:mousepressed(x,y)
 end
 
 function setFont(size)
