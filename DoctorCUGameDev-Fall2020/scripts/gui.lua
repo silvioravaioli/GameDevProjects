@@ -1,10 +1,6 @@
 local gui = {}
 
 function gui:draw()
-	gui:drawTopAndBottomDisplay()
-end
-
-function gui:drawTopAndBottomDisplay()
 	stageBarWidth = 0.1 * screenWidth
 	progressBarWidth = 0.4 * screenWidth
 	levelBarWidth = 0.12 * screenWidth
@@ -12,6 +8,10 @@ function gui:drawTopAndBottomDisplay()
 	testBarWidth = 0.5 * screenWidth
 	topBarStartX = 0.1 * screenWidth
 
+	gui:drawTopAndBottomDisplay()
+end
+
+function gui:drawTopAndBottomDisplay()
 	testBarX = screenWidth * 0.5 - testBarWidth/2
 	testBarY = screenHeight * (1 - screenOffsetFactor) - bottomBarHeight
 
@@ -63,14 +63,12 @@ function gui:drawTopAndBottomDisplay()
 	textWidth = font:getWidth("HELP")
 	love.graphics.print("HELP",
 		x1 + bottomBarHeight/2 - textWidth/2,
-		testBarY + bottomBarHeight/2 - textHeight/2,
-		0, 1, 1)
+		testBarY + bottomBarHeight/2 - textHeight/2)
 
 	textWidth = font:getWidth("MANUAL")
 	love.graphics.print("MANUAL",
 		x2 + bottomBarHeight/2 - textWidth/2,
-		testBarY + bottomBarHeight/2 - textHeight/2,
-		0, 1, 1)
+		testBarY + bottomBarHeight/2 - textHeight/2)
 	
 	-- draw top bars: stage, progress, level, experience
 	setColorBlue()
@@ -138,6 +136,21 @@ function gui:drawTopAndBottomDisplay()
 		expBarX + expBarWidth/2 - textWidth/2,
 		screenOffsetFactor * screenHeight + topBarHeight/2 - textHeight/2)
 
+	-- draw return button
+	returnX = x2 + bottomBarHeight + screenOffsetFactor * screenWidth
+	setColorWhite()
+	love.graphics.draw(squareRed, returnX, testBarY, 0, scaleX, scaleX)
+	setColorBlack()
+	textWidth = font:getWidth("Go Back")
+	love.graphics.print("Go Back",
+		returnX + bottomBarHeight/2 - textWidth/2,
+		testBarY + bottomBarHeight/2 - textHeight/2)
+end
+
+function gui:mousepressed(x,y)
+	if x >= returnX and x <= returnX + bottomBarHeight and y >= testBarY and y <= testBarY + bottomBarHeight then
+		page = "MAIN"
+	end
 end
 
 return gui

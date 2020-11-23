@@ -1,18 +1,8 @@
 local patients = {}
 
-local testPatient = {
-	name="Bob Ross",
-	bio="Likes to paint",
-	exp= 1,
-	photo=love.graphics.newImage("assets/Characters/Icon_Patient1.jpeg"),
-	symptoms={
-		{1, 50},
-		{2, 100}
-	},
-}
+function patients:draw()
+	patient = patientsTable[currentPatient]
 
-function patients:draw(patient)
-	patient = testPatient
 	x = screenWidth/2 - centerUIWidth/2
 	y = (lowerBound+upperBound)/2 - centerUIHeight/2
 	scaleCenterX = centerUIWidth / centerRect:getWidth()
@@ -20,26 +10,49 @@ function patients:draw(patient)
 	setColorWhite()
 	love.graphics.draw(centerRect, x, y, 0, scaleCenterX, scaleCenterY)
 
-	-- love.graphics.rectangle("fill", 150, 100, 300, 500)
-	-- love.graphics.setColor(0,0,0,255)
-	-- love.graphics.print(patient.name, 200, 110, 0, 4)
-	-- love.graphics.print(patient.exp, 200, 160, 0 ,2)
-	-- love.graphics.print(patient.bio, 200, 190, 0 ,2)
-	-- love.graphics.print("List of symptoms", 200, 230, 0 ,2)
-	-- for i = 1, #patient.symptoms do
-	-- 	love.graphics.setColor(0,0,0,255)
-	-- 	symptom = patient.symptoms[i][1]
-	-- 	--symptom_name = manual.symptoms[symptom]
-	-- 	symptom_prob = patient.symptoms[i][2]
-	-- 	love.graphics.print(symptom, 220, 240 + (40 * i), 0, 2)
-	-- 	love.graphics.print(symptom_prob, 250, 240 + (40 * i), 0, 2)
-	-- 	love.graphics.setColor(1,1,1)
-	-- end
+	local borderOffset = 50
+	local textSpacing = 15		-- pixels between lines
+	setFont(25)					-- set font size
+	local currX = x + borderOffset
+	local currY = y + borderOffset
+	setColorBlack()
+
+	fields = {
+		"Name: "..patient.name,
+		"EXP: +"..patient.exp,
+		"Bio: "..patient.bio,
+		"List of symptoms:"
+	}
+
+	for j = 1, #fields do
+		love.graphics.print(fields[j], currX, currY)
+		currY = currY + textHeight + textSpacing
+	end
+
+	for i = 1, #patient.symptoms do
+		symptom = patient.symptoms[i][1]
+		--symptom_name = manual.symptoms[symptom]
+		symptom_prob = patient.symptoms[i][2]
+		love.graphics.print(symptom.." "..symptom_prob, currX, currY)
+		currY = currY + textHeight + textSpacing
+	end
+
+	-- draw doctor and patient
+	doctorHeight = 0.75 * centerUIHeight
+	doctorWidth = doctorHeight / ratio
+	scale = doctorHeight / hospital.doctor[1]:getHeight()
 	
+	doctorX = x/2 - doctorWidth/2
+	doctorY = (lowerBound+upperBound)/2 - doctorHeight/2
+	setColorWhite()
+	love.graphics.draw(hospital.doctor[1], doctorX, doctorY, 0, scale, scale)
+
+	patientX = x + centerUIWidth + x/2 - doctorWidth/2
+	patientY = doctorY
+	love.graphics.draw(love.graphics.newImage(patient.photo), patientX, patientY, 0, scale, scale)
 end
 
 --function patients:drawinfo(patient)
-	--maybe set color
-	
+	--maybe set color	
 
 return patients

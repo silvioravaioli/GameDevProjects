@@ -31,17 +31,17 @@ function hospital:load(lvl)
 	end
 	patientHeight = ratio * patientWidth
 
-	x = screenWidth/2 - ((#self.patients + 2) * xOffset + (#self.patients + 1) * patientWidth)/2
-	y = (lowerBound + upperBound)/2 - patientHeight/2
+	mainX = screenWidth/2 - ((#self.patients + 2) * xOffset + (#self.patients + 1) * patientWidth)/2
+	mainY = (lowerBound + upperBound)/2 - patientHeight/2
 
 	for i = 1, #self.patients do
-		self.patientBoxes[i] = {x + (patientWidth + xOffset) * i, y}
+		self.patientBoxes[i] = {mainX + (patientWidth + xOffset) * i, mainY}
 	end
 end
 
 function hospital:draw()
 	setColorWhite()
-	love.graphics.draw(self.doctor[1], x, y, 0, xScale, yScale)
+	love.graphics.draw(self.doctor[1], mainX, mainY, 0, xScale, yScale)
 	for i = 1, #self.patients do
 		local patientSprite = self.patients[i]
 		xScale = patientWidth/patientSprite:getWidth()
@@ -56,6 +56,7 @@ function hospital:mousepressed(x, y)
 		yy = self.patientBoxes[i][2]
 		if x >= xx and x <= xx + patientWidth and y >= yy and y <= yy + patientHeight then
 			page = "TEST"
+			currentPatient=i
 		end
 	end
 end

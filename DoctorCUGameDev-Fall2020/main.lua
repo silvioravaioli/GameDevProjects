@@ -2,6 +2,7 @@ gui = require('scripts.gui')
 tests = require('scripts.test')
 hospital = require('scripts.hospital')
 patients = require('scripts.patients')
+patientData = require('scripts.patientData')
 manual = require('scripts.manual')
 
 love.graphics.setDefaultFilter("nearest")
@@ -11,6 +12,7 @@ function love.load()
 
 	-- load image assets
 	square = love.graphics.newImage("assets/bluesquare.png")
+	squareRed = love.graphics.newImage("assets/redsquare.png")
 	rectangle = love.graphics.newImage("assets/bluerectangle.png")
 	centerRect = love.graphics.newImage("assets/testMenu.png")
 
@@ -35,7 +37,7 @@ function love.load()
 	font = setFont(defaultFontSize)
 	textHeight = font:getHeight()
 
-	currentPatient = {}
+	currentPatient = 1
 
 	-- level data
 	stage = 99
@@ -46,8 +48,8 @@ function love.load()
 	maxExperience = 5
 
 	-- patients
-	numPatients = 6
 	hospital:load(level)
+	patientsTable = patientData:getPatients()
 
 end
 
@@ -65,19 +67,23 @@ function love.draw()
 	if page == "MAIN" then
 		hospital:draw()
 	elseif page == "TEST" then
-		patients.draw()
+		patients:draw()
 	end
 end
 
 
 function love.mousepressed(x, y, button, isTouch)
-	hospital:mousepressed(x, y)
+	gui:mousepressed(x,y)
+	if page == "MAIN" then
+		hospital:mousepressed(x, y)
+	end
 	--manual:mousepressed(x,y)
 end
 
 function setFont(size)
 	font = love.graphics.newFont("assets/nokiafc22.ttf", size)
 	love.graphics.setFont(font)
+	textHeight = font:getHeight()
 	return font
 end
 
