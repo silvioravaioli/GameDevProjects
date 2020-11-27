@@ -11,10 +11,18 @@ function love.load()
 	page = "MAIN"
 
 	-- load image assets
-	square = love.graphics.newImage("assets/bluesquare.png")
-	squareRed = love.graphics.newImage("assets/redsquare.png")
-	rectangle = love.graphics.newImage("assets/bluerectangle.png")
-	centerRect = love.graphics.newImage("assets/testMenu.png")
+	square 		= love.graphics.newImage("assets/bluesquare.png")
+	squareRed 	= love.graphics.newImage("assets/redsquare.png")
+	rectangle 	= love.graphics.newImage("assets/bluerectangle.png")
+	centerRect 	= love.graphics.newImage("assets/testMenu.png")
+	-- load image icons
+	icontest1 	= love.graphics.newImage("assets/Icons/test_1.png")
+	icontest2 	= love.graphics.newImage("assets/Icons/test_2.png")
+	icontest3 	= love.graphics.newImage("assets/Icons/test_3.png")
+	icontest4 	= love.graphics.newImage("assets/Icons/test_4.png")
+	icontest5 	= love.graphics.newImage("assets/Icons/test_5.png")
+	icontest6 	= love.graphics.newImage("assets/Icons/test_6.png")
+
 
 	-- drawing the UI elements
 	screenWidth = love.graphics.getWidth()
