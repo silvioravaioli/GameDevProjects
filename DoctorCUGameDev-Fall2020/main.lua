@@ -4,6 +4,9 @@ hospital = require('scripts.hospital')
 patients = require('scripts.patients')
 patientData = require('scripts.patientData')
 manual = require('scripts.manual')
+diseases = require('scripts.diseases')
+symptoms = require('scripts.symptoms')
+treatments = require('scripts.treatments')
 
 love.graphics.setDefaultFilter("nearest")
 
