@@ -66,7 +66,7 @@ function gui:drawTopAndBottomDisplay()
 
 	-- MANUAL
 	love.graphics.draw(square, x2, testBarY, 0, scaleX, scaleX)
-	manualButton = {x2, testBarY, square:getWidth()}
+	manualButton = {x2, testBarY, bottomBarHeight}
 
 	-- Add text to UI
 	setColorBlack()
@@ -163,6 +163,13 @@ function gui:mousepressed(x,y)
 	if x >= returnX and x <= returnX + bottomBarHeight and y >= testBarY and y <= testBarY + bottomBarHeight then
 		page = "MAIN"
 	end
+	-- move to manual page
+	xx = manualButton[1]
+	yy = manualButton[2]
+	ww = manualButton[3]
+	if x >= xx and x <= xx + ww and y >= yy and y <= yy + ww then
+		page = "MANUAL"
+	end	
 end
 
 return gui

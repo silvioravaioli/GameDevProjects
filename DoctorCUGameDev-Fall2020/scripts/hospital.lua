@@ -51,8 +51,8 @@ function hospital:draw()
 end
 
 function hospital:mousepressed(x, y)
-	print('Mouse Pressed: coordinates:')
-	print(x,y)
+	--print('Mouse Pressed: coordinates:')
+	--print(x,y)
 	--print(ScaleX) -- you can print other stuff for debugging
 
 	-- move to patient pages
@@ -64,14 +64,6 @@ function hospital:mousepressed(x, y)
 			currentPatient=i
 		end
 	end
-
-	-- move to manual page
-	xx = manualButton[1]
-	yy = manualButton[2]
-	ww = manualButton[3]
-	if x >= xx and x <= xx + ww and y >= yy and y <= yy + ww then
-		page = "MANUAL"
-	end	
 end
 
 return hospital

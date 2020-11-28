@@ -80,6 +80,8 @@ function love.draw()
 		hospital:draw()
 	elseif page == "TEST" then
 		patients:draw()
+	elseif page == "MANUAL" then
+		manual:draw()
 	end
 end
 
@@ -88,8 +90,9 @@ function love.mousepressed(x, y, button, isTouch)
 	gui:mousepressed(x,y)
 	if page == "MAIN" then
 		hospital:mousepressed(x, y)
+	elseif page == "MANUAL" then
+		manual:mousepressed(x,y)
 	end
-	--manual:mousepressed(x,y)
 end
 
 function setFont(size)

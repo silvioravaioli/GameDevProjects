@@ -4,6 +4,7 @@ local manual = {
 	page = 0,
 }
 
+
 manual.symptoms = {
 	"runnynose",
 	"fever",
@@ -35,6 +36,8 @@ manual.treatments = {
 	
 }
 
+manual.contentsBoxes = {}
+
 
 --want to make symptoms gui
 --ideas: map a specific symptom to an image, 
@@ -49,6 +52,7 @@ manual.treatments = {
 
 manual.diseaseGivenSymptoms = {}
 function manual:setup()
+	xstart = 350
 	for x = 1, 10 do
 		self.diseaseGivenSymptoms[x] = {}
 	end
@@ -68,28 +72,36 @@ function manual:setup()
 			end
 		end
 	end
+	for i = 1,  10 do
+		self.contentsBoxes[i] = {screenWidth/2 - 50, 140 + (55 * i), 0, 1.4}
+			--love.graphics.print(self.diseases[i], 350, 50 + (40 * i), 0, 2)
+	end
+
 end 
 
-function manual:draw(manual) --maybe should be called update
+function manual:draw()
 	if self.page == 0 then
-		love.graphics.print("Doctor's Manual", 350, 10, 0, 2)
+		love.graphics.print("Doctor's Manual", xstart + 50, 100, 0, 2)
 		for i = 1,  10 do
-			love.graphics.print(self.diseases[i], 350, 50 + (40 * i), 0, 2)
+			setColorBlue()
+			love.graphics.rectangle("fill", self.contentsBoxes[i][1], self.contentsBoxes[i][2], 40, 30)
+			setColorBlack()
+			love.graphics.print(self.diseases[i], self.contentsBoxes[i][1], self.contentsBoxes[i][2], self.contentsBoxes[i][3], self.contentsBoxes[i][4])
 		end
 	else
 		j = 0
 		dis = self.diseases[self.page]
-		love.graphics.print(dis, 200, 25, 0, 2)
+		love.graphics.print(dis, screenWidth/2, 150, 0, 2)
 		for i = 1, 10 do
 			prob = self.diseaseGivenSymptoms[i][self.page]
 			if prob > 0 then
 				j = j + 1
 				sympt = self.symptoms[i]
-				love.graphics.print(sympt, 50, 50 + (40 * j), 0, 2)
-				love.graphics.print(prob, 300,  50 + (40 * j), 0 , 2)
+				love.graphics.print(sympt, 450, 225 + (50 * j), 0, 1)
+				love.graphics.print(prob, 800,  225 + (50 * j), 0 , 1)
 			end
 		end
-		love.graphics.print("back", 300, 450, 0 , 2) 
+		love.graphics.print("back", screenWidth/2, 550, 0 , 2) 
 		--back button
 	end
 	--update
@@ -97,35 +109,18 @@ end
 
 function manual:mousepressed(x,y)
 	if manual.page == 0 then
-		if x >= 350 and x <= 450 and y >= 90 and y <= 120 then
-			manual.page = 1
-		elseif x >= 350 and x <= 450 and y >= 130 and y <= 150 then
-			manual.page = 2
-		elseif x >= 350 and x <= 450 and y >= 170 and y <= 190 then
-			manual.page = 3
-		elseif x >= 350 and x <= 450 and y >= 210 and y <= 230 then
-			manual.page = 4
-		elseif x >= 350 and x <= 450 and y >= 250 and y <= 270 then
-			manual.page = 5
-		elseif x >= 350 and x <= 450 and y >= 290 and y <= 310 then
-			manual.page = 6
-		elseif x >= 350 and x <= 450 and y >= 330 and y <= 350 then
-			manual.page = 7
-		elseif x >= 350 and x <= 450 and y >= 370 and y <= 390 then
-			manual.page = 8
-		elseif x >= 350 and x <= 450 and y >= 410 and y <= 430 then
-			manual.page = 9
-		elseif x >= 350 and x <= 450 and y >= 450 and y <= 470 then
-			manual.page = 10
+		for i = 1, 10 do
+			xx = self.contentsBoxes[i][1]
+			yy = self.contentsBoxes[i][2]
+			if x >= xx and x <= xx + 100 and y >= yy and y <= yy + 50 then
+				manual.page = i
+			end
 		end
-
-
 	else
-		if x >= 300 and x <= 400 and y >= 450 and y <= 550 then
+		if x >= screenWidth/2 - 50 and x <= screenWidth/2 + 100 and y >= 550 and y <= 650 then
 			manual.page = 0
 		end
 	end
-	manual:draw(manual)
 end
 
 
