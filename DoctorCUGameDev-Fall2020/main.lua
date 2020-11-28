@@ -19,12 +19,13 @@ function love.load()
 	rectangle 	= love.graphics.newImage("assets/bluerectangle.png")
 	centerRect 	= love.graphics.newImage("assets/testMenu.png")
 	-- load image icons
-	icontest1 	= love.graphics.newImage("assets/Icons/test_1.png")
-	icontest2 	= love.graphics.newImage("assets/Icons/test_2.png")
-	icontest3 	= love.graphics.newImage("assets/Icons/test_3.png")
-	icontest4 	= love.graphics.newImage("assets/Icons/test_4.png")
-	icontest5 	= love.graphics.newImage("assets/Icons/test_5.png")
-	icontest6 	= love.graphics.newImage("assets/Icons/test_6.png")
+	icontest = {}
+	icontest[1] = love.graphics.newImage("assets/Icons/test_1.png")
+	icontest[2]	= love.graphics.newImage("assets/Icons/test_2.png")
+	icontest[3]	= love.graphics.newImage("assets/Icons/test_3.png")
+	icontest[4]	= love.graphics.newImage("assets/Icons/test_4.png")
+	icontest[5]	= love.graphics.newImage("assets/Icons/test_5.png")
+	icontest[6]	= love.graphics.newImage("assets/Icons/test_6.png")
 
 
 	-- drawing the UI elements
