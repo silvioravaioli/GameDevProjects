@@ -44,7 +44,7 @@ function gui:drawTopAndBottomDisplay()
 		xpos = testBarX + offset * i + squareWidth * (i - 1)
 		ypos = testBarY + (bottomBarHeight - squareWidth)/2
 		love.graphics.draw(icontest[i], xpos, ypos, 0, squareScale, squareScale)
-		testIconBoxes[i] = {xpos, ypos}
+		testIconBoxes[i] = {xpos, ypos, square:getWidth()}
 
 		-- print the test names
 		--setColorBlack()
@@ -62,11 +62,11 @@ function gui:drawTopAndBottomDisplay()
 	
 	-- HELP
 	love.graphics.draw(square, x1, testBarY, 0, scaleX, scaleX)
-	helpButton = {x1, testBarY}
+	helpButton = {x1, testBarY, square:getWidth()}
 
 	-- MANUAL
 	love.graphics.draw(square, x2, testBarY, 0, scaleX, scaleX)
-	manualButton = {x2, testBarY}
+	manualButton = {x2, testBarY, square:getWidth()}
 
 	-- Add text to UI
 	setColorBlack()
@@ -150,6 +150,8 @@ function gui:drawTopAndBottomDisplay()
 	returnX = x2 + bottomBarHeight + screenOffsetFactor * screenWidth
 	setColorWhite()
 	love.graphics.draw(squareRed, returnX, testBarY, 0, scaleX, scaleX)
+	returnButton = {returnX, testBarY, square:getWidth()}
+
 	setColorBlack()
 	textWidth = font:getWidth("Go Back")
 	love.graphics.print("Go Back",
