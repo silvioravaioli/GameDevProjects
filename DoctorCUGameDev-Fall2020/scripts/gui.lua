@@ -37,26 +37,36 @@ function gui:drawTopAndBottomDisplay()
 
 	setFont(25)
 	textWidth = font:getWidth("TEST N")
+	testIconBoxes={}
 
 	for i = 1, numberOfTests do
 		setColorWhite()
 		xpos = testBarX + offset * i + squareWidth * (i - 1)
 		ypos = testBarY + (bottomBarHeight - squareWidth)/2
-		love.graphics.draw(square, xpos, ypos, 0, squareScale, squareScale)
+		love.graphics.draw(icontest[i], xpos, ypos, 0, squareScale, squareScale)
+		testIconBoxes[i] = {xpos, ypos}
 
 		-- print the test names
-		setColorBlack()
-		love.graphics.print("TEST " .. tostring(i),
-			xpos+squareWidth/2-textWidth/2,
-			ypos+squareWidth/2-textHeight/2)
+		--setColorBlack()
+		--love.graphics.print("TEST " .. tostring(i),
+		--	xpos+squareWidth/2-textWidth/2,
+		--	ypos+squareWidth/2-textHeight/2)
+
+
 	end
 
 	setFont(defaultFontSize)
 
 	setColorWhite()
 	scaleX = bottomBarHeight / square:getWidth()
+	
+	-- HELP
 	love.graphics.draw(square, x1, testBarY, 0, scaleX, scaleX)
+	helpButton = {x1, testBarY}
+
+	-- MANUAL
 	love.graphics.draw(square, x2, testBarY, 0, scaleX, scaleX)
+	manualButton = {x2, testBarY}
 
 	-- Add text to UI
 	setColorBlack()
