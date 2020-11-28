@@ -37,6 +37,7 @@ function patients:generate_symptom(patient)
 		-- retrieve the probability of having the symptom 
 		prob_disease = patient.symptoms_disease[i]
 		-- randomly assign the symptom (yes or no)
+		-- replace rand with a random variable
 		if rand<prob_disease then
 			patient.symptoms_true = 1
 		else
