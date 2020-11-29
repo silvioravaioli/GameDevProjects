@@ -15,7 +15,12 @@ function love.load()
 
 	-- load image assets
 	square 		= love.graphics.newImage("assets/bluesquare.png")
+
+	squareBlue 	= love.graphics.newImage("assets/bluesquare.png")
 	squareRed 	= love.graphics.newImage("assets/redsquare.png")
+	squareYellow= love.graphics.newImage("assets/yellowsquare.png")
+	squareGreen = love.graphics.newImage("assets/greensquare.png")
+
 	rectangle 	= love.graphics.newImage("assets/bluerectangle.png")
 	centerRect 	= love.graphics.newImage("assets/testMenu.png")
 	-- load image icons
@@ -26,6 +31,10 @@ function love.load()
 	icontest[4]	= love.graphics.newImage("assets/Icons/test_4.png")
 	icontest[5]	= love.graphics.newImage("assets/Icons/test_5.png")
 	icontest[6]	= love.graphics.newImage("assets/Icons/test_6.png")
+
+	icon_help	= love.graphics.newImage("assets/Icons/icon_help.png")
+	icon_manual	= love.graphics.newImage("assets/Icons/icon_manual.png")
+	icon_hospital	= love.graphics.newImage("assets/Icons/icon_hospital.png")
 
 
 	-- drawing the UI elements

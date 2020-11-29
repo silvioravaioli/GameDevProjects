@@ -61,24 +61,24 @@ function gui:drawTopAndBottomDisplay()
 	scaleX = bottomBarHeight / square:getWidth()
 	
 	-- HELP
-	love.graphics.draw(square, x1, testBarY, 0, scaleX, scaleX)
+	love.graphics.draw(icon_help, x1, testBarY, 0, scaleX, scaleX)
 	helpButton = {x1, testBarY, square:getWidth()}
 
 	-- MANUAL
-	love.graphics.draw(square, x2, testBarY, 0, scaleX, scaleX)
+	love.graphics.draw(icon_manual, x2, testBarY, 0, scaleX, scaleX)
 	manualButton = {x2, testBarY, bottomBarHeight}
 
 	-- Add text to UI
 	setColorBlack()
-	textWidth = font:getWidth("HELP")
-	love.graphics.print("HELP",
-		x1 + bottomBarHeight/2 - textWidth/2,
-		testBarY + bottomBarHeight/2 - textHeight/2)
+	--textWidth = font:getWidth("HELP")
+	--love.graphics.print("HELP",
+	--	x1 + bottomBarHeight/2 - textWidth/2,
+	--	testBarY + bottomBarHeight/2 - textHeight/2)
 
-	textWidth = font:getWidth("MANUAL")
-	love.graphics.print("MANUAL",
-		x2 + bottomBarHeight/2 - textWidth/2,
-		testBarY + bottomBarHeight/2 - textHeight/2)
+	--textWidth = font:getWidth("MANUAL")
+	--love.graphics.print("MANUAL",
+	--	x2 + bottomBarHeight/2 - textWidth/2,
+	--	testBarY + bottomBarHeight/2 - textHeight/2)
 	
 	-- draw top bars: stage, progress, level, experience
 	setColorBlue()
@@ -149,14 +149,14 @@ function gui:drawTopAndBottomDisplay()
 	-- draw return button
 	returnX = x2 + bottomBarHeight + screenOffsetFactor * screenWidth
 	setColorWhite()
-	love.graphics.draw(squareRed, returnX, testBarY, 0, scaleX, scaleX)
+	love.graphics.draw(icon_hospital, returnX, testBarY, 0, scaleX, scaleX)
 	returnButton = {returnX, testBarY, square:getWidth()}
 
 	setColorBlack()
-	textWidth = font:getWidth("Go Back")
-	love.graphics.print("Go Back",
-		returnX + bottomBarHeight/2 - textWidth/2,
-		testBarY + bottomBarHeight/2 - textHeight/2)
+	--textWidth = font:getWidth("Go Back")
+	--love.graphics.print("Go Back",
+	--	returnX + bottomBarHeight/2 - textWidth/2,
+	--	testBarY + bottomBarHeight/2 - textHeight/2)
 end
 
 function gui:mousepressed(x,y)
