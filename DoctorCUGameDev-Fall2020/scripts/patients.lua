@@ -29,13 +29,13 @@ function patients:draw()
 		currY = currY + textHeight + textSpacing
 	end
 
-	for i = 1, #patient.symptoms do
-		symptom = patient.symptoms[i][1]
-		--symptom_name = manual.symptoms[symptom]
-		symptom_prob = patient.symptoms[i][2]
-		love.graphics.print(symptom.." "..symptom_prob, currX, currY)
-		currY = currY + textHeight + textSpacing
-	end
+	--for i = 1, #patient.symptoms do
+	--	symptom = patient.symptoms[i][1]
+	--	--symptom_name = manual.symptoms[symptom]
+	--	symptom_prob = patient.symptoms[i][2]
+	--	love.graphics.print(symptom.." "..symptom_prob, currX, currY)
+	--	currY = currY + textHeight + textSpacing
+	--end
 
 	-- draw doctor and patient
 	doctorHeight = 0.75 * centerUIHeight

@@ -18,9 +18,10 @@ function patientGen.generatePatient(patient_data)
 		bio = patient_data.bio,
 		exp = patient_data.exp,
 		photo = patient_data.photo,
-		disease = patient_data.disease,
-		symptoms = {0,0,0,0,0},
-		symptoms_display = {0.4,0.4,0.4,0.4,0.4},
+		possible_disease = patient_data.possible_disease,
+		disease = 1, --- randomly draw from possible_disease
+		symptoms = {0,0,0,0,0,0},
+		symptoms_display = {0.4,0.4,0.4,0.4,0.4,0.4},
 		treatment = -1
 	}
 	local disease_symptoms = disease_probability_matrix[patient.disease]
