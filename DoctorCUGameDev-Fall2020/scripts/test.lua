@@ -39,10 +39,19 @@ function test:mousepressed(x, y)
 	print(hospital.patient)
 	-- implement the test
 	print(testsAvailable)
-	if testsAvailable>0 then	
-		test:runTest(1,2)
-	end
 
+
+	for i = 1, 6 do
+		cur_box = testIconBoxes[i]
+		xx = cur_box[1]
+		yy = cur_box[2]
+		ww = cur_box[3]
+		if x >= xx and x <= xx + ww and y >= yy and y <= yy + ww then
+			if testsAvailable>0 then	
+				test:runTest(1,2)
+			end
+		end
+	end
 end
 	--print(ScaleX) -- you can print other stuff for debugging
 
