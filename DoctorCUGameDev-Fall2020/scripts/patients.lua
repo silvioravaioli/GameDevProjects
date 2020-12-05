@@ -52,6 +52,7 @@ function patients:draw()
 	love.graphics.draw(love.graphics.newImage(patient.photo), patientX, patientY, 0, scale, scale)
 end
 
+
 --function patients:drawinfo(patient)
 	--maybe set color	
 

@@ -1,5 +1,5 @@
 gui = require('scripts.gui')
-tests = require('scripts.test')
+test = require('scripts.test')
 hospital = require('scripts.hospital')
 patients = require('scripts.patients')
 patientData = require('scripts.patientData')
@@ -7,6 +7,7 @@ manual = require('scripts.manual')
 diseases = require('scripts.diseases')
 symptoms = require('scripts.symptoms')
 treatments = require('scripts.treatments')
+stages = require('scripts.stages')
 
 love.graphics.setDefaultFilter("nearest")
 
@@ -68,8 +69,10 @@ function love.load()
 	experience = 0
 	maxExperience = 5
 
+	currStage = 0
+
 	-- patients
-	hospital:load(level)
+	hospital:load(level, 6)
 	patientsTable = patientData:getPatients()
 
 end
@@ -96,11 +99,33 @@ end
 
 
 function love.mousepressed(x, y, button, isTouch)
+	
 	gui:mousepressed(x,y)
+	
 	if page == "MAIN" then
 		hospital:mousepressed(x, y)
-	elseif page == "MANUAL" then
+	end
+	
+	if page == "MANUAL" then
 		manual:mousepressed(x,y)
+	end
+
+	if page== "TEST" then
+		test:mousepressed(x, y)
+	end
+
+end
+
+function loadNewStageInfo(stage_num)
+	if stage_num <= #stages then
+		local stage_info = stages[stage_num]
+	
+		stage = stage_num
+		testsAvailable = stage_info.tests_num
+		maxTests = stage_info.tests_num
+
+		-- patients
+		hospital:load(level, stage_info.patients_num)
 	end
 end
 

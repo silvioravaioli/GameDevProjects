@@ -4,15 +4,15 @@ hospital.patients = {}
 hospital.patientBoxes = {}
 hospital.doctor = {}
 
-function hospital:load(lvl)
+function hospital:load(lvl, num_patients)
+	self.patients = {}
+	self.patientBoxes = {}
+
 	self.doctor[1] = love.graphics.newImage("assets/Characters/Icon_Doctor.jpeg");
 	if lvl == 1 then
-		self.patients[1] = love.graphics.newImage("assets/Characters/Icon_Patient1.jpeg");
-		self.patients[2] = love.graphics.newImage("assets/Characters/Icon_Patient2.jpeg");
-		self.patients[3] = love.graphics.newImage("assets/Characters/Icon_Patient3.jpeg");
-		self.patients[4] = love.graphics.newImage("assets/Characters/Icon_Patient4.jpeg");
-		self.patients[5] = love.graphics.newImage("assets/Characters/Icon_Patient5.jpeg");
-		self.patients[6] = love.graphics.newImage("assets/Characters/Icon_Patient6.jpeg");
+		for i = 1, num_patients do -- TODO: level-specific characters
+			self.patients[i] = love.graphics.newImage("assets/Characters/Icon_Patient"..tostring(i)..".jpeg");
+		end
 	end
 
 	xOffset = screenOffsetFactor * screenWidth
