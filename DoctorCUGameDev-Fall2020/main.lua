@@ -126,7 +126,6 @@ function loadNewStageInfo(stage_num)
 
 		-- patients
 		hospital:load(level, stage_info.patients_num)
-		hospital:draw()
 	end
 end
 

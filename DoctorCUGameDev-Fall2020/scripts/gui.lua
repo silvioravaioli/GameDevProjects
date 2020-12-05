@@ -62,7 +62,7 @@ function gui:drawTopAndBottomDisplay()
 	
 	-- HELP
 	love.graphics.draw(icon_help, x1, testBarY, 0, scaleX, scaleX)
-	helpButton = {x1, testBarY, square:getWidth()}
+	helpButton = {x1, testBarY, bottomBarHeight}
 
 	-- MANUAL
 	love.graphics.draw(icon_manual, x2, testBarY, 0, scaleX, scaleX)

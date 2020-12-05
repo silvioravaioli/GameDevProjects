@@ -5,8 +5,10 @@ hospital.patientBoxes = {}
 hospital.doctor = {}
 
 function hospital:load(lvl, num_patients)
-	self.doctor[1] = love.graphics.newImage("assets/Characters/Icon_Doctor.jpeg");
 	self.patients = {}
+	self.patientBoxes = {}
+
+	self.doctor[1] = love.graphics.newImage("assets/Characters/Icon_Doctor.jpeg");
 	if lvl == 1 then
 		for i = 1, num_patients do -- TODO: level-specific characters
 			self.patients[i] = love.graphics.newImage("assets/Characters/Icon_Patient"..tostring(i)..".jpeg");
