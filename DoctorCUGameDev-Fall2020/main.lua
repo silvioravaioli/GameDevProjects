@@ -1,5 +1,5 @@
 gui = require('scripts.gui')
-tests = require('scripts.test')
+test = require('scripts.test')
 hospital = require('scripts.hospital')
 patients = require('scripts.patients')
 patientData = require('scripts.patientData')
@@ -99,12 +99,21 @@ end
 
 
 function love.mousepressed(x, y, button, isTouch)
+	
 	gui:mousepressed(x,y)
+	
 	if page == "MAIN" then
 		hospital:mousepressed(x, y)
-	elseif page == "MANUAL" then
+	end
+	
+	if page == "MANUAL" then
 		manual:mousepressed(x,y)
 	end
+
+	if page== "TEST" then
+		test:mousepressed(x, y)
+	end
+
 end
 
 function loadNewStageInfo(stage_num)
