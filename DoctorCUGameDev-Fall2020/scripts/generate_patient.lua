@@ -1,3 +1,4 @@
+-- load scripts
 require('scripts.patients')
 require('scripts.patientData')
 disease_probability_matrix = require('files.disease_probability_matrix')
@@ -5,12 +6,18 @@ util = require('scripts.util')
 
 local patientGen = {}
 
+
+
 local function fillSymptoms(patient)
 end
+
+
 
 local function generatePerm()
 	rand = math.floor(100*math.random())
 end
+
+
 
 function patientGen.generatePatient(patient_data)
 	local patient = {

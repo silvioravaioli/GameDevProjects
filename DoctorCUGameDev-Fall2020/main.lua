@@ -1,3 +1,6 @@
+-- main.lua -- MAIN FILE
+
+-- load other scripts in th efolder
 gui = require('scripts.gui')
 test = require('scripts.test')
 hospital = require('scripts.hospital')
@@ -9,12 +12,16 @@ symptoms = require('scripts.symptoms')
 treatments = require('scripts.treatments')
 stages = require('scripts.stages')
 
+-- set filter 
 love.graphics.setDefaultFilter("nearest")
 
+
+
+-- FUNCTION LOAD
 function love.load()
 	page = "MAIN"
 
-	-- load image assets
+	-- load basic assets
 	square 		= love.graphics.newImage("assets/bluesquare.png")
 
 	squareBlue 	= love.graphics.newImage("assets/bluesquare.png")
@@ -24,6 +31,7 @@ function love.load()
 
 	rectangle 	= love.graphics.newImage("assets/bluerectangle.png")
 	centerRect 	= love.graphics.newImage("assets/testMenu.png")
+
 	-- load image icons
 	icontest = {}
 	icontest[1] = love.graphics.newImage("assets/Icons/test_1.png")
@@ -77,10 +85,16 @@ function love.load()
 
 end
 
+
+
+-- FUNCTION UPDATE
 function love.update(dt)
 
 end
 
+
+
+-- FUNCTION DRAW
 function love.draw()
 	-- gui:draw()
 	-- hospital:draw()
@@ -98,6 +112,9 @@ function love.draw()
 end
 
 
+
+
+-- FUNCTION MOUSEPRESSED
 function love.mousepressed(x, y, button, isTouch)
 	
 	gui:mousepressed(x,y)
@@ -116,6 +133,9 @@ function love.mousepressed(x, y, button, isTouch)
 
 end
 
+
+
+-- FUNCTION LOAD NEW STAGE INFO
 function loadNewStageInfo(stage_num)
 	if stage_num <= #stages then
 		local stage_info = stages[stage_num]
@@ -129,6 +149,9 @@ function loadNewStageInfo(stage_num)
 	end
 end
 
+
+
+-- FUNCTION SET FONT
 function setFont(size)
 	font = love.graphics.newFont("assets/nokiafc22.ttf", size)
 	love.graphics.setFont(font)
@@ -136,14 +159,22 @@ function setFont(size)
 	return font
 end
 
+
+
+-- FUNCTIONS FOR COLORS
 function setColorBlue()
 	love.graphics.setColor(0/255,191/255,255/255)
 end
-
 function setColorBlack()
 	love.graphics.setColor(0,0,0)
 end
-
 function setColorWhite()
 	love.graphics.setColor(1,1,1)
 end
+
+
+
+
+
+
+

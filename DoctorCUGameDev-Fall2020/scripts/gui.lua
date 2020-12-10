@@ -1,5 +1,6 @@
 local gui = {}
 
+
 function gui:draw()
 	stageBarWidth = 0.1 * screenWidth
 	progressBarWidth = 0.4 * screenWidth
@@ -10,6 +11,8 @@ function gui:draw()
 
 	gui:drawTopAndBottomDisplay()
 end
+
+
 
 function gui:drawTopAndBottomDisplay()
 	testBarX = screenWidth * 0.5 - testBarWidth/2
@@ -158,6 +161,8 @@ function gui:drawTopAndBottomDisplay()
 	--	returnX + bottomBarHeight/2 - textWidth/2,
 	--	testBarY + bottomBarHeight/2 - textHeight/2)
 end
+
+
 
 function gui:mousepressed(x,y)
 	if x >= returnX and x <= returnX + bottomBarHeight and y >= testBarY and y <= testBarY + bottomBarHeight then

@@ -88,6 +88,8 @@ function manual:setup()
 
 end 
 
+
+
 function manual:draw()
 	if self.page == 0 then
 		love.graphics.print("Doctor's Manual", xstart + 50, 100, 0, 2)
@@ -114,6 +116,8 @@ function manual:draw()
 	--update
 end
 
+
+
 function manual:mousepressed(x,y)
 	if manual.page == 0 then
 		for i = 1, #diseases do
@@ -132,12 +136,3 @@ end
 
 
 return manual
-
-
-
-
-
-
-
-
-

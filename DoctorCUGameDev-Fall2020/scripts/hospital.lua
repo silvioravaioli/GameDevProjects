@@ -4,6 +4,8 @@ hospital.patients = {}
 hospital.patientBoxes = {}
 hospital.doctor = {}
 
+
+
 function hospital:load(lvl, num_patients)
 	self.patients = {}
 	self.patientBoxes = {}
@@ -39,6 +41,8 @@ function hospital:load(lvl, num_patients)
 	end
 end
 
+
+
 function hospital:draw()
 	setColorWhite()
 	love.graphics.draw(self.doctor[1], mainX, mainY, 0, xScale, yScale)
@@ -49,6 +53,8 @@ function hospital:draw()
 		love.graphics.draw(patientSprite, self.patientBoxes[i][1], self.patientBoxes[i][2], 0, xScale, yScale)
 	end
 end
+
+
 
 function hospital:mousepressed(x, y)
 	--print('Mouse Pressed: coordinates:')

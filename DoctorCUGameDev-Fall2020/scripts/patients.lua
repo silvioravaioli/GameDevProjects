@@ -1,5 +1,6 @@
 local patients = {}
 
+
 function patients:draw()
 	patient = patientsTable[currentPatient]
 

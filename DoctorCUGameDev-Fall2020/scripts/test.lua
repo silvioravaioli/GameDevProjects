@@ -8,6 +8,8 @@ testing = {
 	symptoms = {}
 }
 
+
+
 function test:new(name, grade, duration, icon)
 	setmetatable({}, test)
 	self.name = name
@@ -18,11 +20,12 @@ function test:new(name, grade, duration, icon)
 	return self
 end
 
+
+
 function test:toString()
 	testStr = string.format("Test: %s\nGrade:: %s\nTime Required:%s\n", self.name, self.grade, self.duration)
 	return testStr
 end
-
 
 
 
@@ -73,6 +76,8 @@ function test:runTest(patient_number,test_number)
 
 end
 
+
+
 function test:mousepressed(x, y)	
 	-- print coordinates
 	print('Mouse Pressed: coordinates:')
@@ -87,7 +92,7 @@ function test:mousepressed(x, y)
 		ww = cur_box[3]
 		if x >= xx and x <= xx + ww and y >= yy and y <= yy + ww then
 			if testsAvailable>0 then	
-				test:runTest(1,i)
+				test:runTest(currentPatient,i)
 			end
 		end
 	end
