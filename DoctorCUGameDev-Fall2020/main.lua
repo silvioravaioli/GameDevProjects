@@ -48,6 +48,8 @@ function love.load()
 	icon_manual	= love.graphics.newImage("assets/Icons/icon_manual.png")
 	icon_hospital=love.graphics.newImage("assets/Icons/icon_hospital.png")
 
+	manual_background = love.graphics.newImage("assets/BackgroundManual.jpeg")
+
 	icon_end_day= love.graphics.newImage("assets/Icons/icon_end_day.png")
 	icon_close	= love.graphics.newImage("assets/Icons/icon_close.png")
 
