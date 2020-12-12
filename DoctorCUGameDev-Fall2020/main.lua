@@ -43,9 +43,13 @@ function love.load()
 	icontest[5]	= love.graphics.newImage("assets/Icons/test_5.png")
 	icontest[6]	= love.graphics.newImage("assets/Icons/test_6.png")
 
+	icon_music	= love.graphics.newImage("assets/Icons/icon_music.png")
 	icon_help	= love.graphics.newImage("assets/Icons/icon_help.png")
 	icon_manual	= love.graphics.newImage("assets/Icons/icon_manual.png")
-	icon_hospital	= love.graphics.newImage("assets/Icons/icon_hospital.png")
+	icon_hospital=love.graphics.newImage("assets/Icons/icon_hospital.png")
+
+	icon_end_day= love.graphics.newImage("assets/Icons/icon_end_day.png")
+	icon_close	= love.graphics.newImage("assets/Icons/icon_close.png")
 
 
 	-- drawing the UI elements
