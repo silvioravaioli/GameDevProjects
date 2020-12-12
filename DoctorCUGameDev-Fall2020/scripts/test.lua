@@ -41,15 +41,12 @@ function test:runTest(patient_number,test_number)
 	-- Retrieve parameters for the test
 	true_symp = patient.symptoms[test_number]
 	prob_symp = patient.symptoms_display[test_number]
-	test_acc = 0.75 -- replace with the accuracy of the current test
-	print('Patient information')
-	print(true_symp)
-	print(prob_symp)
-
-	-- These are used only for example
-	--true_symp = patient.symptoms_true[i_test]		-- true value (0 or 1)
-	--prob_symp = patient.symptoms_display[i_test]	-- displayed v (probability)
+	test_acc = 0.80 -- replace with the accuracy of the current test
 	--test_acc = test.accuracy[i_test]				-- accuracy of the test
+
+	--print('Patient information')
+	--print(true_symp)
+	--print(prob_symp)
 
 	-- Random number generator, determines the sign of the test
 	coin = math.random()
@@ -74,10 +71,9 @@ function test:runTest(patient_number,test_number)
 	new_prob = math.floor(new_prob * 100) / 100
 
 	-- Update displayed probability
-	-- patient.symptoms_display[i_test] = new_prob
-	print('Initial and updated probability')
-	print(prob_symp)
-	print(new_prob)
+	-- print('Initial and updated probability')
+	-- print(prob_symp)
+	-- print(new_prob)
 	patient.symptoms_display[test_number] = new_prob
 
 end
