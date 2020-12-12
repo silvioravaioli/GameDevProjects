@@ -110,7 +110,6 @@ function love.draw()
 	
 	-- manual:draw()
 	-- patients:draw({ name="Bob Ross", bio="Likes to paint", exp= 1, photo=love.graphics.newImage("assets/greenOrb.png"),symptoms={{1, 50},{2, 100}},})
-	gui:draw()
 	if page == "MAIN" then
 		hospital:draw()
 	elseif page == "TEST" then
@@ -118,6 +117,7 @@ function love.draw()
 	elseif page == "MANUAL" then
 		manual:draw()
 	end
+	gui:draw()
 end
 
 
