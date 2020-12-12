@@ -31,9 +31,10 @@ end
 
 function test:runTest(patient_number,test_number)
 
-	print('Run new test (patient number, test number)')
-	print(patient_number)
-	print(test_number)
+	print('Run new test on the patient')
+	--print('Run new test (patient number, test number)')
+	--print(patient_number)
+	--print(test_number)
 
 	-- Consume a test
 	testsAvailable = testsAvailable-1
@@ -50,13 +51,13 @@ function test:runTest(patient_number,test_number)
 
 	-- Random number generator, determines the sign of the test
 	coin = math.random()
-	print(coin)
+	--print(coin)
 	if coin < test_acc then	-- if accurate
 		sign_test = true_symp
 	else					-- if inaccurate
 		sign_test = 1-true_symp
 	end
-	print(sign_test)
+	--print(sign_test)
 
 	-- Bayesian updating!
 	if sign_test == 1 then
