@@ -2,7 +2,7 @@ local patients = {}
 
 
 function patients:draw()
-	patient = patientsTable[currentPatient]
+	patient = currentPatients[currentPatient]
 
 	x = screenWidth/2 - centerUIWidth/2
 	y = (lowerBound+upperBound)/2 - centerUIHeight/2
@@ -13,7 +13,7 @@ function patients:draw()
 
 	local borderOffset = 50
 	local textSpacing = 15		-- pixels between lines
-	setFont(25)					-- set font size
+	setFont(20)					-- set font size
 	local currX = x + borderOffset
 	local currY = y + borderOffset
 	setColorBlack()
@@ -22,9 +22,14 @@ function patients:draw()
 		"Name: "..patient.name,
 		"EXP: +"..patient.exp,
 		"Bio: "..patient.bio,
-		"List of symptoms:"
+		"List of symptoms:",
+		"Possible Diseases: "..table.concat(patient.possible_disease, ", "),
+		"Disease: "..patient.disease,
+		"Symptoms: "..table.concat(patient.symptoms, ", "),
+		"Displayed: "..table.concat(patient.symptoms_display, ", ")
 	}
 
+	-- print the patient summary
 	for j = 1, #fields do
 		love.graphics.print(fields[j], currX, currY)
 		currY = currY + textHeight + textSpacing
@@ -41,12 +46,12 @@ function patients:draw()
 	-- draw doctor and patient
 	doctorHeight = 0.75 * centerUIHeight
 	doctorWidth = doctorHeight / ratio
-	scale = doctorHeight / hospital.doctor[1]:getHeight()
+	scale = doctorHeight / doctorImage:getHeight()
 	
 	doctorX = x/2 - doctorWidth/2
 	doctorY = (lowerBound+upperBound)/2 - doctorHeight/2
 	setColorWhite()
-	love.graphics.draw(hospital.doctor[1], doctorX, doctorY, 0, scale, scale)
+	love.graphics.draw(doctorImage, doctorX, doctorY, 0, scale, scale)
 
 	patientX = x + centerUIWidth + x/2 - doctorWidth/2
 	patientY = doctorY

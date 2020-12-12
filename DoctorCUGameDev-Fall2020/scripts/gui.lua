@@ -175,13 +175,6 @@ function gui:mousepressed(x,y)
 	if x >= xx and x <= xx + ww and y >= yy and y <= yy + ww then
 		page = "MANUAL"
 	end	
-
-	-- move to next stage - for testing purposes, will change later
-	if x >= helpButton[1] and x <= helpButton[1] + helpButton[3] and y >= helpButton[2] and y <= helpButton[2] + helpButton[3] then
-		currStage = currStage + 1
-		loadNewStageInfo(currStage)
-		page = "MAIN"
-	end	
 end
 
 return gui
