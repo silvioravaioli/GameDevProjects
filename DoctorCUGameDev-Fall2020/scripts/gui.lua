@@ -66,7 +66,7 @@ function gui:drawTopAndBottomDisplay()
 	
 	-- MUSIC
 	love.graphics.draw(icon_music, x0, testBarY, 0, scaleX, scaleX)
-	helpButton = {x0, testBarY, bottomBarHeight}
+	musicButton = {x0, testBarY, bottomBarHeight}
 
 	-- HELP
 	love.graphics.draw(icon_help, x1, testBarY, 0, scaleX, scaleX)
@@ -75,6 +75,20 @@ function gui:drawTopAndBottomDisplay()
 	-- MANUAL
 	love.graphics.draw(icon_manual, x2, testBarY, 0, scaleX, scaleX)
 	manualButton = {x2, testBarY, bottomBarHeight}
+
+
+
+
+	-- CONFIRM button
+	-- NOTE: this should be displayed only if all the patients received a treatment
+	x_center = screenWidth * 0.5 - bottomBarHeight/2/1.5
+	y_confirm = screenHeight * (1 - screenOffsetFactor) - 2*bottomBarHeight
+	love.graphics.draw(icon_end_day, x_center, y_confirm, 0, scaleX/1.5, scaleX/1.5)
+	confirmButton = {x_center, y_confirm, scaleX/1.5}
+
+--	testBarX = screenWidth * 0.5 - testBarWidth/2
+--	testBarY = screenHeight * (1 - screenOffsetFactor) - bottomBarHeight
+
 
 	-- Add text to UI
 	setColorBlack()
