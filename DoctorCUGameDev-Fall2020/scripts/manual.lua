@@ -32,9 +32,6 @@ local manual = {
 -- 	"dis10",
 -- }
 
-manual.treatments = {
-	
-}
 
 manual.probstoWords = {
 	[0.0] = "never",
@@ -62,6 +59,7 @@ manual.contentsBoxes = {}
 manual.diseaseGivenSymptoms = {}
 function manual:setup()
 	xstart = 350
+
 	-- for x = 1, 10 do
 	-- 	self.diseaseGivenSymptoms[x] = {}
 	-- end
@@ -91,11 +89,15 @@ end
 
 
 function manual:draw()
+	setColorWhite()
+	love.graphics.draw(manual_background, -10, -20, 0, 1.5, 1.5)
+	backbuttonheight  = 675
+	setColorBlack()
 	if self.page == 0 then
 		love.graphics.print("Doctor's Manual", xstart + 50, 100, 0, 2)
 		for i = 1,  #diseases do
-			setColorBlue()
-			love.graphics.rectangle("fill", self.contentsBoxes[i][1], self.contentsBoxes[i][2], 40, 30)
+			--setColorBlue()
+			--love.graphics.rectangle("fill", self.contentsBoxes[i][1], self.contentsBoxes[i][2], 40, 30)
 			setColorBlack()
 			love.graphics.print(diseases[i]["name"], self.contentsBoxes[i][1], self.contentsBoxes[i][2], self.contentsBoxes[i][3], self.contentsBoxes[i][4])
 		end
@@ -110,7 +112,9 @@ function manual:draw()
 			love.graphics.print(sympt, 450, 125 + (50 * (i + 1)), 0, 1)
 			love.graphics.print(self.probstoWords[prob], 800,  125 + (50 * (i + 1)), 0 , 1)
 		end
-		love.graphics.print("back", screenWidth/2, 550, 0 , 2) 
+		love.graphics.print("Treatment:", screenWidth/2 - 150, 550, 0, 1.5)
+		love.graphics.print(treatments[dis["treatment"][1]], screenWidth/2 - 100, 625)
+		love.graphics.print("back", screenWidth/2, backbuttonheight, 0 , 1.75) 
 		--back button
 	end
 	--update
@@ -128,7 +132,7 @@ function manual:mousepressed(x,y)
 			end
 		end
 	else
-		if x >= screenWidth/2 - 50 and x <= screenWidth/2 + 200 and y >= 550 and y <= 650 then
+		if x >= screenWidth/2 - 50 and x <= screenWidth/2 + 200 and y >= backbuttonheight and y <= backbuttonheight + 100 then
 			manual.page = 0
 		end
 	end
