@@ -30,6 +30,7 @@ function gui:drawTopAndBottomDisplay()
 	-- draw the help and manual buttons
 	x1 = testBarX - bottomBarHeight - (screenWidth * screenOffsetFactor)
 	x2 = testBarX + testBarWidth + (screenWidth * screenOffsetFactor)
+	x0 = x1 - bottomBarHeight - screenOffsetFactor * screenWidth
 
 	-- draw outlines for tests
 	offset = bottomBarHeight * 0.1
@@ -63,6 +64,10 @@ function gui:drawTopAndBottomDisplay()
 	setColorWhite()
 	scaleX = bottomBarHeight / square:getWidth()
 	
+	-- MUSIC
+	love.graphics.draw(icon_music, x0, testBarY, 0, scaleX, scaleX)
+	helpButton = {x0, testBarY, bottomBarHeight}
+
 	-- HELP
 	love.graphics.draw(icon_help, x1, testBarY, 0, scaleX, scaleX)
 	helpButton = {x1, testBarY, bottomBarHeight}
