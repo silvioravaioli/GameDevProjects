@@ -1,15 +1,15 @@
 local P = {}
 
-function P.random(max_int)
-	return math.floor(math.random(random)*maxVal)+1
-end
+-- function P.random(max_int)
+-- 	return math.floor(math.random()*max_int)+1
+-- end
 
 function P.shuffle(arr)
 	local shuffledArr = {}
 	for i = 1, #arr do
-		local index = util.random(#arr)
+		local index = math.random(#arr)
 		while(shuffledArr[index]~=nil) do
-			index = util.random(#arr)
+			index = math.random(#arr)
 		end
 		shuffledArr[index] = arr[i]
 	end

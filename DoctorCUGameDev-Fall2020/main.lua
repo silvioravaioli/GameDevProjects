@@ -5,7 +5,6 @@ gui = require('scripts.gui')
 test = require('scripts.test')
 hospital = require('scripts.hospital')
 patients = require('scripts.patients')
-patientData = require('scripts.patientData')
 manual = require('scripts.manual')
 diseases = require('scripts.diseases')
 symptoms = require('scripts.symptoms')
@@ -20,8 +19,9 @@ love.graphics.setDefaultFilter("nearest")
 -- FUNCTION LOAD
 function love.load()
 	page = "MAIN"
-
-	-- load basic assets
+	math.randomseed(os.time())
+	
+	-- load image assets
 	square 		= love.graphics.newImage("assets/bluesquare.png")
 
 	squareBlue 	= love.graphics.newImage("assets/bluesquare.png")
@@ -31,6 +31,8 @@ function love.load()
 
 	rectangle 	= love.graphics.newImage("assets/bluerectangle.png")
 	centerRect 	= love.graphics.newImage("assets/testMenu.png")
+
+	doctorImage = love.graphics.newImage("assets/Characters/Icon_Doctor.jpeg");
 
 	-- load image icons
 	icontest = {}
@@ -73,22 +75,25 @@ function love.load()
 
 	currentPatient = 1
 
-	-- level data
-	stage = 99
-	testsAvailable = 10
-	maxTests = 10
+	-- default stage data
+	stage = 1
+	testsAvailable = 8
+	maxTests = 8
+	diseases_unlocked = 3
+	symptoms_unlocked = 3
+
+	-- these should vary based on progress in the game
 	level = 1
 	experience = 0
 	maxExperience = 5
 
-	currStage = 0
+	-- THIS IS A TABLE STORING THE CURRENT PATIENTS FOR THE STAGE
+	-- THIS IS UPDATED WHEN A NEW STAGE IS LOADED
+	currentPatients = {}
 
-	-- patients
-	hospital:load(level, 6)
-	patientsTable = patientData:getPatients()
+	loadNewStage(stage)
 
 end
-
 
 
 -- FUNCTION UPDATE
@@ -137,19 +142,27 @@ function love.mousepressed(x, y, button, isTouch)
 
 end
 
+-- right now used for testing purposes
+function love.keypressed(key, isrepeat)
+	if key == "space" then
+		loadNewStage(stage+1)
+	elseif key == "backspace" then
+		loadNewStage(stage-1)
+	end
+end
 
-
--- FUNCTION LOAD NEW STAGE INFO
-function loadNewStageInfo(stage_num)
-	if stage_num <= #stages then
+-- FUNCTION LOAD NEW STAGE
+function loadNewStage(stage_num)
+	if stage_num >= 1 and stage_num <= #stages then
 		local stage_info = stages[stage_num]
-	
 		stage = stage_num
 		testsAvailable = stage_info.tests_num
 		maxTests = stage_info.tests_num
+		diseases_unlocked = stage_info.diseases_unlocked
+		symptoms_unlocked = stage_info.symptoms_unlocked
 
-		-- patients
-		hospital:load(level, stage_info.patients_num)
+		-- load patients
+		hospital:load(stage_num)
 	end
 end
 

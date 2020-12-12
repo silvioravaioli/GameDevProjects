@@ -81,10 +81,12 @@ function gui:drawTopAndBottomDisplay()
 
 	-- CONFIRM button
 	-- NOTE: this should be displayed only if all the patients received a treatment
-	x_center = screenWidth * 0.5 - bottomBarHeight/2/1.5
-	y_confirm = screenHeight * (1 - screenOffsetFactor) - 2*bottomBarHeight
-	love.graphics.draw(icon_end_day, x_center, y_confirm, 0, scaleX/1.5, scaleX/1.5)
-	confirmButton = {x_center, y_confirm, scaleX/1.5}
+--	x_center = screenWidth * 0.5 - bottomBarHeight/2/1.5
+--	y_confirm = screenHeight * (1 - screenOffsetFactor) - 2*bottomBarHeight
+--	love.graphics.draw(icon_end_day, x_center, y_confirm, 0, scaleX/1.5, scaleX/1.5)
+	love.graphics.draw(icon_end_day, x0, testBarY, 0, scaleX, scaleX)
+--	confirmButton = {x_center, y_confirm, bottomBarHeight/1.5}
+	confirmButton = {x0, testBarY, bottomBarHeight}
 
 --	testBarX = screenWidth * 0.5 - testBarWidth/2
 --	testBarY = screenHeight * (1 - screenOffsetFactor) - bottomBarHeight
@@ -196,11 +198,12 @@ function gui:mousepressed(x,y)
 	end	
 
 	-- move to next stage - for testing purposes, will change later
-	if x >= helpButton[1] and x <= helpButton[1] + helpButton[3] and y >= helpButton[2] and y <= helpButton[2] + helpButton[3] then
-		currStage = currStage + 1
-		loadNewStageInfo(currStage)
+	if x >= confirmButton[1] and x <= confirmButton[1] + confirmButton[3] and y >= confirmButton[2] and y <= confirmButton[2] + confirmButton[3] then
+		stage = stage + 1
+		loadNewStage(stage)
 		page = "MAIN"
 	end	
+
 end
 
 return gui

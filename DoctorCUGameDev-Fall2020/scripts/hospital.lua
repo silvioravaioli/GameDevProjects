@@ -1,20 +1,20 @@
+patient_generator = require('scripts.generate_patient')
+patientData = require('scripts.patientData')
+
 local hospital = {}
 
-hospital.patients = {}
 hospital.patientBoxes = {}
-hospital.doctor = {}
 
-
-
-function hospital:load(lvl, num_patients)
-	self.patients = {}
+function hospital:load(stage)
+	-- clear bounding boxes and current patients
 	self.patientBoxes = {}
+	currentPatients = {}
 
-	self.doctor[1] = love.graphics.newImage("assets/Characters/Icon_Doctor.jpeg");
-	if lvl == 1 then
-		for i = 1, num_patients do -- TODO: level-specific characters
-			self.patients[i] = love.graphics.newImage("assets/Characters/Icon_Patient"..tostring(i)..".jpeg");
-		end
+	i = 1
+	for _,patientID in pairs(stages[stage].patient_ids) do
+		local patient_data = patientData[patientID]
+		currentPatients[i] = patient_generator:generatePatient(patient_data)
+		i = i + 1
 	end
 
 	xOffset = screenOffsetFactor * screenWidth
@@ -23,8 +23,8 @@ function hospital:load(lvl, num_patients)
 	upperBound = topBarHeight + 2 * yOffset
 	lowerBound = screenHeight - bottomBarHeight - 2 * yOffset
 
-	ratio = self.doctor[1]:getHeight() / self.doctor[1]:getWidth()
-	patientWidth = screenWidth/(#self.patients+1) - 2 * xOffset
+	ratio = doctorImage:getHeight() / doctorImage:getWidth()
+	patientWidth = screenWidth/(#currentPatients+1) - 2 * xOffset
 
 	heightLimit = lowerBound - upperBound
 
@@ -33,10 +33,10 @@ function hospital:load(lvl, num_patients)
 	end
 	patientHeight = ratio * patientWidth
 
-	mainX = screenWidth/2 - ((#self.patients + 2) * xOffset + (#self.patients + 1) * patientWidth)/2
+	mainX = screenWidth/2 - ((#currentPatients + 2) * xOffset + (#currentPatients + 1) * patientWidth)/2
 	mainY = (lowerBound + upperBound)/2 - patientHeight/2
 
-	for i = 1, #self.patients do
+	for i = 1, #currentPatients do
 		self.patientBoxes[i] = {mainX + (patientWidth + xOffset) * i, mainY}
 	end
 end
@@ -45,9 +45,9 @@ end
 
 function hospital:draw()
 	setColorWhite()
-	love.graphics.draw(self.doctor[1], mainX, mainY, 0, xScale, yScale)
-	for i = 1, #self.patients do
-		local patientSprite = self.patients[i]
+	love.graphics.draw(doctorImage, mainX, mainY, 0, xScale, yScale)
+	for i = 1, #currentPatients do
+		local patientSprite = love.graphics.newImage(currentPatients[i].photo)
 		xScale = patientWidth/patientSprite:getWidth()
 		yScale = patientHeight/patientSprite:getHeight()
 		love.graphics.draw(patientSprite, self.patientBoxes[i][1], self.patientBoxes[i][2], 0, xScale, yScale)
