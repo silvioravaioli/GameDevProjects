@@ -23,7 +23,6 @@ function patients:draw()
 		"EXP: +"..patient.exp,
 		"Bio: "..patient.bio,
 		"List of symptoms:",
-		"Possible Diseases: "..table.concat(patient.possible_disease, ", "),
 		"Disease: "..patient.disease,
 		"Symptoms: "..table.concat(patient.symptoms, ", "),
 		"Displayed: "..table.concat(patient.symptoms_display, ", ")

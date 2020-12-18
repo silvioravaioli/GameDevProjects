@@ -23,13 +23,12 @@ function patientGen:generatePatient(patient_data)
 		bio = patient_data.bio,
 		exp = patient_data.exp,
 		photo = patient_data.photo,
-		possible_disease = patient_data.possible_disease,
-		--- randomly draw from possible_disease
 		disease = 1,
 		symptoms = {0,0,0,0,0,0},
 		symptoms_display = {0.4,0.4,0.4,0.4,0.4,0.4},
 		treatment = -1
 	}
+	patient.disease = patient_data.possible_disease[math.random(#patient_data.possible_disease)]
 	local disease_symptoms = disease_probability_matrix[patient.disease]
 	for i = 1, #symptoms do
 		local rand = math.random()
