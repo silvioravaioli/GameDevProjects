@@ -60,12 +60,13 @@ function patients:draw()
 	love.graphics.draw(love.graphics.newImage(patient.photo), patientX, patientY, 0, scale, scale)
 
 	--draw treatment button and tests if applicable
-	local rectTotal = centerUIHeight/(#treatments)
+	local rectTotal = centerUIHeight/(#treatments + 1)
 	local treatmentX = x + centerUIHeight + x/8
 	local treatmentY = y
 	treatHeight = 0.75*rectTotal
 	treatScale = treatHeight / rectangle:getHeight()
 	love.graphics.draw(rectangle, treatmentX, treatmentY, 0, treatScale, treatScale)
+	love.graphics.print("Assign Treatment", treatmentX + treatHeight/5, y + treatHeight/4)
 	self.treatmentButton = {x=treatmentX, y=treatmentY, height=treatHeight, width=treatScale * rectangle:getWidth()}
 	if self.isTreating then
 		self:drawTests(treatmentX, treatmentY, 0.75 * rectTotal, 0.25 * rectTotal)
@@ -75,17 +76,20 @@ end
 function patients:drawTests(x, y, squareSize, offset)
 	local squareScale = squareSize / rectangle:getHeight()
 	for i = 1, #treatments do
+		y = y + squareSize + offset
 		self.treatmentBoxes[i] = {x = x, 
-			y = y + (squareSize + offset) * (i-1) + offset, 
+			y = y, 
 			height = squareSize, 
 			width = squareScale * rectangle:getWidth()}
-		love.graphics.draw(rectangle, x, y + (squareSize + offset) * (i-1) + offset, 0, squareScale, squareScale)
+		love.graphics.draw(rectangle, x, y, 0, squareScale, squareScale)
+
+		love.graphics.print(treatments[i], x + squareSize/5, y + squareSize/4)
 	end
 end
 
 
 function withinObj(x, y, range)
-	if not range.x then
+	if not range or not range.x then
 		return false
 	end
 	if x >= range.x and x <= range.x + range.width
@@ -99,6 +103,15 @@ function patients:mousepressed(x, y)
 	if withinObj(x, y, self.treatmentButton) then
 		self.isTreating = not self.isTreating
 	end
+	for i = 1, #treatments do
+		if withinObj(x, y, self.treatmentBoxes[i]) then
+			self.useTreatment(i)
+		end
+	end
+end
+
+function patients:useTreatment(treatmentIndex)
+	-- use treatment somehow
 end
 
 --function patients:drawinfo(patient)
