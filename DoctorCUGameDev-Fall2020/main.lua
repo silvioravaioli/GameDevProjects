@@ -30,7 +30,8 @@ function love.load()
 	squareYellow= love.graphics.newImage("assets/yellowsquare.png")
 	squareGreen = love.graphics.newImage("assets/greensquare.png")
 
-	rectangle 	= love.graphics.newImage("assets/bluerectangle.png")
+	rectangle_box_icons = love.graphics.newImage("assets/bluerectangle.png")
+	rectangle_confirm 	= love.graphics.newImage("assets/bluerectangle_confirm.png")
 	centerRect 	= love.graphics.newImage("assets/testMenu.png")
 
 	doctorImage = love.graphics.newImage("assets/Characters/Icon_Doctor.jpeg");
@@ -44,7 +45,7 @@ function love.load()
 	icontest[5]	= love.graphics.newImage("assets/Icons/test_5.png")
 	icontest[6]	= love.graphics.newImage("assets/Icons/test_6.png")
 
-	icon_music	= love.graphics.newImage("assets/Icons/icon_music.png")
+	--icon_music	= love.graphics.newImage("assets/Icons/icon_music.png")
 	icon_help	= love.graphics.newImage("assets/Icons/icon_help.png")
 	icon_manual	= love.graphics.newImage("assets/Icons/icon_manual.png")
 	icon_hospital=love.graphics.newImage("assets/Icons/icon_hospital.png")
@@ -165,8 +166,10 @@ end
 function love.keypressed(key, isrepeat)
 	if key == "space" then
 		loadNewStage(stage+1)
+		--print('This function has been disabled')
 	elseif key == "backspace" then
 		loadNewStage(stage-1)
+		--print('This function has been disabled')
 	end
 end
 
@@ -174,12 +177,15 @@ end
 function loadNewStage(stage_num)
 	if stage_num >= 1 and stage_num <= #stages then
 		local stage_info = stages[stage_num]
-		stage = stage_num
-		testsAvailable = stage_info.tests_num
-		maxTests = stage_info.tests_num
-		diseases_unlocked = stage_info.diseases_unlocked
-		symptoms_unlocked = stage_info.symptoms_unlocked
-
+		-- stage info
+		stage 						= stage_num
+		testsAvailable 				= stage_info.tests_num
+		maxTests 					= stage_info.tests_num
+		diseases_unlocked 			= stage_info.diseases_unlocked
+		symptoms_unlocked 			= stage_info.symptoms_unlocked
+		-- number of patients
+		stage_num_patients_total 	= stage_info.patients_count
+		stage_num_patients_untreated= stage_info.patients_count
 		-- load patients
 		hospital:load(stage_num)
 	end
@@ -207,10 +213,5 @@ end
 function setColorWhite()
 	love.graphics.setColor(1,1,1)
 end
-
-
-
-
-
 
 
