@@ -59,9 +59,11 @@ function gui:drawTopAndBottomDisplay()
 	-- large confirm button, display only if all the patients have been treated
 	--if stage_num_patients_untreated==0 then
 	if stage_num_patients_untreated==0 then
-		love.graphics.draw(rectangle_confirm, testBarX, testBarY, 0, testBarXScale, testBarYScale)
+			love.graphics.draw(icon_end_day, x0, testBarY, 0, scaleX, scaleX)
+			--love.graphics.draw(rectangle_confirm, testBarX, testBarY, 0, testBarXScale, testBarYScale)
 	end
-	rectangleConfirmButton = {testBarX, testBarY, testBarWidth, bottomBarHeight}
+	confirmButton = {x0, testBarY, bottomBarHeight}
+	--rectangleConfirmButton = {testBarX, testBarY, testBarWidth, bottomBarHeight}
 
 
 
@@ -71,8 +73,8 @@ function gui:drawTopAndBottomDisplay()
 	scaleX = bottomBarHeight / square:getWidth()
 	
 	-- MUSIC
-	love.graphics.draw(icon_music, x0, testBarY, 0, scaleX, scaleX)
-	musicButton = {x0, testBarY, bottomBarHeight}
+	--love.graphics.draw(icon_music, x0, testBarY, 0, scaleX, scaleX)
+	--musicButton = {x0, testBarY, bottomBarHeight}
 
 	-- HELP
 	love.graphics.draw(icon_help, x1, testBarY, 0, scaleX, scaleX)
@@ -90,9 +92,9 @@ function gui:drawTopAndBottomDisplay()
 --	x_center = screenWidth * 0.5 - bottomBarHeight/2/1.5
 --	y_confirm = screenHeight * (1 - screenOffsetFactor) - 2*bottomBarHeight
 --	love.graphics.draw(icon_end_day, x_center, y_confirm, 0, scaleX/1.5, scaleX/1.5)
-	love.graphics.draw(icon_end_day, x0, testBarY, 0, scaleX, scaleX)
+--	love.graphics.draw(icon_end_day, x0, testBarY, 0, scaleX, scaleX)
 --	confirmButton = {x_center, y_confirm, bottomBarHeight/1.5}
-	confirmButton = {x0, testBarY, bottomBarHeight}
+--	confirmButton = {x0, testBarY, bottomBarHeight}
 
 --	testBarX = screenWidth * 0.5 - testBarWidth/2
 --	testBarY = screenHeight * (1 - screenOffsetFactor) - bottomBarHeight
@@ -204,17 +206,17 @@ function gui:mousepressed(x,y)
 	end	
 
 	-- move to next stage using the tick button - for testing purposes, will change later
-	if x >= confirmButton[1] and x <= confirmButton[1] + confirmButton[3] and y >= confirmButton[2] and y <= confirmButton[2] + confirmButton[3] then
+	if stage_num_patients_untreated==0 and x >= confirmButton[1] and x <= confirmButton[1] + confirmButton[3] and y >= confirmButton[2] and y <= confirmButton[2] + confirmButton[3] then
 		stage = stage + 1
 		loadNewStage(stage)
 		page = "MAIN"
 	end	
 	-- move to next stage using the large confirm button (only if all patients have been treated)
-	if stage_num_patients_untreated==0 and x >= rectangleConfirmButton[1] and x <= rectangleConfirmButton[1] + rectangleConfirmButton[3] and y >= rectangleConfirmButton[2] and y <= rectangleConfirmButton[2] + rectangleConfirmButton[4] then
-		stage = stage + 1
-		loadNewStage(stage)
-		page = "MAIN"
-	end	
+	--if stage_num_patients_untreated==0 and x >= rectangleConfirmButton[1] and x <= rectangleConfirmButton[1] + rectangleConfirmButton[3] and y >= rectangleConfirmButton[2] and y <= rectangleConfirmButton[2] + rectangleConfirmButton[4] then
+	--	stage = stage + 1
+	--	loadNewStage(stage)
+	--	page = "MAIN"
+	--end	
 
 end
 
