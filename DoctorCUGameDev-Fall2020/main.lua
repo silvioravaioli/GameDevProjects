@@ -10,6 +10,7 @@ diseases = require('scripts.diseases')
 symptoms = require('scripts.symptoms')
 treatments = require('scripts.treatments')
 stages = require('scripts.stages')
+review = require('scripts.review')
 
 -- set filter 
 love.graphics.setDefaultFilter("nearest")
@@ -127,6 +128,8 @@ function love.draw()
 		patients:draw()
 	elseif page == "MANUAL" then
 		manual:draw()
+	elseif page == "REVIEW" then
+		review:draw()
 	end
 	gui:draw()
 end
@@ -150,6 +153,10 @@ function love.mousepressed(x, y, button, isTouch)
 	if page== "TEST" then
 		test:mousepressed(x, y)
 		patients:mousepressed(x, y)
+	end
+
+	if page== "REVIEW" then
+		review:mousepressed(x, y)
 	end
 
 end

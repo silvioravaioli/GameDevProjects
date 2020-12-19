@@ -199,9 +199,7 @@ function gui:mousepressed(x,y)
 
 	-- move to next stage - for testing purposes, will change later
 	if x >= confirmButton[1] and x <= confirmButton[1] + confirmButton[3] and y >= confirmButton[2] and y <= confirmButton[2] + confirmButton[3] then
-		stage = stage + 1
-		loadNewStage(stage)
-		page = "MAIN"
+		review:open()
 	end	
 
 end
