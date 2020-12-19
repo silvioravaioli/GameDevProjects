@@ -67,7 +67,7 @@ function patients:draw()
 	treatHeight = 0.75*rectTotal
 	treatScale = treatHeight / rectangle_box_icons:getHeight()
 	love.graphics.draw(rectangle_box_icons, treatmentX, treatmentY, 0, treatScale, treatScale)
-	love.graphics.print("Assign Treatment", treatmentX + treatHeight/5, y + treatHeight/4)
+	love.graphics.print("Medicines", treatmentX + treatHeight/5, y + treatHeight/4)
 	self.treatmentButton = {x=treatmentX, y=treatmentY, height=treatHeight, width=treatScale * rectangle_box_icons:getWidth()}
 	if self.isTreating then
 		self:drawTests(treatmentX, treatmentY, 0.75 * rectTotal, 0.25 * rectTotal)
