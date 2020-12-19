@@ -197,6 +197,15 @@ function gui:mousepressed(x,y)
 		page = "MANUAL"
 	end	
 
+	-- move to skill points page
+	xx = expBarX
+	yy = screenOffsetFactor * screenHeight
+	dx = expBarWidth
+	dy = topBarHeight
+	if x >= xx and x <= xx + dx and y >= yy and y <= yy + dy then
+		page = "SKILLS"
+	end
+
 	-- move to next stage - for testing purposes, will change later
 	if x >= confirmButton[1] and x <= confirmButton[1] + confirmButton[3] and y >= confirmButton[2] and y <= confirmButton[2] + confirmButton[3] then
 		stage = stage + 1
