@@ -28,7 +28,8 @@ function patients:draw()
 		"List of symptoms:",
 		"Disease: "..patient.disease,
 		"Symptoms: "..table.concat(patient.symptoms, ", "),
-		"Displayed: "..table.concat(patient.symptoms_display, ", ")
+		"Displayed: "..table.concat(patient.symptoms_display, ", "),
+		"Treatment: "..patient.treatment
 	}
 
 	-- print the patient summary
@@ -105,13 +106,14 @@ function patients:mousepressed(x, y)
 	end
 	for i = 1, #treatments do
 		if withinObj(x, y, self.treatmentBoxes[i]) then
-			self.useTreatment(i)
+			self:useTreatment(i)
 		end
 	end
 end
 
 function patients:useTreatment(treatmentIndex)
-	-- use treatment somehow
+	patient = currentPatients[currentPatient]
+	patient.treatment = treatmentIndex
 end
 
 --function patients:drawinfo(patient)
