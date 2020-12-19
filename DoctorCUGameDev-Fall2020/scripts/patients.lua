@@ -1,5 +1,8 @@
-local patients = {}
+local treatments = require('scripts.treatments')
 
+local patients = {isTreating = false}
+patients.treatmentBoxes = {}
+patients.treatmentButton = {}
 
 function patients:draw()
 	patient = currentPatients[currentPatient]
@@ -23,10 +26,10 @@ function patients:draw()
 		"EXP: +"..patient.exp,
 		"Bio: "..patient.bio,
 		"List of symptoms:",
-		"Possible Diseases: "..table.concat(patient.possible_disease, ", "),
 		"Disease: "..patient.disease,
 		"Symptoms: "..table.concat(patient.symptoms, ", "),
-		"Displayed: "..table.concat(patient.symptoms_display, ", ")
+		"Displayed: "..table.concat(patient.symptoms_display, ", "),
+		"Treatment: "..patient.treatment
 	}
 
 	-- print the patient summary
@@ -56,8 +59,62 @@ function patients:draw()
 	patientX = x + centerUIWidth + x/2 - doctorWidth/2
 	patientY = doctorY
 	love.graphics.draw(love.graphics.newImage(patient.photo), patientX, patientY, 0, scale, scale)
+
+	--draw treatment button and tests if applicable
+	local rectTotal = centerUIHeight/(#treatments + 1)
+	local treatmentX = x + centerUIHeight + x/8
+	local treatmentY = y
+	treatHeight = 0.75*rectTotal
+	treatScale = treatHeight / rectangle:getHeight()
+	love.graphics.draw(rectangle, treatmentX, treatmentY, 0, treatScale, treatScale)
+	love.graphics.print("Assign Treatment", treatmentX + treatHeight/5, y + treatHeight/4)
+	self.treatmentButton = {x=treatmentX, y=treatmentY, height=treatHeight, width=treatScale * rectangle:getWidth()}
+	if self.isTreating then
+		self:drawTests(treatmentX, treatmentY, 0.75 * rectTotal, 0.25 * rectTotal)
+	end
 end
 
+function patients:drawTests(x, y, squareSize, offset)
+	local squareScale = squareSize / rectangle:getHeight()
+	for i = 1, #treatments do
+		y = y + squareSize + offset
+		self.treatmentBoxes[i] = {x = x, 
+			y = y, 
+			height = squareSize, 
+			width = squareScale * rectangle:getWidth()}
+		love.graphics.draw(rectangle, x, y, 0, squareScale, squareScale)
+
+		love.graphics.print(treatments[i], x + squareSize/5, y + squareSize/4)
+	end
+end
+
+
+function withinObj(x, y, range)
+	if not range or not range.x then
+		return false
+	end
+	if x >= range.x and x <= range.x + range.width
+	  and y >= range.y and y <= range.y + range.height then
+		return true
+	end
+	return false
+end
+
+function patients:mousepressed(x, y)
+	if withinObj(x, y, self.treatmentButton) then
+		self.isTreating = not self.isTreating
+	end
+	for i = 1, #treatments do
+		if withinObj(x, y, self.treatmentBoxes[i]) then
+			self:useTreatment(i)
+		end
+	end
+end
+
+function patients:useTreatment(treatmentIndex)
+	patient = currentPatients[currentPatient]
+	patient.treatment = treatmentIndex
+end
 
 --function patients:drawinfo(patient)
 	--maybe set color	
