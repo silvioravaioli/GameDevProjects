@@ -140,6 +140,7 @@ function love.mousepressed(x, y, button, isTouch)
 
 	if page== "TEST" then
 		test:mousepressed(x, y)
+		patients:mousepressed(x, y)
 	end
 
 end
