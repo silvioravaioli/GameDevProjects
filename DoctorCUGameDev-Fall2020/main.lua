@@ -89,6 +89,15 @@ function love.load()
 	experience = 0
 	maxExperience = 5
 
+	-- THIS IS A TABLE STORING THE TREATMENT ACCURACY
+
+	treatment = {}
+	treatment.accuracy_level={}
+	treatment.accuracy_prob={}
+
+	treatment.accuracy_level[1]=1
+	treatment.accuracy_prob[1]=0.80
+
 	-- THIS IS A TABLE STORING THE CURRENT PATIENTS FOR THE STAGE
 	-- THIS IS UPDATED WHEN A NEW STAGE IS LOADED
 	currentPatients = {}

@@ -42,7 +42,7 @@ function test:runTest(patient_number,test_number)
 	-- Retrieve parameters for the test
 	true_symp = patient.symptoms[test_number]
 	prob_symp = patient.symptoms_display[test_number]
-	test_acc = 0.80 -- replace with the accuracy of the current test
+	test_acc = treatment.accuracy_prob[1] -- replace with the accuracy of the current test
 	--test_acc = test.accuracy[i_test]				-- accuracy of the test
 
 	--print('Patient information')

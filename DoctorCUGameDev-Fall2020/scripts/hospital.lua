@@ -67,7 +67,7 @@ function hospital:mousepressed(x, y)
 		yy = self.patientBoxes[i][2]
 		if x >= xx and x <= xx + patientWidth and y >= yy and y <= yy + patientHeight then
 			currentPatient=i
-			if 1 -- REPLACE with if test>0
+			if 1 then -- REPLACE with if test>0
 				page = "TEST"
 			else
 				page = "TEST"
