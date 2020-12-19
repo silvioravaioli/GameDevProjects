@@ -65,24 +65,24 @@ function patients:draw()
 	local treatmentX = x + centerUIHeight + x/8
 	local treatmentY = y
 	treatHeight = 0.75*rectTotal
-	treatScale = treatHeight / rectangle:getHeight()
-	love.graphics.draw(rectangle, treatmentX, treatmentY, 0, treatScale, treatScale)
+	treatScale = treatHeight / rectangle_box_icons:getHeight()
+	love.graphics.draw(rectangle_box_icons, treatmentX, treatmentY, 0, treatScale, treatScale)
 	love.graphics.print("Assign Treatment", treatmentX + treatHeight/5, y + treatHeight/4)
-	self.treatmentButton = {x=treatmentX, y=treatmentY, height=treatHeight, width=treatScale * rectangle:getWidth()}
+	self.treatmentButton = {x=treatmentX, y=treatmentY, height=treatHeight, width=treatScale * rectangle_box_icons:getWidth()}
 	if self.isTreating then
 		self:drawTests(treatmentX, treatmentY, 0.75 * rectTotal, 0.25 * rectTotal)
 	end
 end
 
 function patients:drawTests(x, y, squareSize, offset)
-	local squareScale = squareSize / rectangle:getHeight()
+	local squareScale = squareSize / rectangle_box_icons:getHeight()
 	for i = 1, #treatments do
 		y = y + squareSize + offset
 		self.treatmentBoxes[i] = {x = x, 
 			y = y, 
 			height = squareSize, 
-			width = squareScale * rectangle:getWidth()}
-		love.graphics.draw(rectangle, x, y, 0, squareScale, squareScale)
+			width = squareScale * rectangle_box_icons:getWidth()}
+		love.graphics.draw(rectangle_box_icons, x, y, 0, squareScale, squareScale)
 
 		love.graphics.print(treatments[i], x + squareSize/5, y + squareSize/4)
 	end
