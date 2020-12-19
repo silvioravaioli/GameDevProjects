@@ -42,7 +42,7 @@ function test:runTest(patient_number,test_number)
 	-- Retrieve parameters for the test
 	true_symp = patient.symptoms[test_number]
 	prob_symp = patient.symptoms_display[test_number]
-	test_acc = treatment.accuracy_prob[1] -- replace with the accuracy of the current test
+	test_acc = treatment.accuracy_prob[test_number]
 	--test_acc = test.accuracy[i_test]				-- accuracy of the test
 
 	--print('Patient information')
@@ -69,7 +69,7 @@ function test:runTest(patient_number,test_number)
 		p2 = test_acc*(1-prob_symp)
 		new_prob = p1/(p1+p2)
 	end
-	new_prob = math.floor(new_prob * 100) / 100
+	new_prob = math.floor(new_prob * 1000) / 1000
 
 	-- Update displayed probability
 	-- print('Initial and updated probability')
