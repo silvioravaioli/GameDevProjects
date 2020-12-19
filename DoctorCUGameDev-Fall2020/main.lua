@@ -30,7 +30,8 @@ function love.load()
 	squareYellow= love.graphics.newImage("assets/yellowsquare.png")
 	squareGreen = love.graphics.newImage("assets/greensquare.png")
 
-	rectangle 	= love.graphics.newImage("assets/bluerectangle.png")
+	rectangle_box_icons = love.graphics.newImage("assets/bluerectangle.png")
+	rectangle_confirm 	= love.graphics.newImage("assets/bluerectangle_confirm.png")
 	centerRect 	= love.graphics.newImage("assets/testMenu.png")
 
 	doctorImage = love.graphics.newImage("assets/Characters/Icon_Doctor.jpeg");
@@ -174,12 +175,15 @@ end
 function loadNewStage(stage_num)
 	if stage_num >= 1 and stage_num <= #stages then
 		local stage_info = stages[stage_num]
-		stage = stage_num
-		testsAvailable = stage_info.tests_num
-		maxTests = stage_info.tests_num
-		diseases_unlocked = stage_info.diseases_unlocked
-		symptoms_unlocked = stage_info.symptoms_unlocked
-
+		-- stage info
+		stage 						= stage_num
+		testsAvailable 				= stage_info.tests_num
+		maxTests 					= stage_info.tests_num
+		diseases_unlocked 			= stage_info.diseases_unlocked
+		symptoms_unlocked 			= stage_info.symptoms_unlocked
+		-- number of patients
+		stage_num_patients_total 	= stage_info.diseases_unlocked
+		stage_num_patients_untreated= stage_info.diseases_unlocked
 		-- load patients
 		hospital:load(stage_num)
 	end
@@ -207,10 +211,5 @@ end
 function setColorWhite()
 	love.graphics.setColor(1,1,1)
 end
-
-
-
-
-
 
 
