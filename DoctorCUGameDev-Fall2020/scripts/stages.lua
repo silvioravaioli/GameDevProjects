@@ -47,6 +47,14 @@ local stages = {
         diseases_unlocked=6,
         symptoms_unlocked=5
     },
+    [7] = {
+        patient_ids={1,2,3,4,5,6},
+        patients_count=6,
+        patients_goal=5,
+        tests_num=40,
+        diseases_unlocked=8,
+        symptoms_unlocked=6
+    },
 }
 
 return stages

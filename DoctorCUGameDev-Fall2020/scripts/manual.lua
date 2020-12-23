@@ -95,7 +95,7 @@ function manual:draw()
 	setColorBlack()
 	if self.page == 0 then
 		love.graphics.print("Doctor's Manual", xstart + 50, 100, 0, 2)
-		for i = 1,  #diseases do
+		for i = 1,  diseases_unlocked do
 			--setColorBlue()
 			--love.graphics.rectangle("fill", self.contentsBoxes[i][1], self.contentsBoxes[i][2], 40, 30)
 			setColorBlack()
@@ -124,7 +124,7 @@ end
 
 function manual:mousepressed(x,y)
 	if manual.page == 0 then
-		for i = 1, #diseases do
+		for i = 1, diseases_unlocked do
 			xx = self.contentsBoxes[i][1]
 			yy = self.contentsBoxes[i][2]
 			if x >= xx and x <= xx + 400 and y >= yy and y <= yy + 50 then

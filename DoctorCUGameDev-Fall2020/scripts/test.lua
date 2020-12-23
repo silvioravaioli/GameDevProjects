@@ -88,7 +88,7 @@ function test:mousepressed(x, y)
 	-- print patient information (debug)
 	print(hospital.patient)
 
-	for i = 1, 6 do
+	for i = 1, symptoms_unlocked do
 		cur_box = testIconBoxes[i]
 		xx = cur_box[1]
 		yy = cur_box[2]

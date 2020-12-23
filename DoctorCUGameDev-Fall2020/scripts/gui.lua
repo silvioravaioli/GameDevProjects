@@ -43,7 +43,7 @@ function gui:drawTopAndBottomDisplay()
 	textWidth = font:getWidth("TEST N")
 	testIconBoxes={}
 
-	for i = 1, numberOfTests do
+	for i = 1, symptoms_unlocked do
 		setColorWhite()
 		xpos = testBarX + offset * i + squareWidth * (i - 1)
 		ypos = testBarY + (bottomBarHeight - squareWidth)/2
