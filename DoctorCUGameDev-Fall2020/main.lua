@@ -90,6 +90,7 @@ function love.load()
 	level = 1
 	experience = 0
 	maxExperience = 5
+	skill_points = 5
 
 	-- THIS IS A TABLE STORING THE TREATMENT ACCURACY
 	treatment = {}
