@@ -1,4 +1,5 @@
 local treatments = require('scripts.treatments')
+local symptoms = require('scripts.symptoms')
 
 local patients = {isTreating = false}
 patients.treatmentBoxes = {}
@@ -25,18 +26,43 @@ function patients:draw()
 		"Name: "..patient.name,
 		"EXP: +"..patient.exp,
 		"Bio: "..patient.bio,
-		"List of symptoms:",
-		"Disease: "..patient.disease,
-		"Symptoms: "..table.concat(patient.symptoms, ", "),
-		"Displayed: "..table.concat(patient.symptoms_display, ", "),
-		"Treatment: "..patient.treatment
+		"Symptoms:"
+		-- "Disease: "..patient.disease,
+		-- "Symptoms: "..table.concat(patient.symptoms, ", "),
+		-- "Displayed: "..table.concat(patient.symptoms_display, ", "),
+		-- "Treatment: "..patient.treatment
 	}
+
 
 	-- print the patient summary
 	for j = 1, #fields do
 		love.graphics.print(fields[j], currX, currY)
 		currY = currY + textHeight + textSpacing
 	end
+
+	-- print symptoms
+	-- lazy ... just adjust chance_columnX to align properly
+	chance_columnX1 = currX + font:getWidth(string.rep("X", 4))
+	chance_columnX2 = currX + font:getWidth(string.rep("X", 16))
+	love.graphics.print("SYMPTOM", chance_columnX1, currY)
+	love.graphics.print("CHANCE", chance_columnX2, currY)
+	
+	for k = 1, #symptoms do
+		currY = currY + textHeight + textSpacing
+		love.graphics.print(symptoms[k], chance_columnX1, currY)
+		love.graphics.print(patient.symptoms_display[k] * 100 .. "%", chance_columnX2, currY)
+	end
+
+	currY = currY + 2 * (textHeight + textSpacing)
+	
+	-- selected treatment
+	local treatment_selected = patient.treatment
+	if patient.treatment < 1 or patient.treatment > #treatments then
+		treatment_selected = "None"
+	else
+		treatment_selected = treatments[treatment_selected]
+	end 
+	love.graphics.print("Treatment selected: "..treatment_selected, currX, currY)
 
 	--for i = 1, #patient.symptoms do
 	--	symptom = patient.symptoms[i][1]
