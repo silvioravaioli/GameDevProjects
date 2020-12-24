@@ -85,7 +85,7 @@ function manual:draw()
 		local textHeight = font:getHeight(dis["name"])
 		love.graphics.print(dis["name"], screenWidth/2 - textwidth/2, topBarHeight + small_offset, 0, 1)
 		setFont(DEFAULT_FONT_SIZE)
-		for i = 1, #dis["symptoms"] do
+		for i = 1, symptoms_unlocked do
 			prob = dis["symptoms"][i]
 			j = j + 1
 			sympt = symptoms[i]
