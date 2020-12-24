@@ -39,7 +39,7 @@ function gui:drawTopAndBottomDisplay()
 	squareScale = squareWidth / square:getWidth()
 
 	-- draw tests
-	setFont(25)
+	setFont(DEFAULT_FONT_SIZE)
 	textWidth = font:getWidth("TEST N")
 	testIconBoxes={}
 
@@ -67,7 +67,7 @@ function gui:drawTopAndBottomDisplay()
 
 
 
-	setFont(defaultFontSize)
+	setFont(DEFAULT_FONT_SIZE)
 
 	setColorWhite()
 	scaleX = bottomBarHeight / square:getWidth()
@@ -113,7 +113,7 @@ function gui:drawTopAndBottomDisplay()
 	--	testBarY + bottomBarHeight/2 - textHeight/2)
 	
 	-- draw top bars: stage, progress, level, experience
-	setColorBlue()
+	setColorLightBlue()
 	stageBarX = topBarStartX
 	love.graphics.rectangle("fill", stageBarX, screenOffsetFactor * screenHeight,
 		stageBarWidth, topBarHeight)
@@ -128,7 +128,7 @@ function gui:drawTopAndBottomDisplay()
 		screenOffsetFactor * screenHeight + topBarHeight/2 - textHeight/2)
 
 	-- progress bar
-	setColorBlue()
+	setColorLightBlue()
 	progressBarX = stageBarX + stageBarWidth + screenOffsetFactor * screenWidth
 	love.graphics.rectangle("fill", progressBarX,
 		screenOffsetFactor * screenHeight, progressBarWidth,
@@ -147,7 +147,7 @@ function gui:drawTopAndBottomDisplay()
 
 	levelBarX = progressBarX + progressBarWidth + screenOffsetFactor * screenWidth
 
-	setColorBlue()
+	setColorLightBlue()
 	love.graphics.rectangle("fill", levelBarX, screenOffsetFactor * screenHeight,
 		levelBarWidth, topBarHeight)
 
@@ -163,7 +163,7 @@ function gui:drawTopAndBottomDisplay()
 
 	expBarX = levelBarX + levelBarWidth + screenOffsetFactor * screenWidth
 	expBarWidth = screenWidth - topBarStartX - expBarX
-	setColorBlue()
+	setColorLightBlue()
 	love.graphics.rectangle("fill", expBarX, screenOffsetFactor * screenHeight,
 		expBarWidth, topBarHeight)
 
@@ -200,7 +200,11 @@ end
 
 function gui:mousepressed(x,y)
 	if x >= returnX and x <= returnX + bottomBarHeight and y >= testBarY and y <= testBarY + bottomBarHeight then
-		page = "MAIN"
+		if skill_points>0 then
+			page = "SKILLS"
+		else
+			page = "MAIN"
+		end
 	end
 	-- move to manual page
 	xx = manualButton[1]
@@ -237,13 +241,6 @@ function gui:mousepressed(x,y)
 	if stage_num_patients_untreated==0 and x >= confirmButton[1] and x <= confirmButton[1] + confirmButton[3] and y >= confirmButton[2] and y <= confirmButton[2] + confirmButton[3] then
 		evaluateStage()
 		page = "STAGE_EVALUATION"
-		-- ADD HERE: IF GOOD, MOVE TO NEXT STAGE, OTHERWISE RESTART
-		if level_pass==1 then
-			stage = stage + 1
-			loadNewStage(stage)
-		else
-			loadNewStage(stage)
-		end
 		--page = "MAIN"
 	end	
 	-- move to next stage using the large confirm button (only if all patients have been treated)
