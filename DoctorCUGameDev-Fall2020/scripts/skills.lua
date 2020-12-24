@@ -8,16 +8,16 @@ function skills:draw()
     local dx = 260
     local dy = 80
 	for x = 0, 3 do
-		for y = 0, 6 do
+		for y = 0, symptoms_unlocked do
 			love.graphics.rectangle("line", tableX + x*dx, tableY + y*dy, dx, dy)
 		end
     end
     
     local tableLabels = {[1] = "Current level", [2] = "Current accuracy", [3] = "Next level", [4] = ""}
-    local testLabels = {[0] = "", [1] = "Test A", [2] = "Test B", [3] = "Test C", [4] = "Test D", [5] = "Test E", [6] = "Test F"}
+    local testLabels = {[0] = "", [1] = "Hit with hammer", [2] = "Put snail in nose", [3] = "Place leeches", [4] = "Eat garlic soup", [5] = "Dogs sniffing", [6] = "Lift rocks"}
     plusY = {}
 	for x = 0, 4 do
-        for y = 0, 6 do
+        for y = 0, symptoms_unlocked do
             if x == 0 then
                 local textWidth = font:getWidth(testLabels[y])
                 local textHeight = font:getHeight(testLabels[y])
@@ -32,7 +32,7 @@ function skills:draw()
                 local textHeight = font:getHeight(text)
                 love.graphics.print(text, tableX + dx/2 - 0.75 * textWidth/2 + x*dx, tableY + dy/2 - 0.75 * textHeight/2 + y*dy, 0, 0.75)
             elseif x == 2 then
-                local text = tostring(treatment.accuracy_prob[y])
+                local text = tostring(treatment.accuracy_prob[y]*100).."%"
                 local textWidth = font:getWidth(text)
                 local textHeight = font:getHeight(text)
                 love.graphics.print(text, tableX + dx/2 - 0.75 * textWidth/2 + x*dx, tableY + dy/2 - 0.75 * textHeight/2 + y*dy, 0, 0.75)
@@ -41,7 +41,7 @@ function skills:draw()
                 if future_prob > 1 then
                     future_prob = 1
                 end
-                local text = tostring(future_prob)
+                local text = tostring(future_prob * 100).."%"
                 local textWidth = font:getWidth(text)
                 local textHeight = font:getHeight(text)
                 love.graphics.print(text, tableX + dx/2 - 0.75 * textWidth/2 + x*dx, tableY + dy/2 - 0.75 * textHeight/2 + y*dy, 0, 0.75)
@@ -58,7 +58,7 @@ function skills:draw()
     local text = tostring(skill_points).." skill points available"
     local textWidth = font:getWidth(text)
     local textHeight = font:getHeight(text)
-    love.graphics.print(text,  tableX + dx/2 - 0.75 * textWidth/2 + 1.5*dx, tableY + dy/2 - 0.75 * textHeight/2 + 7*dy, 0, 0.75)
+    love.graphics.print(text,  tableX + dx/2 - 0.75 * textWidth/2 + 1.5*dx, tableY + dy/2 - 0.75 * textHeight/2 + (symptoms_unlocked+1)*dy, 0, 0.75)
 
 end
 
@@ -68,7 +68,7 @@ function skills:mousepressed(x,y)
     local plusHeight = font:getHeight("+")
 
     if skill_points > 0 and plusX ~= nil and plusY ~= nil and x >= plusX and x <= plusX + plusWidth then
-        for i = 1, 6 do
+        for i = 1, symptoms_unlocked do
             if treatment.accuracy_prob[i] < 1 and y >= plusY[i] and y <= plusY[i] + plusHeight then
                 skill_points = skill_points - 1
                 treatment.accuracy_level[i] = treatment.accuracy_level[i] + 1
