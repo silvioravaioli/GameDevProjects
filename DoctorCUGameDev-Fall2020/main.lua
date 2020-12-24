@@ -11,6 +11,7 @@ symptoms = require('scripts.symptoms')
 treatments = require('scripts.treatments')
 stages = require('scripts.stages')
 skills = require('scripts.skills')
+help = require('scripts.help')
 
 -- set filter 
 love.graphics.setDefaultFilter("nearest")
@@ -107,6 +108,9 @@ function love.load()
 	-- THIS IS UPDATED WHEN A NEW STAGE IS LOADED
 	currentPatients = {}
 
+	-- page num for help page
+	help_page = 1
+
 	loadNewStage(stage)
 
 end
@@ -134,6 +138,8 @@ function love.draw()
 		manual:draw()
 	elseif page == "SKILLS" then
 		skills:draw()
+	elseif page == "HELP" then
+		help:draw()
 	end
 	gui:draw()
 end
@@ -161,6 +167,10 @@ function love.mousepressed(x, y, button, isTouch)
 
 	if page == "SKILLS" then
 		skills:mousepressed(x, y)
+	end
+
+	if page == "HELP" then
+		help:mousepressed(x, y)
 	end
 
 end

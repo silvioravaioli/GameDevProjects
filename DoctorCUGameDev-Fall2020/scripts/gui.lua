@@ -228,6 +228,11 @@ function gui:mousepressed(x,y)
 		incrementExp(11)
 	end
 
+	-- move to help page
+	if x >= helpButton[1] and x <= helpButton[1] + helpButton[3] and y >= helpButton[2] and y <= helpButton[2] + helpButton[3] then
+		page = "HELP"
+	end	
+
 	-- move to next stage using the tick button - for testing purposes, will change later
 	if stage_num_patients_untreated==0 and x >= confirmButton[1] and x <= confirmButton[1] + confirmButton[3] and y >= confirmButton[2] and y <= confirmButton[2] + confirmButton[3] then
 		stage = stage + 1
