@@ -83,7 +83,7 @@ end
 
 function incrementExp(exp)
     experience = experience + exp
-    if experience >= max_experience[level] and level < max_level then
+    while experience >= max_experience[level] and level < max_level do
         experience = experience - max_experience[level]
         level = level + 1
         skill_points = skill_points + skill_points_gained[level]
