@@ -251,8 +251,13 @@ function evaluateStage()
 	-- determine if you passed the level
 	if tot_cured>=patients_goal then
 		level_pass = 1
+		incrementExp(tot_experience)
+		stage = stage + 1
+		loadNewStage(stage)
 	else
 		level_pass = 0
+		loadNewStage(stage)
+
 	end
 
 end
