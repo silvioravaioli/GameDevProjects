@@ -171,7 +171,12 @@ function gui:drawTopAndBottomDisplay()
 	love.graphics.rectangle("line", expBarX, screenOffsetFactor * screenHeight,
 		expBarWidth, topBarHeight)
 
-	expString = " EXP: "..tostring(experience).."/"..tostring(maxExperience)
+	if level < max_level then
+		maxExpStr = tostring(max_experience[level])
+	else
+		maxExpStr = "-"
+	end
+	expString = " EXP: "..tostring(experience).."/"..maxExpStr
 	textWidth = font:getWidth(expString)
 
 	love.graphics.print(expString,
@@ -205,13 +210,22 @@ function gui:mousepressed(x,y)
 		page = "MANUAL"
 	end	
 
-	-- move to skill points page
+	-- move to skill points page (for testing - should add own button later)
 	xx = expBarX
 	yy = screenOffsetFactor * screenHeight
 	dx = expBarWidth
 	dy = topBarHeight
 	if x >= xx and x <= xx + dx and y >= yy and y <= yy + dy then
 		page = "SKILLS"
+	end
+
+	-- increment xp by 11 - for testing purposes, need to remove later
+	xx = levelBarX
+	yy = screenOffsetFactor * screenHeight
+	dx = levelBarWidth
+	dy = topBarHeight
+	if x >= xx and x <= xx + dx and y >= yy and y <= yy + dy then
+		incrementExp(11)
 	end
 
 	-- move to next stage using the tick button - for testing purposes, will change later

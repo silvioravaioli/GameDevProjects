@@ -88,9 +88,11 @@ function love.load()
 
 	-- these should vary based on progress in the game
 	level = 1
+	max_level = 13
 	experience = 0
-	maxExperience = 5
-	skill_points = 5
+	max_experience = {[1] = 10, [2] = 20, [3] = 30, [4] = 50, [5] = 70, [6] = 100, [7] = 130, [8] = 170, [9] = 210, [10] = 260, [11] = 310, [12] = 370, [13] = -1}
+	skill_points = 0
+	skill_points_gained = {[2] = 3, [3] = 3, [4] = 2, [5] = 2, [6] = 1, [7] = 1, [8] = 1, [9] = 1, [10] = 1, [11] = 1, [12] = 1, [13] = 1}
 
 	-- THIS IS A TABLE STORING THE TREATMENT ACCURACY
 	treatment = {}

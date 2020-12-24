@@ -70,13 +70,23 @@ function skills:mousepressed(x,y)
     if skill_points > 0 and plusX ~= nil and plusY ~= nil and x >= plusX and x <= plusX + plusWidth then
         for i = 1, 6 do
             if treatment.accuracy_prob[i] < 1 and y >= plusY[i] and y <= plusY[i] + plusHeight then
-                treatment.accuracy_prob[i] = treatment.accuracy_prob[i] + 0.05
                 skill_points = skill_points - 1
+                treatment.accuracy_level[i] = treatment.accuracy_level[i] + 1
+                treatment.accuracy_prob[i] = treatment.accuracy_prob[i] + 0.05
                 if treatment.accuracy_prob[i] > 1 then
                     treatment.accuracy_prob[i] = 1
                 end
             end
         end
+    end
+end
+
+function incrementExp(exp)
+    experience = experience + exp
+    if experience >= max_experience[level] and level < max_level then
+        experience = experience - max_experience[level]
+        level = level + 1
+        skill_points = skill_points + skill_points_gained[level]
     end
 end
 
