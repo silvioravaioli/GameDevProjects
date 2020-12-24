@@ -132,7 +132,10 @@ function love.load()
 	stage_num_patients_total_old = 1
 	patients_goal = 0
 
+	manual:setup()
+
 	loadNewStage(stage)
+
 
 end
 
