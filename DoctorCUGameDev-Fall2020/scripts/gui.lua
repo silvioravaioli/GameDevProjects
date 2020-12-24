@@ -200,7 +200,11 @@ end
 
 function gui:mousepressed(x,y)
 	if x >= returnX and x <= returnX + bottomBarHeight and y >= testBarY and y <= testBarY + bottomBarHeight then
-		page = "MAIN"
+		if skill_points>0 then
+			page = "SKILLS"
+		else
+			page = "MAIN"
+		end
 	end
 	-- move to manual page
 	xx = manualButton[1]
