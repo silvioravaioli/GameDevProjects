@@ -17,7 +17,7 @@ function patients:draw()
 
 	local borderOffset = 50
 	local textSpacing = 15		-- pixels between lines
-	setFont(20)					-- set font size
+	setFont(SMALLER_FONT_SIZE)					-- set font size
 	local currX = x + borderOffset
 	local currY = y + borderOffset
 	setColorBlack()
@@ -53,17 +53,20 @@ function patients:draw()
 		love.graphics.print(patient.symptoms_display[k] * 100 .. "%", chance_columnX2, currY)
 	end
 
-	currY = currY + 2 * (textHeight + textSpacing)
-	
+	currY = currY + 1.5 * (textHeight + textSpacing)
+
 	-- selected treatment
 	local treatment_selected = patient.treatment
 	if patient.treatment < 1 or patient.treatment > #treatments then
 		treatment_selected = "None"
 	else
 		treatment_selected = treatments[treatment_selected]
-	end 
+	end
+	setColorBlue()
+	setFont(EVEN_SMALLER_FONT_SIZE)
 	love.graphics.print("Treatment selected: "..treatment_selected, currX, currY)
-
+	setColorBlack()
+	setFont(DEFAULT_FONT_SIZE)
 	--for i = 1, #patient.symptoms do
 	--	symptom = patient.symptoms[i][1]
 	--	--symptom_name = manual.symptoms[symptom]

@@ -20,6 +20,11 @@ love.graphics.setDefaultFilter("nearest")
 -- FUNCTION LOAD
 function love.load()
 	page = "MAIN"
+	DEFAULT_FONT = "assets/nokiafc22.ttf"
+	DEFAULT_FONT_SIZE = 30
+	SMALLER_FONT_SIZE = 20
+	EVEN_SMALLER_FONT_SIZE = 18
+	LARGER_FONT_SIZE = 40
 	math.randomseed(os.time())
 	
 	-- load image assets
@@ -55,7 +60,6 @@ function love.load()
 	icon_end_day= love.graphics.newImage("assets/Icons/icon_end_day.png")
 	icon_close	= love.graphics.newImage("assets/Icons/icon_close.png")
 
-
 	-- drawing the UI elements
 	screenWidth = love.graphics.getWidth()
 	screenHeight = love.graphics.getHeight()
@@ -67,14 +71,12 @@ function love.load()
 	centerUIHeight = centerRect:getHeight()/centerRect:getWidth() * centerUIWidth
 
 	numberOfTests = 6
-	manual:setup()
 	
 	lineWidth = 5
 	love.graphics.setLineWidth(lineWidth)
 
 	love.graphics.setBackgroundColor(1,1,1);
-	defaultFontSize = 30
-	font = setFont(defaultFontSize)
+	font = setFont(DEFAULT_FONT_SIZE)
 	textHeight = font:getHeight()
 
 	currentPatient = 1
@@ -103,6 +105,8 @@ function love.load()
 	-- THIS IS A TABLE STORING THE CURRENT PATIENTS FOR THE STAGE
 	-- THIS IS UPDATED WHEN A NEW STAGE IS LOADED
 	currentPatients = {}
+
+	manual:setup()
 
 	loadNewStage(stage)
 
@@ -195,7 +199,7 @@ end
 
 -- FUNCTION SET FONT
 function setFont(size)
-	font = love.graphics.newFont("assets/nokiafc22.ttf", size)
+	font = love.graphics.newFont(DEFAULT_FONT, size)
 	love.graphics.setFont(font)
 	textHeight = font:getHeight()
 	return font
@@ -205,7 +209,7 @@ end
 
 -- FUNCTIONS FOR COLORS
 function setColorBlue()
-	love.graphics.setColor(0/255,191/255,255/255)
+	love.graphics.setColor(0,0,1)
 end
 function setColorBlack()
 	love.graphics.setColor(0,0,0)
@@ -213,5 +217,9 @@ end
 function setColorWhite()
 	love.graphics.setColor(1,1,1)
 end
-
-
+function setColorRed()
+	love.graphics.setColor(1,0,0)
+end
+function setColorLightBlue()
+	love.graphics.setColor(0,191/255,1)
+end
