@@ -115,10 +115,10 @@ function love.load()
 	stage_evaluation_cured 		= {}
 	stage_evaluation_points 	= {}
 	stage_evaluation_disease 	= {}
-	tot_cured = 0;
-	tot_experience = 0;
-
-
+	tot_cured = 0
+	tot_experience = 0
+	stage_num_patients_total_old = 1
+	patients_goal = 0
 
 	loadNewStage(stage)
 
@@ -208,6 +208,7 @@ function loadNewStage(stage_num)
 		-- number of patients
 		stage_num_patients_total 	= stage_info.patients_count
 		stage_num_patients_untreated= stage_info.patients_count
+		patients_goal				= stage_info.patients_goal
 		-- load patients
 		hospital:load(stage_num)
 	end
@@ -222,8 +223,9 @@ function evaluateStage()
 	stage_evaluation_treatments = {[1]= "treat1",[2]="",[3]="",[4]="",[5]="",[6]=""}
 	stage_evaluation_cured 		= {[1]= "cured1",[2]="",[3]="",[4]="",[5]="",[6]=""}
 	stage_evaluation_points 	= {[1]= "point1",[2]="",[3]="",[4]="",[5]="",[6]=""}
-	tot_cured = 0;
-	tot_experience = 0;
+	tot_cured = 0
+	tot_experience = 0
+	stage_num_patients_total_old=stage_num_patients_total
 
 	-- fill with the information for all the patients
 	for i_patient = 1,stage_num_patients_total do
@@ -247,7 +249,11 @@ function evaluateStage()
 	print(tot_experience)
 
 	-- determine if you passed the level
-	level_pass = 1
+	if tot_cured>=patients_goal then
+		level_pass = 1
+	else
+		level_pass = 0
+	end
 
 end
 

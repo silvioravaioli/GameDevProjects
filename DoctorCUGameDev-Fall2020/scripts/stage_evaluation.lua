@@ -12,7 +12,7 @@ function stage_evaluation:draw()
     local dx = 260
     local dy = 80
 	for x = 0, 3 do
-		for y = 0, 6 do
+		for y = 0, stage_num_patients_total_old do
 			love.graphics.rectangle("line", tableX + x*dx, tableY + y*dy, dx, dy)
 		end
     end
@@ -21,7 +21,7 @@ function stage_evaluation:draw()
     local tableLabels = {[0] = "Patients",[1] = "Treatment", [2] = "Cured?", [3] = "Points"}
 
     -- fill the table, one cell at the time
-	for y = 0, 6 do
+	for y = 0, stage_num_patients_total_old do
         for x = 0, 3 do
 
             -- header

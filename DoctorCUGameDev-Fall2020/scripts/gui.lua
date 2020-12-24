@@ -233,8 +233,12 @@ function gui:mousepressed(x,y)
 		evaluateStage()
 		page = "STAGE_EVALUATION"
 		-- ADD HERE: IF GOOD, MOVE TO NEXT STAGE, OTHERWISE RESTART
-		stage = stage + 1
-		loadNewStage(stage)
+		if level_pass==1 then
+			stage = stage + 1
+			loadNewStage(stage)
+		else
+			loadNewStage(stage)
+		end
 		--page = "MAIN"
 	end	
 	-- move to next stage using the large confirm button (only if all patients have been treated)
