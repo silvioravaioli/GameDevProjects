@@ -59,6 +59,22 @@ function stage_evaluation:draw()
             end
         end
     end
+
+    -- Display the outcome message
+    y=stage_num_patients_total_old+1
+    x=0
+    local textWidth = font:getWidth(tableLabels[x])
+    local textHeight = font:getHeight(tableLabels[x])
+    if level_pass==1 then
+        setColorGreen()
+        text = "GOOD JOB! You are ready for the NEXT STAGE"
+    else
+        setColorRed()
+        text = "OH NO! Better REPEAT THE STAGE... and read more carefully the manual!"
+    end
+    love.graphics.print(text, tableX + dx/2 - 0.75 * textWidth/2 + x*dx, tableY + dy/2 - 0.75 * textHeight/2 + y*dy, 0, 0.75)
+    setColorBlack()
+
 end
 
 
