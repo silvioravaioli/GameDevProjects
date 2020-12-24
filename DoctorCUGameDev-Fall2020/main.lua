@@ -1,6 +1,6 @@
 -- main.lua -- MAIN FILE
 
--- load other scripts in th efolder
+-- load other scripts in the folder
 gui = require('scripts.gui')
 test = require('scripts.test')
 hospital = require('scripts.hospital')
@@ -11,6 +11,7 @@ symptoms = require('scripts.symptoms')
 treatments = require('scripts.treatments')
 stages = require('scripts.stages')
 skills = require('scripts.skills')
+stage_evaluation = require('scripts.stage_evaluation')
 
 -- set filter 
 love.graphics.setDefaultFilter("nearest")
@@ -107,6 +108,18 @@ function love.load()
 	-- THIS IS UPDATED WHEN A NEW STAGE IS LOADED
 	currentPatients = {}
 
+
+	-- Variables used to evaluate stages
+	stage_evaluation_names 		= {}
+	stage_evaluation_treatments	= {}
+	stage_evaluation_cured 		= {}
+	stage_evaluation_points 	= {}
+	stage_evaluation_disease 	= {}
+	tot_cured = 0;
+	tot_experience = 0;
+
+
+
 	loadNewStage(stage)
 
 end
@@ -134,6 +147,8 @@ function love.draw()
 		manual:draw()
 	elseif page == "SKILLS" then
 		skills:draw()
+	elseif page == "STAGE_EVALUATION" then
+		stage_evaluation:draw()
 	end
 	gui:draw()
 end
@@ -161,6 +176,10 @@ function love.mousepressed(x, y, button, isTouch)
 
 	if page == "SKILLS" then
 		skills:mousepressed(x, y)
+	end
+
+	if page == "STAGE_EVALUATION" then
+		stage_evaluation:mousepressed(x, y)
 	end
 
 end
@@ -194,6 +213,43 @@ function loadNewStage(stage_num)
 	end
 end
 
+
+-- FUNCTION EVALUATE STAGE
+function evaluateStage()
+
+	-- initialize the variables
+	stage_evaluation_names 		= {[1]= "name_1",[2]="",[3]="",[4]="",[5]="",[6]=""}
+	stage_evaluation_treatments = {[1]= "treat1",[2]="",[3]="",[4]="",[5]="",[6]=""}
+	stage_evaluation_cured 		= {[1]= "cured1",[2]="",[3]="",[4]="",[5]="",[6]=""}
+	stage_evaluation_points 	= {[1]= "point1",[2]="",[3]="",[4]="",[5]="",[6]=""}
+	tot_cured = 0;
+	tot_experience = 0;
+
+	-- fill with the information for all the patients
+	for i_patient = 1,stage_num_patients_total do
+		local patient = currentPatients[i_patient]
+		stage_evaluation_names[i_patient] 		= patient.name
+		stage_evaluation_treatments[i_patient] = patient.treatment
+		stage_evaluation_disease[i_patient] 	= patient.disease
+		if patient.treatment==patient.disease then
+			stage_evaluation_cured[i_patient] 		= 1
+			tot_cured = tot_cured+1
+			stage_evaluation_points[i_patient] 	= patient.exp
+			tot_experience = tot_experience+patient.exp
+		else
+			stage_evaluation_cured[i_patient] 		= 0
+			stage_evaluation_points[i_patient] 	= 0
+		end	
+	end
+	print('Total patients cured')
+	print(tot_cured)
+	print('Total experience received')
+	print(tot_experience)
+
+	-- determine if you passed the level
+	level_pass = 1
+
+end
 
 
 -- FUNCTION SET FONT
