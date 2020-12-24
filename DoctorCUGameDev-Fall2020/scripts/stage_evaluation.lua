@@ -7,10 +7,11 @@ local stage_evaluation = {}
 function stage_evaluation:draw()
 
     -- set size of the table
-    local tableX = 0.14 * screenHeight
-    local tableY = 0.14 * screenWidth
+    --local tableX = 0.14 * screenHeight
     local dx = 260
     local dy = 80
+    local tableX = screenWidth/2 - 2 * dx
+    local tableY = 0.07 * screenWidth
 	for x = 0, 3 do
 		for y = 0, stage_num_patients_total_old do
 			love.graphics.rectangle("line", tableX + x*dx, tableY + y*dy, dx, dy)
@@ -36,7 +37,7 @@ function stage_evaluation:draw()
                 local text = tostring(stage_evaluation_names[y])
                 local textWidth = font:getWidth(tableLabels[x])
                 local textHeight = font:getHeight(tableLabels[x])
-                love.graphics.print(text, tableX + dx/2 - 0.75 * textWidth/2 + x*dx, tableY + dy/2 - 0.75 * textHeight/2 + y*dy, 0, 0.75)
+                love.graphics.print(text, tableX + dx/8 - 0.75 * textWidth/2 + x*dx, tableY + dy/2 - 0.75 * textHeight/2 + y*dy, 0, 0.75)
             -- patient: treatment
             elseif x == 1 then
                 local text = tostring(stage_evaluation_treatments[y])

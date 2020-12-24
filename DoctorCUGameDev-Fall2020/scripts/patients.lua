@@ -7,6 +7,9 @@ patients.treatmentButton = {}
 
 function patients:draw()
 	patient = currentPatients[currentPatient]
+	if patient == nil then
+		return
+	end
 
 	x = screenWidth/2 - centerUIWidth/2
 	y = (lowerBound+upperBound)/2 - centerUIHeight/2

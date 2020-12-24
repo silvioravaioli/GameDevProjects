@@ -44,9 +44,19 @@ function manual:setup()
 	-- bounding boxes for clicking diseases
 	for i = 1, #diseases do
 		if i < 5 then
-			self.contentsBoxes[i] = {self.manualX + 3*small_offset, self.manualY + small_offset + (2*font:getHeight()*i), 0, 1}
+			self.contentsBoxes[i] = {
+			self.manualX + 3*small_offset,
+			self.manualY + small_offset + (2*font:getHeight()*i), 
+			0,1,
+			font:getWidth(diseases[i]["name"])
+		}
 		else
-			self.contentsBoxes[i] = {screenWidth/2 + 2*small_offset, self.manualY + small_offset + (2*font:getHeight()*(i-4)), 0, 1}
+			self.contentsBoxes[i] = {
+				screenWidth/2 + 2*small_offset,
+				self.manualY + small_offset + (2*font:getHeight()*(i-4)),
+				0, 1,
+				font:getWidth(diseases[i]["name"])
+			}
 		end
 	end
 	self.manualbackbuttonheight = self.manualY + manual_height - font:getHeight("X") - small_offset
@@ -85,7 +95,7 @@ function manual:draw()
 		local textHeight = font:getHeight(dis["name"])
 		love.graphics.print(dis["name"], screenWidth/2 - textwidth/2, topBarHeight + small_offset, 0, 1)
 		setFont(DEFAULT_FONT_SIZE)
-		for i = 1, #dis["symptoms"] do
+		for i = 1, symptoms_unlocked do
 			prob = dis["symptoms"][i]
 			j = j + 1
 			sympt = symptoms[i]
@@ -116,7 +126,8 @@ function manual:mousepressed(x,y)
 		for i = 1, diseases_unlocked do
 			xx = self.contentsBoxes[i][1]
 			yy = self.contentsBoxes[i][2]
-			if x >= xx and x <= xx + 400 and y >= yy and y <= yy + 50 then
+			ww = self.contentsBoxes[i][5]
+			if x >= xx and x <= xx + ww and y >= yy and y <= yy + font:getHeight("X") then
 				manual.page = i
 			end
 		end
