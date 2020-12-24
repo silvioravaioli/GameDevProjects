@@ -37,7 +37,7 @@ function stage_evaluation:draw()
                 local text = tostring(stage_evaluation_names[y])
                 local textWidth = font:getWidth(tableLabels[x])
                 local textHeight = font:getHeight(tableLabels[x])
-                love.graphics.print(text, tableX + dx/8 - 0.75 * textWidth/2 + x*dx, tableY + dy/2 - 0.75 * textHeight/2 + y*dy, 0, 0.75)
+                love.graphics.print(text, tableX + dx/3 - 0.75 * textWidth/2 + x*dx, tableY + dy/2 - 0.75 * textHeight/2 + y*dy, 0, 0.75)
             -- patient: treatment
             elseif x == 1 then
                 local text = tostring(stage_evaluation_treatments[y])
