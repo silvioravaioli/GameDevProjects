@@ -47,7 +47,7 @@ function patients:draw()
 	love.graphics.print("SYMPTOM", chance_columnX1, currY)
 	love.graphics.print("CHANCE", chance_columnX2, currY)
 	
-	for k = 1, #symptoms do
+	for k = 1, symptoms_unlocked do
 		currY = currY + textHeight + textSpacing
 		love.graphics.print(symptoms[k], chance_columnX1, currY)
 		love.graphics.print(patient.symptoms_display[k] * 100 .. "%", chance_columnX2, currY)
