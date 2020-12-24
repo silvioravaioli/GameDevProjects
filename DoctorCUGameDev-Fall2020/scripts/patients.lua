@@ -127,13 +127,19 @@ function withinObj(x, y, range)
 end
 
 function patients:mousepressed(x, y)
+	local click_out=1
 	if withinObj(x, y, self.treatmentButton) then
 		self.isTreating = not self.isTreating
+		click_out=0
 	end
 	for i = 1, #treatments do
 		if withinObj(x, y, self.treatmentBoxes[i]) then
 			self:useTreatment(i)
+			click_out=0
 		end
+	end
+	if click_out==1 then
+		self.isTreating = false
 	end
 end
 
