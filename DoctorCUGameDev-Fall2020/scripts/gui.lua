@@ -171,7 +171,12 @@ function gui:drawTopAndBottomDisplay()
 	love.graphics.rectangle("line", expBarX, screenOffsetFactor * screenHeight,
 		expBarWidth, topBarHeight)
 
-	expString = " EXP: "..tostring(experience).."/"..tostring(maxExperience)
+	if level < max_level then
+		maxExpStr = tostring(max_experience[level])
+	else
+		maxExpStr = "-"
+	end
+	expString = " EXP: "..tostring(experience).."/"..maxExpStr
 	textWidth = font:getWidth(expString)
 
 	love.graphics.print(expString,
@@ -195,7 +200,11 @@ end
 
 function gui:mousepressed(x,y)
 	if x >= returnX and x <= returnX + bottomBarHeight and y >= testBarY and y <= testBarY + bottomBarHeight then
-		page = "MAIN"
+		if skill_points>0 then
+			page = "SKILLS"
+		else
+			page = "MAIN"
+		end
 	end
 	-- move to manual page
 	xx = manualButton[1]
@@ -205,7 +214,7 @@ function gui:mousepressed(x,y)
 		page = "MANUAL"
 	end	
 
-	-- move to skill points page
+	-- move to skill points page (for testing - should add own button later)
 	xx = expBarX
 	yy = screenOffsetFactor * screenHeight
 	dx = expBarWidth
@@ -214,11 +223,25 @@ function gui:mousepressed(x,y)
 		page = "SKILLS"
 	end
 
+	-- increment xp by 11 - for testing purposes, need to remove later
+	xx = levelBarX
+	yy = screenOffsetFactor * screenHeight
+	dx = levelBarWidth
+	dy = topBarHeight
+	if x >= xx and x <= xx + dx and y >= yy and y <= yy + dy then
+		incrementExp(11)
+	end
+
+	-- move to help page
+	if x >= helpButton[1] and x <= helpButton[1] + helpButton[3] and y >= helpButton[2] and y <= helpButton[2] + helpButton[3] then
+		page = "HELP"
+	end	
+
 	-- move to next stage using the tick button - for testing purposes, will change later
 	if stage_num_patients_untreated==0 and x >= confirmButton[1] and x <= confirmButton[1] + confirmButton[3] and y >= confirmButton[2] and y <= confirmButton[2] + confirmButton[3] then
-		stage = stage + 1
-		loadNewStage(stage)
-		page = "MAIN"
+		evaluateStage()
+		page = "STAGE_EVALUATION"
+		--page = "MAIN"
 	end	
 	-- move to next stage using the large confirm button (only if all patients have been treated)
 	--if stage_num_patients_untreated==0 and x >= rectangleConfirmButton[1] and x <= rectangleConfirmButton[1] + rectangleConfirmButton[3] and y >= rectangleConfirmButton[2] and y <= rectangleConfirmButton[2] + rectangleConfirmButton[4] then

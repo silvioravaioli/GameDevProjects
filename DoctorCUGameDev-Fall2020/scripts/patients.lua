@@ -47,7 +47,7 @@ function patients:draw()
 	love.graphics.print("SYMPTOM", chance_columnX1, currY)
 	love.graphics.print("CHANCE", chance_columnX2, currY)
 	
-	for k = 1, #symptoms do
+	for k = 1, symptoms_unlocked do
 		currY = currY + textHeight + textSpacing
 		love.graphics.print(symptoms[k], chance_columnX1, currY)
 		love.graphics.print(patient.symptoms_display[k] * 100 .. "%", chance_columnX2, currY)
@@ -130,13 +130,19 @@ function withinObj(x, y, range)
 end
 
 function patients:mousepressed(x, y)
+	local click_out=1
 	if withinObj(x, y, self.treatmentButton) then
 		self.isTreating = not self.isTreating
+		click_out=0
 	end
 	for i = 1, #treatments do
-		if withinObj(x, y, self.treatmentBoxes[i]) then
+		if withinObj(x, y, self.treatmentBoxes[i]) and self.isTreating == true then
 			self:useTreatment(i)
+			click_out=0
 		end
+	end
+	if click_out==1 then
+		self.isTreating = false
 	end
 end
 

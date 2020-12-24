@@ -32,6 +32,7 @@ end
 function test:runTest(patient_number,test_number)
 
 	print('Run new test on the patient')
+	print(patient.disease)
 	--print('Run new test (patient number, test number)')
 	--print(patient_number)
 	--print(test_number)

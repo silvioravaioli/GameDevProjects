@@ -77,6 +77,7 @@ function manual:draw()
 			love.graphics.print(diseases[i]["name"], self.contentsBoxes[i][1], self.contentsBoxes[i][2], self.contentsBoxes[i][3], self.contentsBoxes[i][4])
 		end
 	else
+
 		local j = 0
 		local dis = diseases[self.page]
 		setFont(LARGER_FONT_SIZE)
@@ -91,8 +92,6 @@ function manual:draw()
 			local currHeight = small_offset + textHeight + (1.2*small_offset*(i+1))
 			love.graphics.print(sympt, manualX + 2 * small_offset, currHeight, 0, 1)
 			love.graphics.print(self.probstoWords[prob], screenWidth/2 + 2*small_offset, currHeight, 0, 1)
-			--love.graphics.print(sympt, 450, 125 + (50 * (i + 1)), 0, 1)
-			--love.graphics.print(self.probstoWords[prob], 800,  125 + (50 * (i + 1)), 0 , 1)
 		end
 		local bottomY = small_offset + textHeight + (1.2*small_offset*(#dis["symptoms"]+3))
 		love.graphics.print("Treatment:", manualX + 2 * small_offset, bottomY, 0, 1)
