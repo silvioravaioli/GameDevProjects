@@ -185,6 +185,7 @@ function love.mousepressed(x, y, button, isTouch)
 
 	if page == "HELP" then
 		help:mousepressed(x, y)
+	end
 	
 	if page == "STAGE_EVALUATION" then
 		stage_evaluation:mousepressed(x, y)
