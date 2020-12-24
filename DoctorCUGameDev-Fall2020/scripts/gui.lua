@@ -235,9 +235,16 @@ function gui:mousepressed(x,y)
 
 	-- move to next stage using the tick button - for testing purposes, will change later
 	if stage_num_patients_untreated==0 and x >= confirmButton[1] and x <= confirmButton[1] + confirmButton[3] and y >= confirmButton[2] and y <= confirmButton[2] + confirmButton[3] then
-		stage = stage + 1
-		loadNewStage(stage)
-		page = "MAIN"
+		evaluateStage()
+		page = "STAGE_EVALUATION"
+		-- ADD HERE: IF GOOD, MOVE TO NEXT STAGE, OTHERWISE RESTART
+		if level_pass==1 then
+			stage = stage + 1
+			loadNewStage(stage)
+		else
+			loadNewStage(stage)
+		end
+		--page = "MAIN"
 	end	
 	-- move to next stage using the large confirm button (only if all patients have been treated)
 	--if stage_num_patients_untreated==0 and x >= rectangleConfirmButton[1] and x <= rectangleConfirmButton[1] + rectangleConfirmButton[3] and y >= rectangleConfirmButton[2] and y <= rectangleConfirmButton[2] + rectangleConfirmButton[4] then

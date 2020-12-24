@@ -105,7 +105,7 @@ function manual:draw()
 		j = 0
 		dis = diseases[self.page]
 		love.graphics.print(dis["name"], screenWidth/2 - 150, 150, 0, 2)
-		for i = 1, #dis["symptoms"] do
+		for i = 1, symptoms_unlocked do
 			prob = dis["symptoms"][i]
 			j = j + 1
 			sympt = symptoms[i]
