@@ -43,6 +43,12 @@ function love.load()
 
 	doctorImage = love.graphics.newImage("assets/Characters/Icon_Doctor.jpeg");
 
+	instructions = {}
+    instructions[1] = love.graphics.newImage("assets/Instructions/Instructions1.jpeg")
+    instructions[2] = love.graphics.newImage("assets/Instructions/Instructions2.jpeg")
+    instructions[3] = love.graphics.newImage("assets/Instructions/Instructions3.jpeg")
+    instructions[4] = love.graphics.newImage("assets/Instructions/Instructions4.jpeg")
+
 	-- load image icons
 	icontest = {}
 	icontest[1] = love.graphics.newImage("assets/Icons/test_1.png")
@@ -111,11 +117,9 @@ function love.load()
 	-- THIS IS UPDATED WHEN A NEW STAGE IS LOADED
 	currentPatients = {}
 
-
-	manual:setup()
-
-	-- page num for help page
+	-- page num and graphics for help page
 	help_page = 1
+	max_help_page = 4
 
 	-- Variables used to evaluate stages
 	stage_evaluation_names 		= {}
