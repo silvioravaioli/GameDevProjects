@@ -237,13 +237,6 @@ function gui:mousepressed(x,y)
 	if stage_num_patients_untreated==0 and x >= confirmButton[1] and x <= confirmButton[1] + confirmButton[3] and y >= confirmButton[2] and y <= confirmButton[2] + confirmButton[3] then
 		evaluateStage()
 		page = "STAGE_EVALUATION"
-		-- ADD HERE: IF GOOD, MOVE TO NEXT STAGE, OTHERWISE RESTART
-		if level_pass==1 then
-			stage = stage + 1
-			loadNewStage(stage)
-		else
-			loadNewStage(stage)
-		end
 		--page = "MAIN"
 	end	
 	-- move to next stage using the large confirm button (only if all patients have been treated)

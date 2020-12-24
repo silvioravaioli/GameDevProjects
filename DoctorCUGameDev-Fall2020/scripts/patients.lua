@@ -133,7 +133,7 @@ function patients:mousepressed(x, y)
 		click_out=0
 	end
 	for i = 1, #treatments do
-		if withinObj(x, y, self.treatmentBoxes[i]) then
+		if withinObj(x, y, self.treatmentBoxes[i]) and self.isTreating == true then
 			self:useTreatment(i)
 			click_out=0
 		end
