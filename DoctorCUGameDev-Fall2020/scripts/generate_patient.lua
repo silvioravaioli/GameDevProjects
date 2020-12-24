@@ -28,7 +28,8 @@ function patientGen:generatePatient(patient_data)
 		symptoms_display = {0.4,0.4,0.4,0.4,0.4,0.4},
 		treatment = -1
 	}
-	patient.disease = patient_data.possible_disease[math.random(#patient_data.possible_disease)]
+	----------- ONLY UP TO diseases_unlocked
+	patient.disease = patient_data.possible_disease[math.random(diseases_unlocked)]
 	local disease_symptoms = disease_probability_matrix[patient.disease]
 	for i = 1, #symptoms do
 		local rand = math.random()
@@ -38,7 +39,7 @@ function patientGen:generatePatient(patient_data)
 			patient.symptoms[i] = 0
 		end
 	end
-	random_indices = util.shuffle({1,2,3,4,5,6})
+  	random_indices = util.shuffle({1,2,3,4,5,6})
 	for i = 1, patient_data.symptoms_revealed do
 		local ind = random_indices[i]
 		patient.symptoms_display[ind] = patient.symptoms[ind]
