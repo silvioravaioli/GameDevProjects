@@ -25,7 +25,7 @@ function patientGen:generatePatient(patient_data)
 		photo = patient_data.photo,
 		disease = 1,
 		symptoms = {0,0,0,0,0,0},
-		symptoms_display = {0.4,0.4,0.4,0.4,0.4,0.4},
+		symptoms_display = {0.5,0.5,0.5,0.5,0.5,0.5},
 		treatment = -1
 	}
 	----------- ONLY UP TO diseases_unlocked
