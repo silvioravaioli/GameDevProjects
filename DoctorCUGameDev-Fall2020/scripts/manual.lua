@@ -7,7 +7,7 @@ local manual = {
 manual.probstoWords = {
 	[0.0] = "never",
 	[0.2] = "rarely",
-	[0.4] = "sometimes",
+	[0.5] = "sometimes",
 	[0.8] = "very often",
 	[1.0] = "always"
 }

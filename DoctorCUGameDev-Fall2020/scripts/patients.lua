@@ -53,7 +53,14 @@ function patients:draw()
 	for k = 1, symptoms_unlocked do
 		currY = currY + textHeight + textSpacing
 		love.graphics.print(symptoms[k], chance_columnX1, currY)
-		love.graphics.print(patient.symptoms_display[k] * 100 .. "%", chance_columnX2, currY)
+		if patient.symptoms_display[k]>=0.995 then
+			setColorGreen()
+		end
+		if patient.symptoms_display[k]< 0.005 then
+			setColorRed()
+		end
+		love.graphics.print( math.floor(patient.symptoms_display[k]*100+0.5) .. "%", chance_columnX2, currY)
+		setColorBlack()
 	end
 
 	currY = currY + 1.5 * (textHeight + textSpacing)

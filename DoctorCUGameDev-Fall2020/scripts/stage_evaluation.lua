@@ -34,19 +34,28 @@ function stage_evaluation:draw()
 
             -- patient: name
             elseif x == 0 then
+                if stage_evaluation_cured[y]==1 then
+                    setColorGreen()
+                else
+                    setColorRed()
+                end
                 local text = tostring(stage_evaluation_names[y])
                 local textWidth = font:getWidth(tableLabels[x])
                 local textHeight = font:getHeight(tableLabels[x])
                 love.graphics.print(text, tableX + dx/3 - 0.75 * textWidth/2 + x*dx, tableY + dy/2 - 0.75 * textHeight/2 + y*dy, 0, 0.75)
             -- patient: treatment
             elseif x == 1 then
-                local text = tostring(stage_evaluation_treatments[y])
+                local text = tostring(treatments[stage_evaluation_treatments[y]])
                 local textWidth = font:getWidth(text)
                 local textHeight = font:getHeight(text)
                 love.graphics.print(text, tableX + dx/2 - 0.75 * textWidth/2 + x*dx, tableY + dy/2 - 0.75 * textHeight/2 + y*dy, 0, 0.75)
             -- patient: cured?
             elseif x == 2 then
-                local text = tostring(stage_evaluation_cured[y])
+                if stage_evaluation_cured[y]==1 then
+                    text = tostring("YES")
+                else
+                    text = tostring("NO")
+                end
                 local textWidth = font:getWidth(text)
                 local textHeight = font:getHeight(text)
                 love.graphics.print(text, tableX + dx/2 - 0.75 * textWidth/2 + x*dx, tableY + dy/2 - 0.75 * textHeight/2 + y*dy, 0, 0.75)
@@ -56,6 +65,7 @@ function stage_evaluation:draw()
                 local textWidth = font:getWidth(text)
                 local textHeight = font:getHeight(text)
                 love.graphics.print(text, tableX + dx/2 - 0.75 * textWidth/2 + x*dx, tableY + dy/2 - 0.75 * textHeight/2 + y*dy, 0, 0.75)
+                setColorBlack()
             end
         end
     end

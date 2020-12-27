@@ -121,7 +121,7 @@ function gui:drawTopAndBottomDisplay()
 	love.graphics.rectangle("line", stageBarX, screenOffsetFactor * screenHeight, 
 		stageBarWidth, topBarHeight)
 
-	stageString = "Stage "..tostring(stage)
+	stageString = "Day "..tostring(stage)
 	textWidth = font:getWidth(stageString)
 	love.graphics.print(stageString,
 		stageBarX + stageBarWidth/2 - textWidth/2,
