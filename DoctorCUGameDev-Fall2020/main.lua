@@ -207,13 +207,13 @@ end
 
 -- right now used for testing purposes
 function love.keypressed(key, isrepeat)
-	if key == "space" then
-		loadNewStage(stage+1)
+	--if key == "space" then
+		--loadNewStage(stage+1)
 		--print('This function has been disabled')
-	elseif key == "backspace" then
-		loadNewStage(stage-1)
+	--elseif key == "backspace" then
+		--loadNewStage(stage-1)
 		--print('This function has been disabled')
-	end
+	--end
 end
 
 -- FUNCTION LOAD NEW STAGE
@@ -264,10 +264,10 @@ function evaluateStage()
 			stage_evaluation_points[i_patient] 	= 0
 		end	
 	end
-	print('Total patients cured')
-	print(tot_cured)
-	print('Total experience received')
-	print(tot_experience)
+	--print('Total patients cured')
+	--print(tot_cured)
+	--print('Total experience received')
+	--print(tot_experience)
 
 	-- determine if you passed the level
 	if tot_cured>=patients_goal then
