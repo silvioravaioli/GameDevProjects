@@ -1,11 +1,16 @@
 local gui = {}
 
 
+-- DEFINE PROPORTIONS AND DRAW ELEMENTS ON THE GENERAL GUI
 function gui:draw()
-	stageBarWidth = 0.1 * screenWidth
-	progressBarWidth = 0.4 * screenWidth
-	levelBarWidth = 0.12 * screenWidth
+	-- TOP SIDE SCREEN
+	stageBarWidth 		= 0.30 * screenWidth
+	progressBarWidth 	= 0.30 * screenWidth
+	levelBarWidth 		= 0.12 * screenWidth -- UNUSED
+	expBarWidth 		= 0.20 * screenWidth
 	-- expBarWidth is not set because it varies for centering
+
+	-- BOTTOM PART SCREEN
 	testBarWidth = 0.5 * screenWidth
 	topBarStartX = 0.1 * screenWidth
 
@@ -113,6 +118,8 @@ function gui:drawTopAndBottomDisplay()
 	--	testBarY + bottomBarHeight/2 - textHeight/2)
 	
 	-- draw top bars: stage, progress, level, experience
+
+	-- STAGE (DAY) AND GOAL
 	setColorLightBlue()
 	stageBarX = topBarStartX
 	love.graphics.rectangle("fill", stageBarX, screenOffsetFactor * screenHeight,
@@ -121,13 +128,14 @@ function gui:drawTopAndBottomDisplay()
 	love.graphics.rectangle("line", stageBarX, screenOffsetFactor * screenHeight, 
 		stageBarWidth, topBarHeight)
 
-	stageString = "Day "..tostring(stage)
+--	stageString = "Day "..tostring(stage)
+	stageString = "Day "..tostring(stage).." - Goal: "..tostring(patients_goal).." patients"
 	textWidth = font:getWidth(stageString)
 	love.graphics.print(stageString,
 		stageBarX + stageBarWidth/2 - textWidth/2,
 		screenOffsetFactor * screenHeight + topBarHeight/2 - textHeight/2)
 
-	-- progress bar
+	-- PROGRESS (TESTS AVAILABLE)
 	setColorLightBlue()
 	progressBarX = stageBarX + stageBarWidth + screenOffsetFactor * screenWidth
 	love.graphics.rectangle("fill", progressBarX,
@@ -139,7 +147,8 @@ function gui:drawTopAndBottomDisplay()
 		screenOffsetFactor * screenHeight, progressBarWidth,
 		topBarHeight)
 
-	progressString = "Progress: "..tostring(testsAvailable).."/"..tostring(maxTests).." Tests Available"
+	--progressString = "Progress: "..tostring(testsAvailable).."/"..tostring(maxTests).." Tests Available"
+	progressString = tostring(testsAvailable).."/"..tostring(maxTests).." Tests Available"
 	textWidth = font:getWidth(progressString)
 
 	love.graphics.print(progressString, progressBarX + progressBarWidth / 2 - textWidth/2,
@@ -147,19 +156,19 @@ function gui:drawTopAndBottomDisplay()
 
 	levelBarX = progressBarX + progressBarWidth + screenOffsetFactor * screenWidth
 
-	setColorLightBlue()
-	love.graphics.rectangle("fill", levelBarX, screenOffsetFactor * screenHeight,
-		levelBarWidth, topBarHeight)
+--	setColorLightBlue()
+--	love.graphics.rectangle("fill", levelBarX, screenOffsetFactor * screenHeight,
+--		levelBarWidth, topBarHeight)
 
-	setColorBlack()
-	love.graphics.rectangle("line", levelBarX, screenOffsetFactor * screenHeight,
-		levelBarWidth, topBarHeight)
+--	setColorBlack()
+--	love.graphics.rectangle("line", levelBarX, screenOffsetFactor * screenHeight,
+--		levelBarWidth, topBarHeight)
 
 	levelString = "Level "..tostring(level)
 	textWidth = font:getWidth(levelString)
-	love.graphics.print(levelString,
-		levelBarX + levelBarWidth/2 - textWidth/2,
-		screenOffsetFactor * screenHeight + topBarHeight/2 - textHeight/2)
+--	love.graphics.print(levelString,
+--		levelBarX + levelBarWidth/2 - textWidth/2,
+--		screenOffsetFactor * screenHeight + topBarHeight/2 - textHeight/2)
 
 	expBarX = levelBarX + levelBarWidth + screenOffsetFactor * screenWidth
 	expBarWidth = screenWidth - topBarStartX - expBarX
@@ -176,7 +185,8 @@ function gui:drawTopAndBottomDisplay()
 	else
 		maxExpStr = "-"
 	end
-	expString = " EXP: "..tostring(experience).."/"..maxExpStr
+	--expString = " EXP: "..tostring(experience).."/"..maxExpStr
+	expString = "Lv "..tostring(level).." - EXP "..tostring(experience).."/"..maxExpStr
 	textWidth = font:getWidth(expString)
 
 	love.graphics.print(expString,
