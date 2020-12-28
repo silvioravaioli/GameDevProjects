@@ -7,7 +7,7 @@ function gui:draw()
 	stageBarWidth 		= 0.30 * screenWidth
 	progressBarWidth 	= 0.30 * screenWidth
 	levelBarWidth 		= 0.12 * screenWidth -- UNUSED
-	expBarWidth 		= 0.20 * screenWidth
+	expBarWidth 		= 0.25 * screenWidth
 	-- expBarWidth is not set because it varies for centering
 
 	-- BOTTOM PART SCREEN
@@ -129,7 +129,11 @@ function gui:drawTopAndBottomDisplay()
 		stageBarWidth, topBarHeight)
 
 --	stageString = "Day "..tostring(stage)
-	stageString = "Day "..tostring(stage).." - Goal: "..tostring(patients_goal).." patients"
+	if patients_goal==1 then
+		stageString = "Day "..tostring(stage).." - Goal: "..tostring(patients_goal).." patient"
+	else
+		stageString = "Day "..tostring(stage).." - Goal: "..tostring(patients_goal).." patients"
+	end
 	textWidth = font:getWidth(stageString)
 	love.graphics.print(stageString,
 		stageBarX + stageBarWidth/2 - textWidth/2,
@@ -164,14 +168,15 @@ function gui:drawTopAndBottomDisplay()
 --	love.graphics.rectangle("line", levelBarX, screenOffsetFactor * screenHeight,
 --		levelBarWidth, topBarHeight)
 
-	levelString = "Level "..tostring(level)
-	textWidth = font:getWidth(levelString)
+	--levelString = "Level "..tostring(level)
+	--textWidth = font:getWidth(levelString)
 --	love.graphics.print(levelString,
 --		levelBarX + levelBarWidth/2 - textWidth/2,
 --		screenOffsetFactor * screenHeight + topBarHeight/2 - textHeight/2)
 
-	expBarX = levelBarX + levelBarWidth + screenOffsetFactor * screenWidth
-	expBarWidth = screenWidth - topBarStartX - expBarX
+	--expBarX = levelBarX + levelBarWidth + screenOffsetFactor * screenWidth
+	expBarX = progressBarX + progressBarWidth + screenOffsetFactor * screenWidth
+	--expBarWidth = screenWidth - topBarStartX - expBarX
 	setColorLightBlue()
 	love.graphics.rectangle("fill", expBarX, screenOffsetFactor * screenHeight,
 		expBarWidth, topBarHeight)
@@ -240,13 +245,13 @@ function gui:mousepressed(x,y)
 	end
 
 	-- increment xp by 11 - for testing purposes, need to remove later
-	xx = levelBarX
-	yy = screenOffsetFactor * screenHeight
-	dx = levelBarWidth
-	dy = topBarHeight
-	if x >= xx and x <= xx + dx and y >= yy and y <= yy + dy then
-		incrementExp(11)
-	end
+	--xx = levelBarX
+	--yy = screenOffsetFactor * screenHeight
+	--dx = levelBarWidth
+	--dy = topBarHeight
+	--if x >= xx and x <= xx + dx and y >= yy and y <= yy + dy then
+	--	incrementExp(11)
+	--end
 
 	-- move to help page
 	if x >= helpButton[1] and x <= helpButton[1] + helpButton[3] and y >= helpButton[2] and y <= helpButton[2] + helpButton[3] then
