@@ -41,7 +41,7 @@ function love.load()
 	--rectangle_confirm 	= love.graphics.newImage("assets/bluerectangle_confirm.png")
 	centerRect 	= love.graphics.newImage("assets/testMenu.png")
 
-	doctorImage = love.graphics.newImage("assets/Characters/Icon_Doctor.jpeg");
+	doctorImage = love.graphics.newImage("assets/Characters/Icon_Doctor.png");
 
 	instructions = {}
     instructions[1] = love.graphics.newImage("assets/Instructions/Instructions1.jpeg")
@@ -210,13 +210,16 @@ end
 
 -- right now used for testing purposes
 function love.keypressed(key, isrepeat)
-	--if key == "space" then
-		--loadNewStage(stage+1)
-		--print('This function has been disabled')
-	--elseif key == "backspace" then
-		--loadNewStage(stage-1)
-		--print('This function has been disabled')
-	--end
+	-- ENABLE THIS FUNCTION ONLY FOR TESTING
+	if 1 then
+		if key == "space" then
+			loadNewStage(stage+1)
+			--print('This function has been disabled')
+		elseif key == "backspace" then
+			loadNewStage(stage-1)
+			--print('This function has been disabled')
+		end
+	end
 end
 
 -- FUNCTION LOAD NEW STAGE
