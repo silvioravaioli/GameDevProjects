@@ -72,7 +72,7 @@ local patientData = {
 		exp= 1,
 		photo="assets/Characters/Icon_P_Scholar.png",
 		possible_disease={1,2,3,4,5,6,7,8},
-		symptoms_revealed = 6
+		symptoms_revealed = 5
 	},
 	[43] = {
 		name="Bob the Bard",

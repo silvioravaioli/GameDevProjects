@@ -48,6 +48,7 @@ function patientGen:generatePatient(patient_data)
 		local ind = random_indices[i]
 		patient.symptoms_display[ind] = patient.symptoms[ind]
 	end
+	print('====')
 	return patient
 end
 
