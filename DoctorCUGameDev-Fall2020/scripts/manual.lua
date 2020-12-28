@@ -1,48 +1,22 @@
---diseases = {}
+diseases = require('scripts.diseases')
 
 local manual = {
 	page = 0,
 }
 
-
--- manual.symptoms = {
--- 	"runnynose",
--- 	"fever",
--- 	"headache",
--- 	"weakness ",
--- 	"trouble breathing",
--- 	"bleeding",
--- 	"weakness",
--- 	"stomach pain",
--- 	"cough",
--- 	"vommiting",
--- }
-
-
--- manual.diseases = {
--- 	"dis1",
--- 	"dis2",
--- 	"dis3",
--- 	"dis4",
--- 	"dis5",
--- 	"dis6",
--- 	"dis7",
--- 	"dis8",
--- 	"dis9",
--- 	"dis10",
--- }
-
-
 manual.probstoWords = {
 	[0.0] = "never",
 	[0.2] = "rarely",
-	[0.4] = "sometimes",
+	[0.5] = "sometimes",
 	[0.8] = "very often",
 	[1.0] = "always"
 }
 
 
 manual.contentsBoxes = {}
+manualX = 0
+manualY = 0
+manualbackbuttonheight = 0
 
 
 --want to make symptoms gui
@@ -56,66 +30,88 @@ manual.contentsBoxes = {}
 -- and probability of disease given symptom
 --disease unlocked and symptoms unlocked variables
 
-manual.diseaseGivenSymptoms = {}
 function manual:setup()
-	xstart = 350
+	local manualRatio =  manual_background:getWidth()/manual_background:getHeight()
+	-- constrain the height
+	local small_offset = screenHeight * 0.05
+	local manual_height = screenHeight - bottomBarHeight - topBarHeight - small_offset
+	local manual_width = manualRatio * manual_height
+	-- center the manual
+	self.manualX = screenWidth/2 - manual_width/2
+	self.manualY = (topBarHeight + screenHeight - bottomBarHeight)/2 - manual_height/2
+	local manual_scale = manual_height / manual_background:getHeight()
 
-	-- for x = 1, 10 do
-	-- 	self.diseaseGivenSymptoms[x] = {}
-	-- end
-
-	-- for x = 1, 10 do
-	-- 	for y = 1, 10 do
-	-- 		if (x + y) % 10 == 0 then
-	-- 			self.diseaseGivenSymptoms[x][y] = 1
-	-- 		elseif (x + y) % 10 == 1 then
-	-- 			self.diseaseGivenSymptoms[x][y] = 2
-	-- 		elseif (x + y) % 10 == 2 then
-	-- 			self.diseaseGivenSymptoms[x][y] = 3
-	-- 		elseif (x + y) % 10 == 3 then
-	-- 			self.diseaseGivenSymptoms[x][y] = 4
-	-- 		else
-	-- 			self.diseaseGivenSymptoms[x][y] = 0
-	-- 		end
-	-- 	end
-	-- end
-	for i = 1,  #diseases do
-		self.contentsBoxes[i] = {screenWidth/2 - 50, 140 + (55 * i), 0, 1.4}
-			--love.graphics.print(self.diseases[i], 350, 50 + (40 * i), 0, 2)
+	-- bounding boxes for clicking diseases
+	for i = 1, #diseases do
+		if i < 5 then
+			self.contentsBoxes[i] = {
+			self.manualX + 3*small_offset,
+			self.manualY + small_offset + (2*font:getHeight()*i), 
+			0,1,
+			font:getWidth(diseases[i]["name"])
+		}
+		else
+			self.contentsBoxes[i] = {
+				screenWidth/2 + 2*small_offset,
+				self.manualY + small_offset + (2*font:getHeight()*(i-4)),
+				0, 1,
+				font:getWidth(diseases[i]["name"])
+			}
+		end
 	end
-
-end 
-
-
+	self.manualbackbuttonheight = self.manualY + manual_height - font:getHeight("X") - small_offset
+end
 
 function manual:draw()
 	setColorWhite()
-	love.graphics.draw(manual_background, -10, -20, 0, 1.5, 1.5)
-	backbuttonheight  = 675
+	local manualRatio =  manual_background:getWidth()/manual_background:getHeight()
+	-- constrain the height
+	small_offset = screenHeight * 0.05
+	local manual_height = screenHeight - bottomBarHeight - topBarHeight - small_offset
+	local manual_width = manualRatio * manual_height
+	-- center the manual
+	local manualX = screenWidth/2 - manual_width/2
+	local manualY = (topBarHeight + screenHeight - bottomBarHeight)/2 - manual_height/2
+	local manual_scale = manual_height / manual_background:getHeight()
+
+	love.graphics.draw(manual_background, manualX, manualY, 0, manual_scale, manual_scale)
+
 	setColorBlack()
 	if self.page == 0 then
-		love.graphics.print("Doctor's Manual", xstart + 50, 100, 0, 2)
-		for i = 1,  #diseases do
-			--setColorBlue()
-			--love.graphics.rectangle("fill", self.contentsBoxes[i][1], self.contentsBoxes[i][2], 40, 30)
-			setColorBlack()
+		setColorBlack()
+		setFont(LARGER_FONT_SIZE)
+		local textwidth = font:getWidth("Doctor's Manual")
+		love.graphics.print("Doctor's Manual", screenWidth/2-textwidth/2, topBarHeight + small_offset, 0, 1)
+		setFont(DEFAULT_FONT_SIZE)
+		for i = 1, diseases_unlocked do
 			love.graphics.print(diseases[i]["name"], self.contentsBoxes[i][1], self.contentsBoxes[i][2], self.contentsBoxes[i][3], self.contentsBoxes[i][4])
 		end
 	else
-		j = 0
-		dis = diseases[self.page]
-		love.graphics.print(dis["name"], screenWidth/2 - 150, 150, 0, 2)
-		for i = 1, #dis["symptoms"] do
+
+		local j = 0
+		local dis = diseases[self.page]
+		setFont(LARGER_FONT_SIZE)
+		local textwidth = font:getWidth(dis["name"])
+		local textHeight = font:getHeight(dis["name"])
+		love.graphics.print(dis["name"], screenWidth/2 - textwidth/2, topBarHeight + small_offset, 0, 1)
+		setFont(DEFAULT_FONT_SIZE)
+		for i = 1, symptoms_unlocked do
 			prob = dis["symptoms"][i]
 			j = j + 1
 			sympt = symptoms[i]
-			love.graphics.print(sympt, 450, 125 + (50 * (i + 1)), 0, 1)
-			love.graphics.print(self.probstoWords[prob], 800,  125 + (50 * (i + 1)), 0 , 1)
+			local currHeight = small_offset + textHeight + (1.2*small_offset*(i+1))
+			love.graphics.print(sympt, manualX + 2 * small_offset, currHeight, 0, 1)
+			love.graphics.print(self.probstoWords[prob], screenWidth/2 + 2*small_offset, currHeight, 0, 1)
 		end
-		love.graphics.print("Treatment:", screenWidth/2 - 150, 550, 0, 1.5)
-		love.graphics.print(treatments[dis["treatment"][1]], screenWidth/2 - 100, 625)
-		love.graphics.print("back", screenWidth/2, backbuttonheight, 0 , 1.75) 
+		local bottomY = small_offset + textHeight + (1.2*small_offset*(#dis["symptoms"]+3))
+		love.graphics.print("Treatment:", manualX + 2 * small_offset, bottomY, 0, 1)
+		love.graphics.print(treatments[dis["treatment"][1]], screenWidth/2 + 2*small_offset, bottomY, 0, 1)
 		--back button
+		setColorRed()
+		backX = manualX + manual_width - font:getWidth("GO BACK") - small_offset
+		love.graphics.print("GO BACK", backX, self.manualbackbuttonheight, 0 , 1)
+		setColorBlack()
+		
 	end
 	--update
 end
@@ -123,16 +119,22 @@ end
 
 
 function manual:mousepressed(x,y)
+	if #self.contentsBoxes == 0 then
+		return
+	end
 	if manual.page == 0 then
-		for i = 1, #diseases do
+		for i = 1, diseases_unlocked do
 			xx = self.contentsBoxes[i][1]
 			yy = self.contentsBoxes[i][2]
-			if x >= xx and x <= xx + 400 and y >= yy and y <= yy + 50 then
+			ww = self.contentsBoxes[i][5]
+			if x >= xx and x <= xx + ww and y >= yy and y <= yy + font:getHeight("X") then
 				manual.page = i
 			end
 		end
 	else
-		if x >= screenWidth/2 - 50 and x <= screenWidth/2 + 200 and y >= backbuttonheight and y <= backbuttonheight + 100 then
+		local w = font:getWidth("GO BACK")
+		local h = font:getHeight("G")
+		if x >= backX and x <= backX + w and y >= self.manualbackbuttonheight and y <= self.manualbackbuttonheight + h then
 			manual.page = 0
 		end
 	end

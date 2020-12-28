@@ -31,7 +31,8 @@ end
 
 function test:runTest(patient_number,test_number)
 
-	print('Run new test on the patient')
+	--print('Run new test on the patient')
+	--print(patient.disease)
 	--print('Run new test (patient number, test number)')
 	--print(patient_number)
 	--print(test_number)
@@ -83,12 +84,10 @@ end
 
 function test:mousepressed(x, y)	
 	-- print coordinates
-	print('Mouse Pressed: coordinates:')
-	print(x,y)
-	-- print patient information (debug)
-	print(hospital.patient)
+	--print('Mouse Pressed: coordinates:')
+	--print(x,y)
 
-	for i = 1, 6 do
+	for i = 1, symptoms_unlocked do
 		cur_box = testIconBoxes[i]
 		xx = cur_box[1]
 		yy = cur_box[2]

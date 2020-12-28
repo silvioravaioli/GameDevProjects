@@ -1,4 +1,5 @@
 local treatments = require('scripts.treatments')
+local symptoms = require('scripts.symptoms')
 
 local patients = {isTreating = false}
 patients.treatmentBoxes = {}
@@ -6,6 +7,9 @@ patients.treatmentButton = {}
 
 function patients:draw()
 	patient = currentPatients[currentPatient]
+	if patient == nil then
+		return
+	end
 
 	x = screenWidth/2 - centerUIWidth/2
 	y = (lowerBound+upperBound)/2 - centerUIHeight/2
@@ -16,7 +20,7 @@ function patients:draw()
 
 	local borderOffset = 50
 	local textSpacing = 15		-- pixels between lines
-	setFont(20)					-- set font size
+	setFont(SMALLER_FONT_SIZE)					-- set font size
 	local currX = x + borderOffset
 	local currY = y + borderOffset
 	setColorBlack()
@@ -25,12 +29,13 @@ function patients:draw()
 		"Name: "..patient.name,
 		"EXP: +"..patient.exp,
 		"Bio: "..patient.bio,
-		"List of symptoms:",
-		"Disease: "..patient.disease,
-		"Symptoms: "..table.concat(patient.symptoms, ", "),
-		"Displayed: "..table.concat(patient.symptoms_display, ", "),
-		"Treatment: "..patient.treatment
+		"Symptoms:"
+		-- "Disease: "..patient.disease,
+		-- "Symptoms: "..table.concat(patient.symptoms, ", "),
+		-- "Displayed: "..table.concat(patient.symptoms_display, ", "),
+		-- "Treatment: "..patient.treatment
 	}
+
 
 	-- print the patient summary
 	for j = 1, #fields do
@@ -38,6 +43,40 @@ function patients:draw()
 		currY = currY + textHeight + textSpacing
 	end
 
+	-- print symptoms
+	-- lazy ... just adjust chance_columnX to align properly
+	chance_columnX1 = currX + font:getWidth(string.rep("X", 4))
+	chance_columnX2 = currX + font:getWidth(string.rep("X", 16))
+	love.graphics.print("SYMPTOM", chance_columnX1, currY)
+	love.graphics.print("CHANCE", chance_columnX2, currY)
+	
+	for k = 1, symptoms_unlocked do
+		currY = currY + textHeight + textSpacing
+		love.graphics.print(symptoms[k], chance_columnX1, currY)
+		if patient.symptoms_display[k]>=0.995 then
+			setColorGreen()
+		end
+		if patient.symptoms_display[k]< 0.005 then
+			setColorRed()
+		end
+		love.graphics.print( math.floor(patient.symptoms_display[k]*100+0.5) .. "%", chance_columnX2, currY)
+		setColorBlack()
+	end
+
+	currY = currY + 1.5 * (textHeight + textSpacing)
+
+	-- selected treatment
+	local treatment_selected = patient.treatment
+	if patient.treatment < 1 or patient.treatment > #treatments then
+		treatment_selected = "None"
+	else
+		treatment_selected = treatments[treatment_selected]
+	end
+	setColorBlue()
+	setFont(EVEN_SMALLER_FONT_SIZE)
+	love.graphics.print("Treatment selected: "..treatment_selected, currX, currY)
+	setColorBlack()
+	setFont(DEFAULT_FONT_SIZE)
 	--for i = 1, #patient.symptoms do
 	--	symptom = patient.symptoms[i][1]
 	--	--symptom_name = manual.symptoms[symptom]
@@ -65,24 +104,24 @@ function patients:draw()
 	local treatmentX = x + centerUIHeight + x/8
 	local treatmentY = y
 	treatHeight = 0.75*rectTotal
-	treatScale = treatHeight / rectangle:getHeight()
-	love.graphics.draw(rectangle, treatmentX, treatmentY, 0, treatScale, treatScale)
-	love.graphics.print("Assign Treatment", treatmentX + treatHeight/5, y + treatHeight/4)
-	self.treatmentButton = {x=treatmentX, y=treatmentY, height=treatHeight, width=treatScale * rectangle:getWidth()}
+	treatScale = treatHeight / rectangle_box_icons:getHeight()
+	love.graphics.draw(rectangle_box_icons, treatmentX, treatmentY, 0, treatScale, treatScale)
+	love.graphics.print("Medicines", treatmentX + treatHeight/5, y + treatHeight/4)
+	self.treatmentButton = {x=treatmentX, y=treatmentY, height=treatHeight, width=treatScale * rectangle_box_icons:getWidth()}
 	if self.isTreating then
 		self:drawTests(treatmentX, treatmentY, 0.75 * rectTotal, 0.25 * rectTotal)
 	end
 end
 
 function patients:drawTests(x, y, squareSize, offset)
-	local squareScale = squareSize / rectangle:getHeight()
+	local squareScale = squareSize / rectangle_box_icons:getHeight()
 	for i = 1, #treatments do
 		y = y + squareSize + offset
 		self.treatmentBoxes[i] = {x = x, 
 			y = y, 
 			height = squareSize, 
-			width = squareScale * rectangle:getWidth()}
-		love.graphics.draw(rectangle, x, y, 0, squareScale, squareScale)
+			width = squareScale * rectangle_box_icons:getWidth()}
+		love.graphics.draw(rectangle_box_icons, x, y, 0, squareScale, squareScale)
 
 		love.graphics.print(treatments[i], x + squareSize/5, y + squareSize/4)
 	end
@@ -101,18 +140,28 @@ function withinObj(x, y, range)
 end
 
 function patients:mousepressed(x, y)
+	local click_out=1
 	if withinObj(x, y, self.treatmentButton) then
 		self.isTreating = not self.isTreating
+		click_out=0
 	end
 	for i = 1, #treatments do
-		if withinObj(x, y, self.treatmentBoxes[i]) then
+		if withinObj(x, y, self.treatmentBoxes[i]) and self.isTreating == true then
 			self:useTreatment(i)
+			click_out=0
 		end
+	end
+	if click_out==1 then
+		self.isTreating = false
 	end
 end
 
 function patients:useTreatment(treatmentIndex)
 	patient = currentPatients[currentPatient]
+	if patient.treatment==-1 then
+		stage_num_patients_untreated = stage_num_patients_untreated-1
+		--print(stage_num_patients_untreated)
+	end
 	patient.treatment = treatmentIndex
 end
 

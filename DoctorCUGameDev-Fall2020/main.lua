@@ -1,6 +1,6 @@
 -- main.lua -- MAIN FILE
 
--- load other scripts in th efolder
+-- load other scripts in the folder
 gui = require('scripts.gui')
 test = require('scripts.test')
 hospital = require('scripts.hospital')
@@ -10,7 +10,9 @@ diseases = require('scripts.diseases')
 symptoms = require('scripts.symptoms')
 treatments = require('scripts.treatments')
 stages = require('scripts.stages')
-review = require('scripts.review')
+skills = require('scripts.skills')
+help = require('scripts.help')
+stage_evaluation = require('scripts.stage_evaluation')
 
 -- set filter 
 love.graphics.setDefaultFilter("nearest")
@@ -20,6 +22,11 @@ love.graphics.setDefaultFilter("nearest")
 -- FUNCTION LOAD
 function love.load()
 	page = "MAIN"
+	DEFAULT_FONT = "assets/nokiafc22.ttf"
+	DEFAULT_FONT_SIZE = 30
+	SMALLER_FONT_SIZE = 20
+	EVEN_SMALLER_FONT_SIZE = 18
+	LARGER_FONT_SIZE = 40
 	math.randomseed(os.time())
 	
 	-- load image assets
@@ -31,10 +38,16 @@ function love.load()
 	squareGreen = love.graphics.newImage("assets/greensquare.png")
 
 	rectangle_box_icons = love.graphics.newImage("assets/bluerectangle.png")
-	rectangle_confirm 	= love.graphics.newImage("assets/bluerectangle_confirm.png")
+	--rectangle_confirm 	= love.graphics.newImage("assets/bluerectangle_confirm.png")
 	centerRect 	= love.graphics.newImage("assets/testMenu.png")
 
-	doctorImage = love.graphics.newImage("assets/Characters/Icon_Doctor.jpeg");
+	doctorImage = love.graphics.newImage("assets/Characters/Icon_Doctor.png");
+
+	instructions = {}
+    instructions[1] = love.graphics.newImage("assets/Instructions/Instructions1.jpeg")
+    instructions[2] = love.graphics.newImage("assets/Instructions/Instructions2.jpeg")
+    instructions[3] = love.graphics.newImage("assets/Instructions/Instructions3.jpeg")
+    instructions[4] = love.graphics.newImage("assets/Instructions/Instructions4.jpeg")
 
 	-- load image icons
 	icontest = {}
@@ -45,7 +58,7 @@ function love.load()
 	icontest[5]	= love.graphics.newImage("assets/Icons/test_5.png")
 	icontest[6]	= love.graphics.newImage("assets/Icons/test_6.png")
 
-	icon_music	= love.graphics.newImage("assets/Icons/icon_music.png")
+	--icon_music	= love.graphics.newImage("assets/Icons/icon_music.png")
 	icon_help	= love.graphics.newImage("assets/Icons/icon_help.png")
 	icon_manual	= love.graphics.newImage("assets/Icons/icon_manual.png")
 	icon_hospital=love.graphics.newImage("assets/Icons/icon_hospital.png")
@@ -54,7 +67,6 @@ function love.load()
 
 	icon_end_day= love.graphics.newImage("assets/Icons/icon_end_day.png")
 	icon_close	= love.graphics.newImage("assets/Icons/icon_close.png")
-
 
 	-- drawing the UI elements
 	screenWidth = love.graphics.getWidth()
@@ -67,14 +79,12 @@ function love.load()
 	centerUIHeight = centerRect:getHeight()/centerRect:getWidth() * centerUIWidth
 
 	numberOfTests = 6
-	manual:setup()
 	
 	lineWidth = 5
 	love.graphics.setLineWidth(lineWidth)
 
 	love.graphics.setBackgroundColor(1,1,1);
-	defaultFontSize = 30
-	font = setFont(defaultFontSize)
+	font = setFont(DEFAULT_FONT_SIZE)
 	textHeight = font:getHeight()
 
 	currentPatient = 1
@@ -88,8 +98,11 @@ function love.load()
 
 	-- these should vary based on progress in the game
 	level = 1
+	max_level = 13
 	experience = 0
-	maxExperience = 5
+	max_experience = {[1] = 10, [2] = 20, [3] = 30, [4] = 50, [5] = 70, [6] = 100, [7] = 130, [8] = 170, [9] = 210, [10] = 260, [11] = 310, [12] = 370, [13] = -1}
+	skill_points = 0
+	skill_points_gained = {[2] = 3, [3] = 3, [4] = 2, [5] = 2, [6] = 1, [7] = 1, [8] = 1, [9] = 1, [10] = 1, [11] = 1, [12] = 1, [13] = 1}
 
 	-- THIS IS A TABLE STORING THE TREATMENT ACCURACY
 	treatment = {}
@@ -98,13 +111,34 @@ function love.load()
 	-- initialize level and accuracy of each test
 	for i = 1, 6 do
 		treatment.accuracy_level[i]=1
-		treatment.accuracy_prob[i]=0.75
+		treatment.accuracy_prob[i]=0.70
 	end
 	-- THIS IS A TABLE STORING THE CURRENT PATIENTS FOR THE STAGE
 	-- THIS IS UPDATED WHEN A NEW STAGE IS LOADED
 	currentPatients = {}
 
+	-- page num and graphics for help page
+	help_page = 1
+	max_help_page = 4
+
+	-- keeps track if manual is called while testing so we return to testing after viewing manual
+	currently_testing = false
+
+	-- Variables used to evaluate stages
+	stage_evaluation_names 		= {}
+	stage_evaluation_treatments	= {}
+	stage_evaluation_cured 		= {}
+	stage_evaluation_points 	= {}
+	stage_evaluation_disease 	= {}
+	tot_cured = 0
+	tot_experience = 0
+	stage_num_patients_total_old = 1
+	patients_goal = 0
+
+	manual:setup()
+
 	loadNewStage(stage)
+
 
 end
 
@@ -129,8 +163,12 @@ function love.draw()
 		patients:draw()
 	elseif page == "MANUAL" then
 		manual:draw()
-	elseif page == "REVIEW" then
-		review:draw()
+	elseif page == "SKILLS" then
+		skills:draw()
+	elseif page == "HELP" then
+		help:draw()
+	elseif page == "STAGE_EVALUATION" then
+		stage_evaluation:draw()
 	end
 	gui:draw()
 end
@@ -156,18 +194,31 @@ function love.mousepressed(x, y, button, isTouch)
 		patients:mousepressed(x, y)
 	end
 
-	if page== "REVIEW" then
-		review:mousepressed(x, y)
+	if page == "SKILLS" then
+		skills:mousepressed(x, y)
+	end
+
+	if page == "HELP" then
+		help:mousepressed(x, y)
+	end
+	
+	if page == "STAGE_EVALUATION" then
+		stage_evaluation:mousepressed(x, y)
 	end
 
 end
 
 -- right now used for testing purposes
 function love.keypressed(key, isrepeat)
-	if key == "space" then
-		loadNewStage(stage+1)
-	elseif key == "backspace" then
-		loadNewStage(stage-1)
+	-- ENABLE THIS FUNCTION ONLY FOR TESTING
+	if 1 then
+		if key == "space" then
+			loadNewStage(stage+1)
+			--print('This function has been disabled')
+		elseif key == "backspace" then
+			loadNewStage(stage-1)
+			--print('This function has been disabled')
+		end
 	end
 end
 
@@ -182,18 +233,66 @@ function loadNewStage(stage_num)
 		diseases_unlocked 			= stage_info.diseases_unlocked
 		symptoms_unlocked 			= stage_info.symptoms_unlocked
 		-- number of patients
-		stage_num_patients_total 	= stage_info.diseases_unlocked
-		stage_num_patients_untreated= stage_info.diseases_unlocked
+		stage_num_patients_total 	= stage_info.patients_count
+		stage_num_patients_untreated= stage_info.patients_count
+		patients_goal				= stage_info.patients_goal
 		-- load patients
 		hospital:load(stage_num)
 	end
 end
 
 
+-- FUNCTION EVALUATE STAGE
+function evaluateStage()
+
+	-- initialize the variables
+	stage_evaluation_names 		= {[1]= "name_1",[2]="",[3]="",[4]="",[5]="",[6]=""}
+	stage_evaluation_treatments = {[1]= "treat1",[2]="",[3]="",[4]="",[5]="",[6]=""}
+	stage_evaluation_cured 		= {[1]= "cured1",[2]="",[3]="",[4]="",[5]="",[6]=""}
+	stage_evaluation_points 	= {[1]= "point1",[2]="",[3]="",[4]="",[5]="",[6]=""}
+	tot_cured = 0
+	tot_experience = 0
+	stage_num_patients_total_old=stage_num_patients_total
+
+	-- fill with the information for all the patients
+	for i_patient = 1,stage_num_patients_total do
+		local patient = currentPatients[i_patient]
+		stage_evaluation_names[i_patient] 		= patient.name
+		stage_evaluation_treatments[i_patient] = patient.treatment
+		stage_evaluation_disease[i_patient] 	= patient.disease
+		if patient.treatment==patient.disease then
+			stage_evaluation_cured[i_patient] 		= 1
+			tot_cured = tot_cured+1
+			stage_evaluation_points[i_patient] 	= patient.exp
+			tot_experience = tot_experience+patient.exp
+		else
+			stage_evaluation_cured[i_patient] 		= 0
+			stage_evaluation_points[i_patient] 	= 0
+		end	
+	end
+	--print('Total patients cured')
+	--print(tot_cured)
+	--print('Total experience received')
+	--print(tot_experience)
+
+	-- determine if you passed the level
+	if tot_cured>=patients_goal then
+		level_pass = 1
+		incrementExp(tot_experience)
+		stage = stage + 1
+		loadNewStage(stage)
+	else
+		level_pass = 0
+		loadNewStage(stage)
+
+	end
+
+end
+
 
 -- FUNCTION SET FONT
 function setFont(size)
-	font = love.graphics.newFont("assets/nokiafc22.ttf", size)
+	font = love.graphics.newFont(DEFAULT_FONT, size)
 	love.graphics.setFont(font)
 	textHeight = font:getHeight()
 	return font
@@ -203,7 +302,10 @@ end
 
 -- FUNCTIONS FOR COLORS
 function setColorBlue()
-	love.graphics.setColor(0/255,191/255,255/255)
+	love.graphics.setColor(0,0,1)
+end
+function setColorGreen()
+	love.graphics.setColor(0,0.6,0)
 end
 function setColorBlack()
 	love.graphics.setColor(0,0,0)
@@ -211,5 +313,9 @@ end
 function setColorWhite()
 	love.graphics.setColor(1,1,1)
 end
-
-
+function setColorRed()
+	love.graphics.setColor(1,0,0)
+end
+function setColorLightBlue()
+	love.graphics.setColor(0,191/255,1)
+end
