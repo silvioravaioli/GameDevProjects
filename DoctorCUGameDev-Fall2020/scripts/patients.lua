@@ -58,9 +58,10 @@ function patients:draw()
 		end
 		love.graphics.print(symptoms[k], chance_columnX1, currY)
 		if patient.symptoms_display[k]>=0.995 then
-			setColorGreen()
-		elseif patient.symptoms_display[k]< 0.005 then
 			setColorRed()
+		end
+		if patient.symptoms_display[k]< 0.005 then
+			setColorGreen()
 		end
 		love.graphics.print( math.floor(patient.symptoms_display[k]*100+0.5) .. "%", chance_columnX2, currY)
 		setColorBlack()
