@@ -3,7 +3,7 @@ local patientData = {
 	-- DAY 1
 	[11] = {
 		name="Bella the Baker",
-		bio="Likes to paint",
+		bio="Likes to prepare cakes",
 		exp= 10,
 		photo="assets/Characters/Icon_P_Baker.png",
 		possible_disease={1,2,3,4,5,6,7,8},
@@ -13,7 +13,7 @@ local patientData = {
 
 	-- DAY 2
 	[21] = {
-		name="Donald Trump",
+		name="Scarlet the Scholar",
 		bio="Likes to play golf",
 		exp= 20,
 		photo="assets/Characters/Icon_P_Scholar.png",
@@ -21,8 +21,8 @@ local patientData = {
 		symptoms_revealed = 0
 	},
 	[22] = {
-		name="Celine Dion",
-		bio="Likes to sing",
+		name="Flo the Florist",
+		bio="Likes to enjoy nature",
 		exp= 5,
 		photo="assets/Characters/Icon_P_Florist.png",
 		possible_disease={1,2,3,4,5,6,7,8},
@@ -32,8 +32,8 @@ local patientData = {
 
 	-- DAY 3
 	[31] = {
-		name="Jane Doe",
-		bio="Likes to swim",
+		name="Flo the Florist",
+		bio="Likes to enjoy nature",
 		exp= 15,
 		photo="assets/Characters/Icon_P_Florist.png",
 		possible_disease={1,2,3,4,5,6,7,8},
@@ -41,15 +41,15 @@ local patientData = {
 	},
 	[32] = {
 		name="Bella the Baker",
-		bio="Likes to eat honey",
+		bio="Likes to prepare cakes",
 		exp= 60,
 		photo="assets/Characters/Icon_P_Baker.png",
 		possible_disease={1,2,3,4,5,6,7,8},
 		symptoms_revealed = 0
 	},
 	[33] = {
-		name="James Bond",
-		bio="Likes to spy",
+		name="Al the Alchemist",
+		bio="Likes tattoos",
 		exp= 7,
 		photo="assets/Characters/Icon_P_Alchemist.png",
 		possible_disease={1,2,3,4,5,6,7,8},
@@ -59,23 +59,23 @@ local patientData = {
 
 	-- DAY 4
 	[41] = {
-		name="Bob Ross",
-		bio="Likes to paint",
+		name="Al the Alchemist",
+		bio="Likes tattoos",
 		exp= 10,
 		photo="assets/Characters/Icon_P_Alchemist.png",
 		possible_disease={1,2,3,4,5,6,7,8},
 		symptoms_revealed = 2
 	},
 	[42] = {
-		name="Donald Trump",
-		bio="Likes to play golf",
+		name="Scarlet the Scholar",
+		bio="Likes to read novels",
 		exp= 1,
 		photo="assets/Characters/Icon_P_Scholar.png",
 		possible_disease={1,2,3,4,5,6,7,8},
 		symptoms_revealed = 6
 	},
 	[43] = {
-		name="Celine Dion",
+		name="Bob the Bard",
 		bio="Likes to sing",
 		exp= 88,
 		photo="assets/Characters/Icon_P_Bard.png",
@@ -84,7 +84,7 @@ local patientData = {
 	},
 	[44] = {
 		name="Bella the Baker",
-		bio="Likes to swim",
+		bio="Likes to prepare cakes",
 		exp= 5,
 		photo="assets/Characters/Icon_P_Baker.png",
 		possible_disease={1,2,3,4,5,6,7,8},
@@ -94,40 +94,40 @@ local patientData = {
 
 	-- DAY 5
 	[51] = {
-		name="Winnie the Pooh",
-		bio="Likes to eat honey",
+		name="LuKe the Lost Knight",
+		bio="Wants to be brave",
 		exp= 10,
 		photo="assets/Characters/Icon_P_Lost_Knight.png",
 		possible_disease={1,2,3,4,5,6,7,8},
 		symptoms_revealed = 3
 	},
 	[52] = {
-		name="James Bond",
-		bio="Likes to spy",
+		name="Al the Alchemist",
+		bio="Likes tattoos",
 		exp= 70,
 		photo="assets/Characters/Icon_P_Alchemist.png",
 		possible_disease={1,2,3,4,5,6,7,8},
 		symptoms_revealed = 0
 	},
 	[53] = {
-		name="Bob Ross",
-		bio="Likes to paint",
+		name="Scarlet the Scholar",
+		bio="Likes to read novels",
 		exp= 5,
 		photo="assets/Characters/Icon_P_Scholar.png",
 		possible_disease={1,2,3,4,5,6,7,8},
 		symptoms_revealed = 4
 	},
 	[54] = {
-		name="Donald Trump",
-		bio="Likes to play golf",
+		name="Bob the Bard",
+		bio="Likes to sing",
 		exp= 30,
 		photo="assets/Characters/Icon_P_Bard.png",
 		possible_disease={1,2,3,4,5,6,7,8},
 		symptoms_revealed = 1
 	},
 	[55] = {
-		name="Celine Dion",
-		bio="Likes to sing",
+		name="Flo the Florist",
+		bio="Likes to enjoy nature",
 		exp= 15,
 		photo="assets/Characters/Icon_P_Florist.png",
 		possible_disease={1,2,3,4,5,6,7,8},
@@ -137,47 +137,47 @@ local patientData = {
 
 	-- DAY 6
 	[61] = {
-		name="Jane Doe",
-		bio="Likes to swim",
+		name="LuKe the Lost Knight",
+		bio="Wants to be brave",
 		exp= 40,
 		photo="assets/Characters/Icon_P_Lost_Knight.png",
 		possible_disease={1,2,3,4,5,6,7,8},
 		symptoms_revealed = 2
 	},
 	[62] = {
-		name="Winnie the Pooh",
-		bio="Likes to eat honey",
+		name="Flo the Florist",
+		bio="Likes to enjoy nature",
 		exp= 4,
 		photo="assets/Characters/Icon_P_Florist.png",
 		possible_disease={1,2,3,4,5,6,7,8},
 		symptoms_revealed = 4
 	},
 	[63] = {
-		name="James Bond",
-		bio="Likes to spy",
+		name="Al the Alchemist",
+		bio="Likes tattoos",
 		exp= 77,
 		photo="assets/Characters/Icon_P_Alchemist.png",
 		possible_disease={1,2,3,4,5,6,7,8},
 		symptoms_revealed = 1
 	},
 	[64] = {
-		name="Bob Ross",
-		bio="Likes to paint",
+		name="Scarlet the Scholar",
+		bio="Likes to read novels",
 		exp= 20,
 		photo="assets/Characters/Icon_P_Scholar.png",
 		possible_disease={1,2,3,4,5,6,7,8},
 		symptoms_revealed = 3
 	},
 	[65] = {
-		name="Donald Trump",
-		bio="Likes to play golf",
+		name="Bella the Baker",
+		bio="Likes to prepare cakes",
 		exp= 1,
 		photo="assets/Characters/Icon_P_Baker.png",
 		possible_disease={1,2,3,4,5,6,7,8},
 		symptoms_revealed = 6
 	},
 	[66] = {
-		name="Celine Dion",
+		name="Bob the Bard",
 		bio="Likes to sing",
 		exp= 99,
 		photo="assets/Characters/Icon_P_Bard.png",
