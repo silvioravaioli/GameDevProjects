@@ -39,7 +39,11 @@ function patientGen:generatePatient(patient_data)
 			patient.symptoms[i] = 0
 		end
 	end
-  	random_indices = util.shuffle({1,2,3,4,5,6})
+	local unlocked_array = {};
+	for i = 1, diseases_unlocked do
+		unlocked_array[i] = i;
+	end
+  	random_indices = util.shuffle(unlocked_array)
 	for i = 1, patient_data.symptoms_revealed do
 		local ind = random_indices[i]
 		patient.symptoms_display[ind] = patient.symptoms[ind]
