@@ -58,7 +58,7 @@ function gui:drawTopAndBottomDisplay()
 		testIconBoxes[i] = {x = xpos, y = ypos, 
 			width = icontest[i]:getWidth() * squareScale, height = icontest[i]:getHeight() * squareScale}
 		if (util.withinObj(mouseX, mouseY, testIconBoxes[i])) then
-			love.graphics.draw(icontesthighlight, xpos, ypos, 0, squareScale, squareScale)
+			love.graphics.draw(icon_highlight, xpos, ypos, 0, squareScale, squareScale)
 			setColorBlack()
 			local font_width = love.graphics.getFont():getWidth(symptoms[i])
 			local text_x = xpos
@@ -77,11 +77,14 @@ function gui:drawTopAndBottomDisplay()
 
 	-- large confirm button, display only if all the patients have been treated
 	--if stage_num_patients_untreated==0 then
+	confirmButton = {x = x0, y = testBarY, width = bottomBarHeight, height = bottomBarHeight}
 	if stage_num_patients_untreated==0 then
 			love.graphics.draw(icon_end_day, x0, testBarY, 0, scaleX, scaleX)
+			if (util.withinObj(mouseX, mouseY, confirmButton)) then			
+				love.graphics.draw(icon_highlight, x0, testBarY, 0, scaleX, scaleX)
+			end
 			--love.graphics.draw(rectangle_confirm, testBarX, testBarY, 0, testBarXScale, testBarYScale)
 	end
-	confirmButton = {x0, testBarY, bottomBarHeight}
 	--rectangleConfirmButton = {testBarX, testBarY, testBarWidth, bottomBarHeight}
 
 
@@ -97,12 +100,17 @@ function gui:drawTopAndBottomDisplay()
 
 	-- HELP
 	love.graphics.draw(icon_help, x1, testBarY, 0, scaleX, scaleX)
-	helpButton = {x1, testBarY, bottomBarHeight}
+	helpButton = {x = x1, y = testBarY, width = bottomBarHeight, height = bottomBarHeight}
+	if (util.withinObj(mouseX, mouseY, helpButton)) then
+		love.graphics.draw(icon_highlight, x1, testBarY, 0, scaleX, scaleX)
+	end
 
 	-- MANUAL
 	love.graphics.draw(icon_manual, x2, testBarY, 0, scaleX, scaleX)
-	manualButton = {x2, testBarY, bottomBarHeight}
-
+	manualButton = {x = x2, y = testBarY, width = bottomBarHeight, height = bottomBarHeight}
+	if (util.withinObj(mouseX, mouseY, manualButton)) then
+		love.graphics.draw(icon_highlight, x2, testBarY, 0, scaleX, scaleX)
+	end
 
 
 
@@ -215,7 +223,12 @@ function gui:drawTopAndBottomDisplay()
 	-- draw return button
 	returnX = x2 + bottomBarHeight + screenOffsetFactor * screenWidth
 	setColorWhite()
+	local hospital_loc = {x = returnX, y = testBarY, 
+		width = icon_hospital:getWidth() * scaleX, height = icon_hospital:getHeight() * scaleX}
 	love.graphics.draw(icon_hospital, returnX, testBarY, 0, scaleX, scaleX)
+	if (util.withinObj(mouseX, mouseY, hospital_loc)) then
+		love.graphics.draw(icon_highlight, returnX, testBarY, 0, scaleX, scaleX)
+	end
 	returnButton = {returnX, testBarY, square:getWidth()}
 
 	setColorBlack()
@@ -238,10 +251,7 @@ function gui:mousepressed(x,y)
 		end
 	end
 	-- move to manual page
-	xx = manualButton[1]
-	yy = manualButton[2]
-	ww = manualButton[3]
-	if x >= xx and x <= xx + ww and y >= yy and y <= yy + ww then
+	if util.withinObj(x, y, manualButton) then
 		if page == "TEST" then
 			currently_testing = true
 		end
@@ -268,12 +278,12 @@ function gui:mousepressed(x,y)
 	--end
 
 	-- move to help page
-	if x >= helpButton[1] and x <= helpButton[1] + helpButton[3] and y >= helpButton[2] and y <= helpButton[2] + helpButton[3] then
+	if util.withinObj(x, y, helpButton) then
 		page = "HELP"
 	end	
 
 	-- move to next stage using the tick button - for testing purposes, will change later
-	if stage_num_patients_untreated==0 and x >= confirmButton[1] and x <= confirmButton[1] + confirmButton[3] and y >= confirmButton[2] and y <= confirmButton[2] + confirmButton[3] then
+	if stage_num_patients_untreated==0 and util.withinObj(x, y, confirmButton) then
 		evaluateStage()
 		page = "STAGE_EVALUATION"
 		--page = "MAIN"

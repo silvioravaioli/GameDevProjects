@@ -57,7 +57,7 @@ function love.load()
 	icontest[4]	= love.graphics.newImage("assets/Icons/test_4.png")
 	icontest[5]	= love.graphics.newImage("assets/Icons/test_5.png")
 	icontest[6]	= love.graphics.newImage("assets/Icons/test_6.png")
-	icontesthighlight = love.graphics.newImage("assets/Icons/test_highlight.png")
+	icon_highlight = love.graphics.newImage("assets/Icons/test_highlight.png")
 
 	--icon_music	= love.graphics.newImage("assets/Icons/icon_music.png")
 	icon_help	= love.graphics.newImage("assets/Icons/icon_help.png")
