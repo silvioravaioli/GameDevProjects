@@ -45,6 +45,7 @@ end
 
 function hospital:draw()
 	setColorWhite()
+	currently_testing = false
 	love.graphics.draw(doctorImage, mainX, mainY, 0, xScale, yScale)
 	for i = 1, #currentPatients do
 		local patientSprite = love.graphics.newImage(currentPatients[i].photo)

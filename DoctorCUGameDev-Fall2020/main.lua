@@ -121,6 +121,9 @@ function love.load()
 	help_page = 1
 	max_help_page = 4
 
+	-- keeps track if manual is called while testing so we return to testing after viewing manual
+	currently_testing = false
+
 	-- Variables used to evaluate stages
 	stage_evaluation_names 		= {}
 	stage_evaluation_treatments	= {}

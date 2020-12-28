@@ -202,6 +202,8 @@ function gui:mousepressed(x,y)
 	if x >= returnX and x <= returnX + bottomBarHeight and y >= testBarY and y <= testBarY + bottomBarHeight then
 		if skill_points>0 then
 			page = "SKILLS"
+		elseif page == "MANUAL" and currently_testing then
+			page = "TEST"
 		else
 			page = "MAIN"
 		end
@@ -211,7 +213,11 @@ function gui:mousepressed(x,y)
 	yy = manualButton[2]
 	ww = manualButton[3]
 	if x >= xx and x <= xx + ww and y >= yy and y <= yy + ww then
+		if page == "TEST" then
+			currently_testing = true
+		end
 		page = "MANUAL"
+		
 	end	
 
 	-- move to skill points page (for testing - should add own button later)
