@@ -41,6 +41,7 @@ function patients:draw()
 	for j = 1, #fields do
 		love.graphics.print(fields[j], currX, currY)
 		currY = currY + textHeight + textSpacing
+		setColorBlack()
 	end
 
 	-- print symptoms
@@ -52,11 +53,13 @@ function patients:draw()
 	
 	for k = 1, symptoms_unlocked do
 		currY = currY + textHeight + textSpacing
+		if (util.withinObj(mouseX, mouseY, testIconBoxes[k])) then
+			setColorBlue()
+		end
 		love.graphics.print(symptoms[k], chance_columnX1, currY)
 		if patient.symptoms_display[k]>=0.995 then
 			setColorGreen()
-		end
-		if patient.symptoms_display[k]< 0.005 then
+		elseif patient.symptoms_display[k]< 0.005 then
 			setColorRed()
 		end
 		love.graphics.print( math.floor(patient.symptoms_display[k]*100+0.5) .. "%", chance_columnX2, currY)
