@@ -57,6 +57,9 @@ function gui:drawTopAndBottomDisplay()
 		love.graphics.draw(icontest[i], xpos, ypos, 0, squareScale, squareScale)
 		testIconBoxes[i] = {x = xpos, y = ypos, 
 			width = icontest[i]:getWidth() * squareScale, height = icontest[i]:getHeight() * squareScale}
+		if (util.withinObj(mouseX, mouseY, testIconBoxes[i])) then
+			love.graphics.draw(icontesthighlight, xpos, ypos, 0, squareScale, squareScale)
+		end
 		-- print the test names
 		--setColorBlack()
 		--love.graphics.print("TEST " .. tostring(i),
