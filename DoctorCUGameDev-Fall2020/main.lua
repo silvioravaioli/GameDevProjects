@@ -222,6 +222,11 @@ function love.keypressed(key, isrepeat)
 	end
 end
 
+function love.mousemoved(x, y)
+	mouseX = x
+	mouseY = y
+end
+
 -- FUNCTION LOAD NEW STAGE
 function loadNewStage(stage_num)
 	if stage_num >= 1 and stage_num <= #stages then
