@@ -1,15 +1,6 @@
-local review = {}
+util = require('scripts.util')
 
-function withinObj(x, y, range)
-	if not range or not range.x then
-		return false
-	end
-	if x >= range.x and x <= range.x + range.width
-	  and y >= range.y and y <= range.y + range.height then
-		return true
-	end
-	return false
-end
+local review = {}
 
 function review:open()
 	page = "REVIEW"
@@ -25,7 +16,7 @@ function review:draw()
 end
 
 function review:mousepressed(x, y)
-	if withinObj(x, y, self.continueButton) then	
+	if util.withinObj(x, y, self.continueButton) then	
 		stage = stage + 1
 		loadNewStage(stage)
 		page = "MAIN"

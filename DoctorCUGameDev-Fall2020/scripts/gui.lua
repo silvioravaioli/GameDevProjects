@@ -1,3 +1,5 @@
+util = require('scripts.util')
+
 local gui = {}
 
 
@@ -53,7 +55,11 @@ function gui:drawTopAndBottomDisplay()
 		xpos = testBarX + offset * i + squareWidth * (i - 1)
 		ypos = testBarY + (bottomBarHeight - squareWidth)/2
 		love.graphics.draw(icontest[i], xpos, ypos, 0, squareScale, squareScale)
-		testIconBoxes[i] = {xpos, ypos, square:getWidth()}
+		testIconBoxes[i] = {x = xpos, y = ypos, 
+			width = icontest[i]:getWidth() * squareScale, height = icontest[i]:getHeight() * squareScale}
+		if (util.withinObj(mouseX, mouseY, testIconBoxes[i])) then
+			love.graphics.draw(icontesthighlight, xpos, ypos, 0, squareScale, squareScale)
+		end
 		-- print the test names
 		--setColorBlack()
 		--love.graphics.print("TEST " .. tostring(i),

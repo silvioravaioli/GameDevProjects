@@ -16,5 +16,17 @@ function P.shuffle(arr)
 	return shuffledArr
 end
 
+
+function P.withinObj(x, y, range)
+	if not range or not range.x then
+		return false
+	end
+	if x >= range.x and x <= range.x + range.width
+	  and y >= range.y and y <= range.y + range.height then
+		return true
+	end
+	return false
+end
+
 util = P
 return P

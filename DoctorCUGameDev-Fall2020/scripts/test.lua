@@ -88,11 +88,7 @@ function test:mousepressed(x, y)
 	--print(x,y)
 
 	for i = 1, symptoms_unlocked do
-		cur_box = testIconBoxes[i]
-		xx = cur_box[1]
-		yy = cur_box[2]
-		ww = cur_box[3]
-		if x >= xx and x <= xx + ww and y >= yy and y <= yy + ww then
+		if (util.withinObj(x, y, testIconBoxes[i])) then
 			if testsAvailable>0 then	
 				test:runTest(currentPatient,i)
 			end
