@@ -59,6 +59,14 @@ function gui:drawTopAndBottomDisplay()
 			width = icontest[i]:getWidth() * squareScale, height = icontest[i]:getHeight() * squareScale}
 		if (util.withinObj(mouseX, mouseY, testIconBoxes[i])) then
 			love.graphics.draw(icontesthighlight, xpos, ypos, 0, squareScale, squareScale)
+			setColorBlack()
+			local font_width = love.graphics.getFont():getWidth(symptoms[i])
+			local text_x = xpos
+			text_x = text_x + icontest[i]:getWidth() * squareScale * 0.5
+			text_x = text_x - font_width * 0.5
+			local text_y = ypos - DEFAULT_FONT_SIZE * 1.5
+			love.graphics.print(symptoms[i], text_x, text_y)
+			setColorWhite()
 		end
 		-- print the test names
 		--setColorBlack()
