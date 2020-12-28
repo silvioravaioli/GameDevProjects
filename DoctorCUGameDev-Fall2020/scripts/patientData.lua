@@ -14,7 +14,7 @@ local patientData = {
 	-- DAY 2
 	[21] = {
 		name="Scarlet the Scholar",
-		bio="Likes to play golf",
+		bio="Likes to read novels",
 		exp= 20,
 		photo="assets/Characters/Icon_P_Scholar.png",
 		possible_disease={1,2,3,4,5,6,7,8},
