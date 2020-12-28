@@ -38,7 +38,7 @@ function love.load()
 	squareGreen = love.graphics.newImage("assets/greensquare.png")
 
 	rectangle_box_icons = love.graphics.newImage("assets/bluerectangle.png")
-	rectangle_confirm 	= love.graphics.newImage("assets/bluerectangle_confirm.png")
+	--rectangle_confirm 	= love.graphics.newImage("assets/bluerectangle_confirm.png")
 	centerRect 	= love.graphics.newImage("assets/testMenu.png")
 
 	doctorImage = love.graphics.newImage("assets/Characters/Icon_Doctor.jpeg");
