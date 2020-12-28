@@ -160,7 +160,7 @@ function patients:useTreatment(treatmentIndex)
 	patient = currentPatients[currentPatient]
 	if patient.treatment==-1 then
 		stage_num_patients_untreated = stage_num_patients_untreated-1
-		print(stage_num_patients_untreated)
+		--print(stage_num_patients_untreated)
 	end
 	patient.treatment = treatmentIndex
 end

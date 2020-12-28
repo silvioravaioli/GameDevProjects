@@ -50,7 +50,9 @@ function skills:draw()
                 local textHeight = font:getHeight("+")
                 plusX = tableX + dx*0.2 - 1.25 * textWidth/2 + x*dx
                 plusY[y] = tableY + dy/2 - 1.25 * textHeight/2 + y*dy
-                love.graphics.print("+", plusX, plusY[y], 0, 1.25)
+                if treatment.accuracy_prob[y]<1 then
+	                love.graphics.print("+", plusX, plusY[y], 0, 1.25)
+	            end
             end
         end
     end
