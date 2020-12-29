@@ -13,10 +13,10 @@ stages = require('scripts.stages')
 skills = require('scripts.skills')
 help = require('scripts.help')
 stage_evaluation = require('scripts.stage_evaluation')
+end_screen = require('scripts.end_screen')
 
 -- set filter 
 love.graphics.setDefaultFilter("nearest")
-
 
 
 -- FUNCTION LOAD
@@ -57,7 +57,7 @@ function love.load()
 	icontest[4]	= love.graphics.newImage("assets/Icons/test_4.png")
 	icontest[5]	= love.graphics.newImage("assets/Icons/test_5.png")
 	icontest[6]	= love.graphics.newImage("assets/Icons/test_6.png")
-	icontesthighlight = love.graphics.newImage("assets/Icons/test_highlight.png")
+	icon_highlight = love.graphics.newImage("assets/Icons/test_highlight.png")
 
 	--icon_music	= love.graphics.newImage("assets/Icons/icon_music.png")
 	icon_help	= love.graphics.newImage("assets/Icons/icon_help.png")
@@ -91,7 +91,7 @@ function love.load()
 	currentPatient = 1
 
 	-- default stage data
-	stage = 1
+	stage = 1 
 	testsAvailable = 8
 	maxTests = 8
 	diseases_unlocked = 3
@@ -124,6 +124,12 @@ function love.load()
 
 	-- keeps track if manual is called while testing so we return to testing after viewing manual
 	currently_testing = false
+
+	--keeps track of total patients saved
+	patients_saved_game = 0
+
+	--keeps track of total patients encountered
+	patients_encountered = 0
 
 	-- Variables used to evaluate stages
 	stage_evaluation_names 		= {}
@@ -170,8 +176,13 @@ function love.draw()
 		help:draw()
 	elseif page == "STAGE_EVALUATION" then
 		stage_evaluation:draw()
+	elseif page == "END_SCREEN" then
+		end_screen:draw()
 	end
-	gui:draw()
+	--want to disable the gui in the end screen
+	if page ~= "END_SCREEN" then
+		gui:draw()
+	end
 end
 
 
@@ -179,8 +190,9 @@ end
 
 -- FUNCTION MOUSEPRESSED
 function love.mousepressed(x, y, button, isTouch)
-	
-	gui:mousepressed(x,y)
+	if page ~= "END_SCREEN" then --want to disable the gui in the end screen
+		gui:mousepressed(x,y)
+	end
 	
 	if page == "MAIN" then
 		hospital:mousepressed(x, y)
@@ -205,6 +217,10 @@ function love.mousepressed(x, y, button, isTouch)
 	
 	if page == "STAGE_EVALUATION" then
 		stage_evaluation:mousepressed(x, y)
+	end
+
+	if page == "END_SCREEN" then
+		end_screen:mousepressed(x,y)
 	end
 
 end
@@ -244,6 +260,10 @@ function loadNewStage(stage_num)
 		patients_goal				= stage_info.patients_goal
 		-- load patients
 		hospital:load(stage_num)
+
+	--end game
+	elseif stage_num == 7 then
+		page = "END_SCREEN"
 	end
 end
 
@@ -286,6 +306,8 @@ function evaluateStage()
 		level_pass = 1
 		incrementExp(tot_experience)
 		stage = stage + 1
+		patients_saved_game = patients_saved_game + tot_cured
+		patients_encountered = patients_encountered + stage_num_patients_total
 		loadNewStage(stage)
 	else
 		level_pass = 0
