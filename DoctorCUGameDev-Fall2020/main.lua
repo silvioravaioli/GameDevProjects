@@ -107,7 +107,9 @@ function love.load()
 	experience = 0
 	max_experience = {[1] = 10, [2] = 20, [3] = 30, [4] = 50, [5] = 70, [6] = 100, [7] = 130, [8] = 170, [9] = 210, [10] = 260, [11] = 310, [12] = 370, [13] = -1}
 	skill_points = 0
-	skill_points_gained = {[2] = 3, [3] = 3, [4] = 2, [5] = 2, [6] = 1, [7] = 1, [8] = 1, [9] = 1, [10] = 1, [11] = 1, [12] = 1, [13] = 1}
+	-- USE FLAT PROGRESSION (3 skill points per level)
+--	skill_points_gained = {[2] = 3, [3] = 3, [4] = 2, [5] = 2, [6] = 1, [7] = 1, [8] = 1, [9] = 1, [10] = 1, [11] = 1, [12] = 1, [13] = 1}
+	skill_points_gained = {[2] = 2, [3] = 2, [4] = 2, [5] = 2, [6] = 2, [7] = 2, [8] = 2, [9] = 2, [10] = 2, [11] = 2, [12] = 2, [13] = 2}
 
 	-- THIS IS A TABLE STORING THE TREATMENT ACCURACY
 	treatment = {}

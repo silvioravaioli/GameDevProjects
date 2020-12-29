@@ -34,7 +34,7 @@ local stages = {
         patient_ids={41, 42, 43, 44},
         patients_count=4,
         patients_goal=3,
-        tests_num=20,
+        tests_num=15,
         diseases_unlocked=5,
         symptoms_unlocked=4
     },
