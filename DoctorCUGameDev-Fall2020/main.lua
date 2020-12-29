@@ -138,7 +138,7 @@ function love.load()
 	patients_encountered = 0
 
 	--helps with testing endscreen
-	trigger_end = true
+	trigger_end = false
 
 	-- Variables used to evaluate stages
 	stage_evaluation_names 		= {}
