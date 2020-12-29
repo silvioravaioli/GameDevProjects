@@ -21,6 +21,7 @@ love.graphics.setDefaultFilter("nearest")
 
 -- FUNCTION LOAD
 function love.load()
+	mode = "PLAY"
 	mouseX = 0
 	mouseY = 0
 
@@ -237,8 +238,10 @@ end
 -- right now used for testing purposes
 function love.keypressed(key, isrepeat)
 	-- ENABLE THIS FUNCTION ONLY FOR TESTING
-	if 1 then
-		if key == "space" then
+	if mode == "TESTING" then
+		if key == "p" then
+			mode = "PLAY"
+		elseif key == "space" then
 			loadNewStage(stage+1)
 			--print('This function has been disabled')
 		elseif key == "backspace" then
@@ -247,12 +250,23 @@ function love.keypressed(key, isrepeat)
 		elseif key == "l" then
 			skill_points = skill_points+1
 		end
+	elseif mode == "PLAY" then
+		if key == "t" then
+			mode = "TESTING"
+		end
+	end
+	if key == "r" then
+		loadNewStage(stage)
 	end
 end
 
 function love.mousemoved(x, y)
 	mouseX = x
 	mouseY = y
+end
+
+function printMessageToScreen(text)
+
 end
 
 -- FUNCTION LOAD NEW STAGE
@@ -358,4 +372,7 @@ function setColorRed()
 end
 function setColorLightBlue()
 	love.graphics.setColor(0,191/255,1)
+end
+function setColorGray()
+	love.graphics.setColor(200/255,200/255,200/255)
 end

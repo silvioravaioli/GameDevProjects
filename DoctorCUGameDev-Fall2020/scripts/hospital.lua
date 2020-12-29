@@ -52,8 +52,12 @@ function hospital:draw()
 		xScale = patientWidth/patientSprite:getWidth()
 		yScale = patientHeight/patientSprite:getHeight()
 		love.graphics.draw(patientSprite, self.patientBoxes[i][1], self.patientBoxes[i][2], 0, xScale, yScale)
-
 	end
+	setFont(SMALLER_FONT_SIZE)
+	setColorGray()
+	local message = "PRESS r to restart the level"
+	love.graphics.print(message, screenWidth/2-font:getWidth(message)/2,topBarHeight + font:getHeight(message)/2)
+	setFont(DEFAULT_FONT_SIZE)
 end
 
 
