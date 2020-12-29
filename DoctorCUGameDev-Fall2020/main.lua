@@ -241,6 +241,8 @@ function love.keypressed(key, isrepeat)
 		elseif key == "backspace" then
 			loadNewStage(stage-1)
 			--print('This function has been disabled')
+		elseif key == "l" then
+			skill_points = skill_points+1
 		end
 	end
 end
