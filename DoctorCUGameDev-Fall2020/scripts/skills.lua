@@ -3,10 +3,12 @@
 local skills = {}
 
 function skills:draw()
-    local tableX = 0.14 * screenHeight
-    local tableY = 0.1 * screenWidth
+
+    -- set size of the table
     local dx = 260
     local dy = 80
+    local tableX = screenWidth/2 - 2 * dx
+    local tableY = 0.07 * screenWidth
 	for x = 0, 3 do
 		for y = 0, symptoms_unlocked do
 			love.graphics.rectangle("line", tableX + x*dx, tableY + y*dy, dx, dy)

@@ -45,7 +45,7 @@ local stages = {
         patients_count=5,
         patients_goal=4,
         tests_num=20,
-        diseases_unlocked=5,
+        diseases_unlocked=6,
         symptoms_unlocked=5
     },
 
@@ -55,7 +55,7 @@ local stages = {
         patients_count=6,
         patients_goal=5,
         tests_num=20,
-        diseases_unlocked=6,
+        diseases_unlocked=7,
         symptoms_unlocked=5
     },
 
