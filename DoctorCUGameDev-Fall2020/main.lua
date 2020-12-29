@@ -42,7 +42,8 @@ function love.load()
 
 	rectangle_box_icons = love.graphics.newImage("assets/bluerectangle.png")
 	--rectangle_confirm 	= love.graphics.newImage("assets/bluerectangle_confirm.png")
-	centerRect 	= love.graphics.newImage("assets/testMenu.png")
+	centerRect 	= love.graphics.newImage("assets/testMenu.jpg")
+	medicineRect= love.graphics.newImage("assets/BackgroundScrollTreatments_vertical.jpeg")
 
 	doctorImage = love.graphics.newImage("assets/Characters/Icon_Doctor.png");
 
@@ -79,7 +80,7 @@ function love.load()
 	topBarHeight = 0.07 * screenHeight
 	bottomBarHeight = 0.15 * screenHeight
 
-	centerUIWidth = 0.3 * screenWidth
+	centerUIWidth = 0.32 * screenWidth
 	centerUIHeight = centerRect:getHeight()/centerRect:getWidth() * centerUIWidth
 
 	numberOfTests = 6

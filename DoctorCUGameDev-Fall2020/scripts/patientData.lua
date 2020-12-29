@@ -191,7 +191,7 @@ local patientData = {
 		name="Bella the Baker",
 		bio="Is grateful for your help",
 		exp= 22,
-		photo="assets/Characters/Icon_P_Lost_Knight.png",
+		photo="assets/Characters/Icon_P_Baker.png",
 		possible_disease={1,2,3,4,5,6,7,8},
 		symptoms_revealed = 0
 	},
@@ -199,7 +199,7 @@ local patientData = {
 		name="Scarlet the Scholar",
 		bio="Is grateful for your help",
 		exp= 22,
-		photo="assets/Characters/Icon_P_Florist.png",
+		photo="assets/Characters/Icon_P_Scholar.png",
 		possible_disease={1,2,3,4,5,6,7,8},
 		symptoms_revealed = 0
 	},
@@ -207,7 +207,7 @@ local patientData = {
 		name="Flo the Florist",
 		bio="Is grateful for your help",
 		exp= 22,
-		photo="assets/Characters/Icon_P_Alchemist.png",
+		photo="assets/Characters/Icon_P_Florist.png",
 		possible_disease={1,2,3,4,5,6,7,8},
 		symptoms_revealed = 0
 	},
@@ -215,7 +215,7 @@ local patientData = {
 		name="Al the Alchemist",
 		bio="Is grateful for your help",
 		exp= 22,
-		photo="assets/Characters/Icon_P_Scholar.png",
+		photo="assets/Characters/Icon_P_Alchemist.png",
 		possible_disease={1,2,3,4,5,6,7,8},
 		symptoms_revealed = 0
 	},
@@ -223,7 +223,7 @@ local patientData = {
 		name="Bob the Bard",
 		bio="Is grateful for your help",
 		exp= 22,
-		photo="assets/Characters/Icon_P_Baker.png",
+		photo="assets/Characters/Icon_P_Bard.png",
 		possible_disease={1,2,3,4,5,6,7,8},
 		symptoms_revealed = 0
 	},
@@ -231,7 +231,7 @@ local patientData = {
 		name="LuKe the Lost Knight",
 		bio="Is grateful for your help",
 		exp= 22,
-		photo="assets/Characters/Icon_P_Bard.png",
+		photo="assets/Characters/Icon_P_Lost_Knight.png",
 		possible_disease={1,2,3,4,5,6,7,8},
 		symptoms_revealed = 0
 	},
