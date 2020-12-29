@@ -8,13 +8,13 @@ function gui:draw()
 	-- TOP SIDE SCREEN
 	stageBarWidth 		= 0.30 * screenWidth
 	progressBarWidth 	= 0.30 * screenWidth
-	levelBarWidth 		= 0.12 * screenWidth -- UNUSED
+	--levelBarWidth 		= 0.12 * screenWidth -- UNUSED
 	expBarWidth 		= 0.25 * screenWidth
 	-- expBarWidth is not set because it varies for centering
 
 	-- BOTTOM PART SCREEN
 	testBarWidth = 0.5 * screenWidth
-	topBarStartX = 0.1 * screenWidth
+	topBarStartX = 0.07 * screenWidth
 
 	gui:drawTopAndBottomDisplay()
 end
@@ -128,7 +128,7 @@ function gui:drawTopAndBottomDisplay()
 
 
 	-- Add text to UI
-	setColorBlack()
+	--setColorBlack()
 	--textWidth = font:getWidth("HELP")
 	--love.graphics.print("HELP",
 	--	x1 + bottomBarHeight/2 - textWidth/2,
@@ -141,14 +141,26 @@ function gui:drawTopAndBottomDisplay()
 	
 	-- draw top bars: stage, progress, level, experience
 
+
+
+
+
 	-- STAGE (DAY) AND GOAL
 	setColorLightBlue()
 	stageBarX = topBarStartX
-	love.graphics.rectangle("fill", stageBarX, screenOffsetFactor * screenHeight,
-		stageBarWidth, topBarHeight)
-	setColorBlack()
-	love.graphics.rectangle("line", stageBarX, screenOffsetFactor * screenHeight, 
-		stageBarWidth, topBarHeight)
+--	love.graphics.rectangle("fill", stageBarX, screenOffsetFactor * screenHeight,
+--		stageBarWidth, topBarHeight)
+--	setColorBlack()
+--	love.graphics.rectangle("line", stageBarX, screenOffsetFactor * screenHeight, 
+--		stageBarWidth, topBarHeight)
+	--
+	testBarXScale = stageBarWidth / rectangle_box_icons:getWidth()
+	testBarYScale = topBarHeight / rectangle_box_icons:getHeight()
+	setColorWhite()
+	love.graphics.draw(rectangle_box_icons, stageBarX, screenOffsetFactor * screenHeight, 0,  testBarXScale, testBarYScale)
+--	setColorWhite()
+--	love.graphics.draw(rectangle_box_icons, testBarX, testBarY, 0, testBarXScale, testBarYScale)
+
 
 --	stageString = "Day "..tostring(stage)
 	if patients_goal==1 then
@@ -161,17 +173,25 @@ function gui:drawTopAndBottomDisplay()
 		stageBarX + stageBarWidth/2 - textWidth/2,
 		screenOffsetFactor * screenHeight + topBarHeight/2 - textHeight/2)
 
-	-- PROGRESS (TESTS AVAILABLE)
-	setColorLightBlue()
-	progressBarX = stageBarX + stageBarWidth + screenOffsetFactor * screenWidth
-	love.graphics.rectangle("fill", progressBarX,
-		screenOffsetFactor * screenHeight, progressBarWidth,
-		topBarHeight)
 
-	setColorBlack()
-	love.graphics.rectangle("line", progressBarX,
-		screenOffsetFactor * screenHeight, progressBarWidth,
-		topBarHeight)
+
+	-- PROGRESS (TESTS AVAILABLE)
+--	setColorLightBlue()
+	progressBarX = stageBarX + stageBarWidth + screenOffsetFactor * screenWidth
+--	love.graphics.rectangle("fill", progressBarX,
+--		screenOffsetFactor * screenHeight, progressBarWidth,
+--		topBarHeight)
+
+--	setColorBlack()
+--	love.graphics.rectangle("line", progressBarX,
+--		screenOffsetFactor * screenHeight, progressBarWidth,
+--		topBarHeight)
+
+	testBarXScale = progressBarWidth / rectangle_box_icons:getWidth()
+	testBarYScale = topBarHeight / rectangle_box_icons:getHeight()
+	setColorWhite()
+	love.graphics.draw(rectangle_box_icons, progressBarX, screenOffsetFactor * screenHeight, 0,  testBarXScale, testBarYScale)
+
 
 	--progressString = "Progress: "..tostring(testsAvailable).."/"..tostring(maxTests).." Tests Available"
 	progressString = tostring(testsAvailable).."/"..tostring(maxTests).." Tests Available"
@@ -199,13 +219,19 @@ function gui:drawTopAndBottomDisplay()
 	--expBarX = levelBarX + levelBarWidth + screenOffsetFactor * screenWidth
 	expBarX = progressBarX + progressBarWidth + screenOffsetFactor * screenWidth
 	--expBarWidth = screenWidth - topBarStartX - expBarX
-	setColorLightBlue()
-	love.graphics.rectangle("fill", expBarX, screenOffsetFactor * screenHeight,
-		expBarWidth, topBarHeight)
+--	setColorLightBlue()
+--	love.graphics.rectangle("fill", expBarX, screenOffsetFactor * screenHeight,
+--		expBarWidth, topBarHeight)
 
-	setColorBlack()
-	love.graphics.rectangle("line", expBarX, screenOffsetFactor * screenHeight,
-		expBarWidth, topBarHeight)
+--	setColorBlack()
+--	love.graphics.rectangle("line", expBarX, screenOffsetFactor * screenHeight,
+--		expBarWidth, topBarHeight)
+
+	testBarXScale = expBarWidth / rectangle_box_icons:getWidth()
+	testBarYScale = topBarHeight / rectangle_box_icons:getHeight()
+	setColorWhite()
+	love.graphics.draw(rectangle_box_icons, expBarX, screenOffsetFactor * screenHeight, 0,  testBarXScale, testBarYScale)
+
 
 	if level < max_level then
 		maxExpStr = tostring(max_experience[level])

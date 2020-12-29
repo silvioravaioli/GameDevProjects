@@ -1,8 +1,8 @@
 local help = {}
 
 function help:draw()
-    local scaleX = screenWidth / 1900 * 0.7
-    local scaleY = screenHeight / 1069 * 0.7
+    local scaleX = screenWidth / 1900 * 0.7 --1900 --1600
+    local scaleY = screenHeight / 1069 * 0.7 --1069 -900
     local tableX = 0.1 * screenWidth
     local tableY = 0.1 * screenHeight
     setColorWhite()
