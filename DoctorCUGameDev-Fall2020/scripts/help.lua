@@ -1,9 +1,9 @@
 local help = {}
 
 function help:draw()
-    local scaleX = screenWidth / 1900 * 0.7 --1900 --1600
-    local scaleY = screenHeight / 1069 * 0.7 --1069 -900
-    local tableX = 0.1 * screenWidth
+    local scaleX = screenWidth / 1500 * 0.9 --1900 --1600 -- 1500
+    local scaleY = screenHeight / 693 * 0.7 --1069 -900 -- 693
+    local tableX = 0.05 * screenWidth
     local tableY = 0.1 * screenHeight
     setColorWhite()
     love.graphics.draw(instructions[help_page], tableX, tableY, 0, scaleX, scaleY)
