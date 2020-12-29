@@ -21,6 +21,9 @@ love.graphics.setDefaultFilter("nearest")
 
 -- FUNCTION LOAD
 function love.load()
+	mouseX = 0
+	mouseY = 0
+
 	page = "HELP"
 	DEFAULT_FONT = "assets/nokiafc22.ttf"
 	DEFAULT_FONT_SIZE = 30
@@ -266,7 +269,8 @@ function evaluateStage()
 		stage_evaluation_names[i_patient] 		= patient.name
 		stage_evaluation_treatments[i_patient] = patient.treatment
 		stage_evaluation_disease[i_patient] 	= patient.disease
-		if patient.treatment==patient.disease then
+		if patient.treatment==patient.disease or
+			(patient.treatment==9 and math.random() < 0.3) then --chamomile
 			stage_evaluation_cured[i_patient] 		= 1
 			tot_cured = tot_cured+1
 			stage_evaluation_points[i_patient] 	= patient.exp
