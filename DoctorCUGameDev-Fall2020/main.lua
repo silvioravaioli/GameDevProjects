@@ -49,10 +49,14 @@ function love.load()
 	doctorImage = love.graphics.newImage("assets/Characters/Icon_Doctor.png");
 
 	instructions = {}
-    instructions[1] = love.graphics.newImage("assets/Instructions/Instructions1.jpeg")
-    instructions[2] = love.graphics.newImage("assets/Instructions/Instructions2.jpeg")
-    instructions[3] = love.graphics.newImage("assets/Instructions/Instructions3.jpeg")
-    instructions[4] = love.graphics.newImage("assets/Instructions/Instructions4.jpeg")
+--    instructions[1] = love.graphics.newImage("assets/Instructions/Instructions1.jpeg")
+--    instructions[2] = love.graphics.newImage("assets/Instructions/Instructions2.jpeg")
+--    instructions[3] = love.graphics.newImage("assets/Instructions/Instructions3.jpeg")
+--    instructions[4] = love.graphics.newImage("assets/Instructions/Instructions4.jpeg")
+    instructions[1] = love.graphics.newImage("assets/Instructions/tutorial1.jpeg")
+    instructions[2] = love.graphics.newImage("assets/Instructions/tutorial2.jpeg")
+    instructions[3] = love.graphics.newImage("assets/Instructions/tutorial3.jpeg")
+    instructions[4] = love.graphics.newImage("assets/Instructions/tutorial4.jpeg")
 
 	-- load image icons
 	icontest = {}
@@ -257,6 +261,7 @@ function love.keypressed(key, isrepeat)
 	end
 	if key == "r" then
 		loadNewStage(stage)
+		page = "MAIN"
 	end
 end
 
