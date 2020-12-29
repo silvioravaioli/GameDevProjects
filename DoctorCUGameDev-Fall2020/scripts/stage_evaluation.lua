@@ -7,14 +7,18 @@ local stage_evaluation = {}
 function stage_evaluation:draw()
 
     -- set size of the table
-    --local tableX = 0.14 * screenHeight
+    local dx0 = 400
     local dx = 260
     local dy = 80
     local tableX = screenWidth/2 - 2 * dx
     local tableY = 0.07 * screenWidth
 	for x = 0, 3 do
 		for y = 0, stage_num_patients_total_old do
-			love.graphics.rectangle("line", tableX + x*dx, tableY + y*dy, dx, dy)
+            if x==0 then
+    			love.graphics.rectangle("line", tableX + x*dx, tableY + y*dy, dx0, dy)
+            else
+                love.graphics.rectangle("line", tableX + (x-1)*dx+dx0, tableY + y*dy, dx, dy)
+            end
 		end
     end
     
@@ -29,7 +33,11 @@ function stage_evaluation:draw()
             if y == 0 then
                 local textWidth = font:getWidth(tableLabels[x])
                 local textHeight = font:getHeight(tableLabels[x])
-                love.graphics.print(tableLabels[x], tableX + dx/2 - 0.75 * textWidth/2 + x*dx, tableY + dy/2 - 0.75 * textHeight/2 + y*dy, 0, 0.75)
+                local Xcoordinates = tableX + dx/2 - 0.75 * textWidth/2 + x*dx
+                if x>0 then
+                    Xcoordinates = Xcoordinates+140
+                end
+                love.graphics.print(tableLabels[x], Xcoordinates, tableY + dy/2 - 0.75 * textHeight/2 + y*dy, 0, 0.75)
 
 
             -- patient: name
@@ -42,13 +50,15 @@ function stage_evaluation:draw()
                 local text = tostring(stage_evaluation_names[y])
                 local textWidth = font:getWidth(tableLabels[x])
                 local textHeight = font:getHeight(tableLabels[x])
-                love.graphics.print(text, tableX + dx/3 - 0.75 * textWidth/2 + x*dx, tableY + dy/2 - 0.75 * textHeight/2 + y*dy, 0, 0.75)
+                local Xcoordinates = tableX + dx/3 - 0.75 * textWidth/2 + x*dx
+                love.graphics.print(text, Xcoordinates, tableY + dy/2 - 0.75 * textHeight/2 + y*dy, 0, 0.75)
             -- patient: treatment
             elseif x == 1 then
                 local text = tostring(treatments[stage_evaluation_treatments[y]])
                 local textWidth = font:getWidth(text)
                 local textHeight = font:getHeight(text)
-                love.graphics.print(text, tableX + dx/2 - 0.75 * textWidth/2 + x*dx, tableY + dy/2 - 0.75 * textHeight/2 + y*dy, 0, 0.75)
+                local Xcoordinates = tableX + dx/2 - 0.75 * textWidth/2 + x*dx +140
+                love.graphics.print(text, Xcoordinates, tableY + dy/2 - 0.75 * textHeight/2 + y*dy, 0, 0.75)
             -- patient: cured?
             elseif x == 2 then
                 if stage_evaluation_cured[y]==1 then
@@ -58,13 +68,15 @@ function stage_evaluation:draw()
                 end
                 local textWidth = font:getWidth(text)
                 local textHeight = font:getHeight(text)
-                love.graphics.print(text, tableX + dx/2 - 0.75 * textWidth/2 + x*dx, tableY + dy/2 - 0.75 * textHeight/2 + y*dy, 0, 0.75)
+                local Xcoordinates = tableX + dx/2 - 0.75 * textWidth/2 + x*dx +140
+                love.graphics.print(text, Xcoordinates, tableY + dy/2 - 0.75 * textHeight/2 + y*dy, 0, 0.75)
             -- patient: points
             elseif x == 3 then
                 local text = tostring(stage_evaluation_points[y])
                 local textWidth = font:getWidth(text)
                 local textHeight = font:getHeight(text)
-                love.graphics.print(text, tableX + dx/2 - 0.75 * textWidth/2 + x*dx, tableY + dy/2 - 0.75 * textHeight/2 + y*dy, 0, 0.75)
+                local Xcoordinates = tableX + dx/2 - 0.75 * textWidth/2 + x*dx +140
+                love.graphics.print(text, Xcoordinates, tableY + dy/2 - 0.75 * textHeight/2 + y*dy, 0, 0.75)
                 setColorBlack()
             end
         end
