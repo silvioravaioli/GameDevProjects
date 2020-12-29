@@ -1,5 +1,11 @@
 local end_screen = {}
 
+
+--local text4 = "Restart Game"
+--local button_width = font:getWidth(text4)
+--local button_height = font:getHeight(text4)
+--local reset_button_X = screenWidth*0.4
+--local reset_button_Y = screenWidth*0.4
 function end_screen:draw()
 	text1 = "CONGRATULATIONS! You have beaten the game!"
 	text2 = "Patients encountered = "
@@ -24,12 +30,11 @@ function end_screen:draw()
 end
 
 function end_screen:mousepressed(x,y)
-	if x and y then 
-		if x >= reset_button_X and x <= reset_button_X + button_width and y >= reset_button_Y and y <= reset_button_Y + button_height then
-			love.load()
+	end_screen:draw()
+	if x >= reset_button_X and x <= reset_button_X + button_width and y >= reset_button_Y and y <= reset_button_Y + button_height then
+		love.load()
 
-			--print("clicked")
-		end
+		--print("clicked")
 	end
 	print(x)
 	print(y)
