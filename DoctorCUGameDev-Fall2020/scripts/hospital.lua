@@ -52,6 +52,7 @@ function hospital:draw()
 		xScale = patientWidth/patientSprite:getWidth()
 		yScale = patientHeight/patientSprite:getHeight()
 		love.graphics.draw(patientSprite, self.patientBoxes[i][1], self.patientBoxes[i][2], 0, xScale, yScale)
+
 	end
 end
 

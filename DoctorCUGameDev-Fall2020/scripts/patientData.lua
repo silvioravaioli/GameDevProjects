@@ -22,7 +22,7 @@ local patientData = {
 	},
 	[22] = {
 		name="Flo the Florist",
-		bio="Likes to enjoy nature",
+		bio="Enjoys long walks",
 		exp= 5,
 		photo="assets/Characters/Icon_P_Florist.png",
 		possible_disease={1,2,3,4,5,6,7,8},
@@ -33,7 +33,7 @@ local patientData = {
 	-- DAY 3
 	[31] = {
 		name="Flo the Florist",
-		bio="Likes to enjoy nature",
+		bio="Has a small garden",
 		exp= 15,
 		photo="assets/Characters/Icon_P_Florist.png",
 		possible_disease={1,2,3,4,5,6,7,8},
@@ -41,7 +41,7 @@ local patientData = {
 	},
 	[32] = {
 		name="Bella the Baker",
-		bio="Likes to prepare cakes",
+		bio="Is learning new recipes",
 		exp= 60,
 		photo="assets/Characters/Icon_P_Baker.png",
 		possible_disease={1,2,3,4,5,6,7,8},
@@ -60,7 +60,7 @@ local patientData = {
 	-- DAY 4
 	[41] = {
 		name="Al the Alchemist",
-		bio="Likes tattoos",
+		bio="Has a strange compass",
 		exp= 10,
 		photo="assets/Characters/Icon_P_Alchemist.png",
 		possible_disease={1,2,3,4,5,6,7,8},
@@ -68,7 +68,7 @@ local patientData = {
 	},
 	[42] = {
 		name="Scarlet the Scholar",
-		bio="Likes to read novels",
+		bio="Has read 1,000 books",
 		exp= 1,
 		photo="assets/Characters/Icon_P_Scholar.png",
 		possible_disease={1,2,3,4,5,6,7,8},
@@ -76,7 +76,7 @@ local patientData = {
 	},
 	[43] = {
 		name="Bob the Bard",
-		bio="Likes to sing",
+		bio="Likes to play the violin",
 		exp= 88,
 		photo="assets/Characters/Icon_P_Bard.png",
 		possible_disease={1,2,3,4,5,6,7,8},
@@ -84,7 +84,7 @@ local patientData = {
 	},
 	[44] = {
 		name="Bella the Baker",
-		bio="Likes to prepare cakes",
+		bio="Improving her baking skills",
 		exp= 5,
 		photo="assets/Characters/Icon_P_Baker.png",
 		possible_disease={1,2,3,4,5,6,7,8},
@@ -103,7 +103,7 @@ local patientData = {
 	},
 	[52] = {
 		name="Al the Alchemist",
-		bio="Likes tattoos",
+		bio="Can fix broken tools",
 		exp= 70,
 		photo="assets/Characters/Icon_P_Alchemist.png",
 		possible_disease={1,2,3,4,5,6,7,8},
@@ -111,15 +111,15 @@ local patientData = {
 	},
 	[53] = {
 		name="Scarlet the Scholar",
-		bio="Likes to read novels",
+		bio="Is writing her first book",
 		exp= 5,
 		photo="assets/Characters/Icon_P_Scholar.png",
 		possible_disease={1,2,3,4,5,6,7,8},
-		symptoms_revealed = 4
+		symptoms_revealed = 1
 	},
 	[54] = {
 		name="Bob the Bard",
-		bio="Likes to sing",
+		bio="His violin is in tune now",
 		exp= 30,
 		photo="assets/Characters/Icon_P_Bard.png",
 		possible_disease={1,2,3,4,5,6,7,8},
@@ -127,7 +127,7 @@ local patientData = {
 	},
 	[55] = {
 		name="Flo the Florist",
-		bio="Likes to enjoy nature",
+		bio="Has a small greenhouse",
 		exp= 15,
 		photo="assets/Characters/Icon_P_Florist.png",
 		possible_disease={1,2,3,4,5,6,7,8},
@@ -138,7 +138,7 @@ local patientData = {
 	-- DAY 6
 	[61] = {
 		name="LuKe the Lost Knight",
-		bio="Wants to be brave",
+		bio="As brave as a lion!",
 		exp= 40,
 		photo="assets/Characters/Icon_P_Lost_Knight.png",
 		possible_disease={1,2,3,4,5,6,7,8},
@@ -146,7 +146,7 @@ local patientData = {
 	},
 	[62] = {
 		name="Flo the Florist",
-		bio="Likes to enjoy nature",
+		bio="Has a giant-roses garden",
 		exp= 4,
 		photo="assets/Characters/Icon_P_Florist.png",
 		possible_disease={1,2,3,4,5,6,7,8},
@@ -154,7 +154,7 @@ local patientData = {
 	},
 	[63] = {
 		name="Al the Alchemist",
-		bio="Likes tattoos",
+		bio="Knows The Truth",
 		exp= 77,
 		photo="assets/Characters/Icon_P_Alchemist.png",
 		possible_disease={1,2,3,4,5,6,7,8},
@@ -162,7 +162,7 @@ local patientData = {
 	},
 	[64] = {
 		name="Scarlet the Scholar",
-		bio="Likes to read novels",
+		bio="Writes NO STOP!",
 		exp= 20,
 		photo="assets/Characters/Icon_P_Scholar.png",
 		possible_disease={1,2,3,4,5,6,7,8},
@@ -170,17 +170,68 @@ local patientData = {
 	},
 	[65] = {
 		name="Bella the Baker",
-		bio="Likes to prepare cakes",
+		bio="Best baker of the kingdom",
 		exp= 1,
 		photo="assets/Characters/Icon_P_Baker.png",
 		possible_disease={1,2,3,4,5,6,7,8},
-		symptoms_revealed = 6
+		symptoms_revealed = 5
 	},
 	[66] = {
 		name="Bob the Bard",
-		bio="Likes to sing",
+		bio="Is ready for Eurovision",
 		exp= 99,
 		photo="assets/Characters/Icon_P_Bard.png",
+		possible_disease={1,2,3,4,5,6,7,8},
+		symptoms_revealed = 0
+	},
+
+
+	-- DAY 7
+	[71] = {
+		name="Bella the Baker",
+		bio="Is grateful for your help",
+		exp= 22,
+		photo="assets/Characters/Icon_P_Baker.png",
+		possible_disease={1,2,3,4,5,6,7,8},
+		symptoms_revealed = 0
+	},
+	[72] = {
+		name="Scarlet the Scholar",
+		bio="Is grateful for your help",
+		exp= 22,
+		photo="assets/Characters/Icon_P_Scholar.png",
+		possible_disease={1,2,3,4,5,6,7,8},
+		symptoms_revealed = 0
+	},
+	[73] = {
+		name="Flo the Florist",
+		bio="Is grateful for your help",
+		exp= 22,
+		photo="assets/Characters/Icon_P_Florist.png",
+		possible_disease={1,2,3,4,5,6,7,8},
+		symptoms_revealed = 0
+	},
+	[74] = {
+		name="Al the Alchemist",
+		bio="Is grateful for your help",
+		exp= 22,
+		photo="assets/Characters/Icon_P_Alchemist.png",
+		possible_disease={1,2,3,4,5,6,7,8},
+		symptoms_revealed = 0
+	},
+	[75] = {
+		name="Bob the Bard",
+		bio="Is grateful for your help",
+		exp= 22,
+		photo="assets/Characters/Icon_P_Bard.png",
+		possible_disease={1,2,3,4,5,6,7,8},
+		symptoms_revealed = 0
+	},
+	[76] = {
+		name="LuKe the Lost Knight",
+		bio="Is grateful for your help",
+		exp= 22,
+		photo="assets/Characters/Icon_P_Lost_Knight.png",
 		possible_disease={1,2,3,4,5,6,7,8},
 		symptoms_revealed = 0
 	},
@@ -193,7 +244,7 @@ local patientData = {
 	[1] = {
 		name="Al the Alchemist",
 		bio="Likes tattoos",
-		exp= 50,
+		exp= 1,
 		photo="assets/Characters/Icon_P_Alchemist.png",
 		possible_disease={1,2,3,4,5,6,7,8},
 		symptoms_revealed = 2
@@ -201,7 +252,7 @@ local patientData = {
 	[2] = {
 		name="Bella the Baker",
 		bio="Likes to prepare cakes",
-		exp= 20,
+		exp= 2,
 		photo="assets/Characters/Icon_P_Baker.png",
 		possible_disease={1,2,3,4,5,6,7,8},
 		symptoms_revealed = 2
@@ -209,15 +260,15 @@ local patientData = {
 	[3] = {
 		name="Bob the Bard",
 		bio="Likes to sing",
-		exp= 15,
+		exp= 4,
 		photo="assets/Characters/Icon_P_Bard.png",
 		possible_disease={1,2,3,4,5,6,7,8},
 		symptoms_revealed = 2
 	},
 	[4] = {
 		name="Flo the Florist",
-		bio="Likes to enjoy nature",
-		exp= 5,
+		bio="Enjoys long walks",
+		exp= 8,
 		photo="assets/Characters/Icon_P_Florist.png",
 		possible_disease={1,2,3,4,5,6,7,8},
 		symptoms_revealed = 2
@@ -225,7 +276,7 @@ local patientData = {
 	[5] = {
 		name="Scarlet the Scholar",
 		bio="Likes to read novels",
-		exp= 60,
+		exp= 16,
 		photo="assets/Characters/Icon_P_Scholar.png",
 		possible_disease={1,2,3,4,5,6,7,8},
 		symptoms_revealed = 2
@@ -233,7 +284,7 @@ local patientData = {
 	[6] = {
 		name="LuKe the Lost Knight",
 		bio="Wants to be brave",
-		exp= 7,
+		exp= 32,
 		photo="assets/Characters/Icon_P_Lost_Knight.png",
 		possible_disease={1,2,3,4,5,6,7,8},
 		symptoms_revealed = 2

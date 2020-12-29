@@ -21,6 +21,9 @@ love.graphics.setDefaultFilter("nearest")
 
 -- FUNCTION LOAD
 function love.load()
+	mouseX = 0
+	mouseY = 0
+
 	page = "HELP"
 	DEFAULT_FONT = "assets/nokiafc22.ttf"
 	DEFAULT_FONT_SIZE = 30
@@ -39,7 +42,8 @@ function love.load()
 
 	rectangle_box_icons = love.graphics.newImage("assets/bluerectangle.png")
 	--rectangle_confirm 	= love.graphics.newImage("assets/bluerectangle_confirm.png")
-	centerRect 	= love.graphics.newImage("assets/testMenu.png")
+	centerRect 	= love.graphics.newImage("assets/testMenu.jpg")
+	medicineRect= love.graphics.newImage("assets/BackgroundScrollTreatments_vertical.jpeg")
 
 	doctorImage = love.graphics.newImage("assets/Characters/Icon_Doctor.png");
 
@@ -76,7 +80,7 @@ function love.load()
 	topBarHeight = 0.07 * screenHeight
 	bottomBarHeight = 0.15 * screenHeight
 
-	centerUIWidth = 0.3 * screenWidth
+	centerUIWidth = 0.32 * screenWidth
 	centerUIHeight = centerRect:getHeight()/centerRect:getWidth() * centerUIWidth
 
 	numberOfTests = 6
@@ -286,7 +290,8 @@ function evaluateStage()
 		stage_evaluation_names[i_patient] 		= patient.name
 		stage_evaluation_treatments[i_patient] = patient.treatment
 		stage_evaluation_disease[i_patient] 	= patient.disease
-		if patient.treatment==patient.disease then
+		if patient.treatment==patient.disease or
+			(patient.treatment==9 and math.random() < 0.3) then --chamomile
 			stage_evaluation_cured[i_patient] 		= 1
 			tot_cured = tot_cured+1
 			stage_evaluation_points[i_patient] 	= patient.exp

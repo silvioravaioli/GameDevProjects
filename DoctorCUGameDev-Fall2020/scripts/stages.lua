@@ -4,7 +4,7 @@ local stages = {
         patient_ids={11},
         patients_count=1,
         patients_goal=1,
-        tests_num=10,
+        tests_num=33,
         diseases_unlocked=3,
         symptoms_unlocked=3
     },
@@ -61,10 +61,10 @@ local stages = {
 
     -- DAY 7
     [7] = {
-        patient_ids={1,2,3,4,5,6},
+        patient_ids={71,72,73,74,75,76},
         patients_count=6,
         patients_goal=5,
-        tests_num=40,
+        tests_num=25,
         diseases_unlocked=8,
         symptoms_unlocked=6
     },

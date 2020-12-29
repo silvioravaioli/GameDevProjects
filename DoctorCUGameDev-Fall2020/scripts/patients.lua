@@ -21,8 +21,8 @@ function patients:draw()
 	local borderOffset = 50
 	local textSpacing = 15		-- pixels between lines
 	setFont(SMALLER_FONT_SIZE)					-- set font size
-	local currX = x + borderOffset
-	local currY = y + borderOffset
+	local currX = x + borderOffset+20
+	local currY = y + borderOffset+30
 	setColorBlack()
 
 	fields = {
@@ -109,8 +109,18 @@ function patients:draw()
 	local treatmentY = y
 	treatHeight = 0.75*rectTotal
 	treatScale = treatHeight / rectangle_box_icons:getHeight()
-	love.graphics.draw(rectangle_box_icons, treatmentX, treatmentY, 0, treatScale, treatScale)
-	love.graphics.print("Medicines", treatmentX + treatHeight/5, y + treatHeight/4)
+
+	if patients.isTreating==false then
+		love.graphics.draw(rectangle_box_icons, treatmentX, treatmentY, 0, treatScale, treatScale)
+		setColorWhite()
+	else
+		love.graphics.draw(medicineRect, treatmentX-10, treatmentY-10, 0, treatScale*1.32, treatScale*1.37)
+		setColorBlack()
+	end
+	
+
+	love.graphics.print("Medicines", treatmentX+30 + treatHeight/5, y + treatHeight/4)
+	setColorWhite()
 	self.treatmentButton = {x=treatmentX, y=treatmentY, height=treatHeight, width=treatScale * rectangle_box_icons:getWidth()}
 	if self.isTreating then
 		self:drawTests(treatmentX, treatmentY, 0.75 * rectTotal, 0.25 * rectTotal)
@@ -125,9 +135,9 @@ function patients:drawTests(x, y, squareSize, offset)
 			y = y, 
 			height = squareSize, 
 			width = squareScale * rectangle_box_icons:getWidth()}
-		love.graphics.draw(rectangle_box_icons, x, y, 0, squareScale, squareScale)
-
-		love.graphics.print(treatments[i], x + squareSize/5, y + squareSize/4)
+		--love.graphics.draw(rectangle_box_icons, x, y, 0, squareScale, squareScale)
+		setColorBlue()
+		love.graphics.print(treatments[i], x + squareSize/5+10, y + squareSize/4)
 	end
 end
 

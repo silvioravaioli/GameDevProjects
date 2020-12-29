@@ -8,13 +8,13 @@ function gui:draw()
 	-- TOP SIDE SCREEN
 	stageBarWidth 		= 0.30 * screenWidth
 	progressBarWidth 	= 0.30 * screenWidth
-	levelBarWidth 		= 0.12 * screenWidth -- UNUSED
+	--levelBarWidth 		= 0.12 * screenWidth -- UNUSED
 	expBarWidth 		= 0.25 * screenWidth
 	-- expBarWidth is not set because it varies for centering
 
 	-- BOTTOM PART SCREEN
 	testBarWidth = 0.5 * screenWidth
-	topBarStartX = 0.1 * screenWidth
+	topBarStartX = 0.07 * screenWidth
 
 	gui:drawTopAndBottomDisplay()
 end
@@ -58,7 +58,7 @@ function gui:drawTopAndBottomDisplay()
 		testIconBoxes[i] = {x = xpos, y = ypos, 
 			width = icontest[i]:getWidth() * squareScale, height = icontest[i]:getHeight() * squareScale}
 		if (util.withinObj(mouseX, mouseY, testIconBoxes[i])) then
-			love.graphics.draw(icontesthighlight, xpos, ypos, 0, squareScale, squareScale)
+			love.graphics.draw(icon_highlight, xpos, ypos, 0, squareScale, squareScale)
 			setColorBlack()
 			local font_width = love.graphics.getFont():getWidth(symptoms[i])
 			local text_x = xpos
@@ -77,11 +77,14 @@ function gui:drawTopAndBottomDisplay()
 
 	-- large confirm button, display only if all the patients have been treated
 	--if stage_num_patients_untreated==0 then
+	confirmButton = {x = x0, y = testBarY, width = bottomBarHeight, height = bottomBarHeight}
 	if stage_num_patients_untreated==0 then
 			love.graphics.draw(icon_end_day, x0, testBarY, 0, scaleX, scaleX)
+			if (util.withinObj(mouseX, mouseY, confirmButton)) then			
+				love.graphics.draw(icon_highlight, x0, testBarY, 0, scaleX, scaleX)
+			end
 			--love.graphics.draw(rectangle_confirm, testBarX, testBarY, 0, testBarXScale, testBarYScale)
 	end
-	confirmButton = {x0, testBarY, bottomBarHeight}
 	--rectangleConfirmButton = {testBarX, testBarY, testBarWidth, bottomBarHeight}
 
 
@@ -97,12 +100,17 @@ function gui:drawTopAndBottomDisplay()
 
 	-- HELP
 	love.graphics.draw(icon_help, x1, testBarY, 0, scaleX, scaleX)
-	helpButton = {x1, testBarY, bottomBarHeight}
+	helpButton = {x = x1, y = testBarY, width = bottomBarHeight, height = bottomBarHeight}
+	if (util.withinObj(mouseX, mouseY, helpButton)) then
+		love.graphics.draw(icon_highlight, x1, testBarY, 0, scaleX, scaleX)
+	end
 
 	-- MANUAL
 	love.graphics.draw(icon_manual, x2, testBarY, 0, scaleX, scaleX)
-	manualButton = {x2, testBarY, bottomBarHeight}
-
+	manualButton = {x = x2, y = testBarY, width = bottomBarHeight, height = bottomBarHeight}
+	if (util.withinObj(mouseX, mouseY, manualButton)) then
+		love.graphics.draw(icon_highlight, x2, testBarY, 0, scaleX, scaleX)
+	end
 
 
 
@@ -120,7 +128,7 @@ function gui:drawTopAndBottomDisplay()
 
 
 	-- Add text to UI
-	setColorBlack()
+	--setColorBlack()
 	--textWidth = font:getWidth("HELP")
 	--love.graphics.print("HELP",
 	--	x1 + bottomBarHeight/2 - textWidth/2,
@@ -133,14 +141,26 @@ function gui:drawTopAndBottomDisplay()
 	
 	-- draw top bars: stage, progress, level, experience
 
+
+
+
+
 	-- STAGE (DAY) AND GOAL
 	setColorLightBlue()
 	stageBarX = topBarStartX
-	love.graphics.rectangle("fill", stageBarX, screenOffsetFactor * screenHeight,
-		stageBarWidth, topBarHeight)
-	setColorBlack()
-	love.graphics.rectangle("line", stageBarX, screenOffsetFactor * screenHeight, 
-		stageBarWidth, topBarHeight)
+--	love.graphics.rectangle("fill", stageBarX, screenOffsetFactor * screenHeight,
+--		stageBarWidth, topBarHeight)
+--	setColorBlack()
+--	love.graphics.rectangle("line", stageBarX, screenOffsetFactor * screenHeight, 
+--		stageBarWidth, topBarHeight)
+	--
+	testBarXScale = stageBarWidth / rectangle_box_icons:getWidth()
+	testBarYScale = topBarHeight / rectangle_box_icons:getHeight()
+	setColorWhite()
+	love.graphics.draw(rectangle_box_icons, stageBarX, screenOffsetFactor * screenHeight, 0,  testBarXScale, testBarYScale)
+--	setColorWhite()
+--	love.graphics.draw(rectangle_box_icons, testBarX, testBarY, 0, testBarXScale, testBarYScale)
+
 
 --	stageString = "Day "..tostring(stage)
 	if patients_goal==1 then
@@ -153,17 +173,25 @@ function gui:drawTopAndBottomDisplay()
 		stageBarX + stageBarWidth/2 - textWidth/2,
 		screenOffsetFactor * screenHeight + topBarHeight/2 - textHeight/2)
 
-	-- PROGRESS (TESTS AVAILABLE)
-	setColorLightBlue()
-	progressBarX = stageBarX + stageBarWidth + screenOffsetFactor * screenWidth
-	love.graphics.rectangle("fill", progressBarX,
-		screenOffsetFactor * screenHeight, progressBarWidth,
-		topBarHeight)
 
-	setColorBlack()
-	love.graphics.rectangle("line", progressBarX,
-		screenOffsetFactor * screenHeight, progressBarWidth,
-		topBarHeight)
+
+	-- PROGRESS (TESTS AVAILABLE)
+--	setColorLightBlue()
+	progressBarX = stageBarX + stageBarWidth + screenOffsetFactor * screenWidth
+--	love.graphics.rectangle("fill", progressBarX,
+--		screenOffsetFactor * screenHeight, progressBarWidth,
+--		topBarHeight)
+
+--	setColorBlack()
+--	love.graphics.rectangle("line", progressBarX,
+--		screenOffsetFactor * screenHeight, progressBarWidth,
+--		topBarHeight)
+
+	testBarXScale = progressBarWidth / rectangle_box_icons:getWidth()
+	testBarYScale = topBarHeight / rectangle_box_icons:getHeight()
+	setColorWhite()
+	love.graphics.draw(rectangle_box_icons, progressBarX, screenOffsetFactor * screenHeight, 0,  testBarXScale, testBarYScale)
+
 
 	--progressString = "Progress: "..tostring(testsAvailable).."/"..tostring(maxTests).." Tests Available"
 	progressString = tostring(testsAvailable).."/"..tostring(maxTests).." Tests Available"
@@ -191,13 +219,19 @@ function gui:drawTopAndBottomDisplay()
 	--expBarX = levelBarX + levelBarWidth + screenOffsetFactor * screenWidth
 	expBarX = progressBarX + progressBarWidth + screenOffsetFactor * screenWidth
 	--expBarWidth = screenWidth - topBarStartX - expBarX
-	setColorLightBlue()
-	love.graphics.rectangle("fill", expBarX, screenOffsetFactor * screenHeight,
-		expBarWidth, topBarHeight)
+--	setColorLightBlue()
+--	love.graphics.rectangle("fill", expBarX, screenOffsetFactor * screenHeight,
+--		expBarWidth, topBarHeight)
 
-	setColorBlack()
-	love.graphics.rectangle("line", expBarX, screenOffsetFactor * screenHeight,
-		expBarWidth, topBarHeight)
+--	setColorBlack()
+--	love.graphics.rectangle("line", expBarX, screenOffsetFactor * screenHeight,
+--		expBarWidth, topBarHeight)
+
+	testBarXScale = expBarWidth / rectangle_box_icons:getWidth()
+	testBarYScale = topBarHeight / rectangle_box_icons:getHeight()
+	setColorWhite()
+	love.graphics.draw(rectangle_box_icons, expBarX, screenOffsetFactor * screenHeight, 0,  testBarXScale, testBarYScale)
+
 
 	if level < max_level then
 		maxExpStr = tostring(max_experience[level])
@@ -215,7 +249,12 @@ function gui:drawTopAndBottomDisplay()
 	-- draw return button
 	returnX = x2 + bottomBarHeight + screenOffsetFactor * screenWidth
 	setColorWhite()
+	local hospital_loc = {x = returnX, y = testBarY, 
+		width = icon_hospital:getWidth() * scaleX, height = icon_hospital:getHeight() * scaleX}
 	love.graphics.draw(icon_hospital, returnX, testBarY, 0, scaleX, scaleX)
+	if (util.withinObj(mouseX, mouseY, hospital_loc)) then
+		love.graphics.draw(icon_highlight, returnX, testBarY, 0, scaleX, scaleX)
+	end
 	returnButton = {returnX, testBarY, square:getWidth()}
 
 	setColorBlack()
@@ -238,10 +277,7 @@ function gui:mousepressed(x,y)
 		end
 	end
 	-- move to manual page
-	xx = manualButton[1]
-	yy = manualButton[2]
-	ww = manualButton[3]
-	if x >= xx and x <= xx + ww and y >= yy and y <= yy + ww then
+	if util.withinObj(x, y, manualButton) then
 		if page == "TEST" then
 			currently_testing = true
 		end
@@ -268,12 +304,12 @@ function gui:mousepressed(x,y)
 	--end
 
 	-- move to help page
-	if x >= helpButton[1] and x <= helpButton[1] + helpButton[3] and y >= helpButton[2] and y <= helpButton[2] + helpButton[3] then
+	if util.withinObj(x, y, helpButton) then
 		page = "HELP"
 	end	
 
 	-- move to next stage using the tick button - for testing purposes, will change later
-	if stage_num_patients_untreated==0 and x >= confirmButton[1] and x <= confirmButton[1] + confirmButton[3] and y >= confirmButton[2] and y <= confirmButton[2] + confirmButton[3] then
+	if stage_num_patients_untreated==0 and util.withinObj(x, y, confirmButton) then
 		evaluateStage()
 		page = "STAGE_EVALUATION"
 		--page = "MAIN"
