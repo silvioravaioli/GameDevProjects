@@ -137,6 +137,9 @@ function love.load()
 	--keeps track of total patients encountered
 	patients_encountered = 0
 
+	--helps with testing endscreen
+	trigger_end = true
+
 	-- Variables used to evaluate stages
 	stage_evaluation_names 		= {}
 	stage_evaluation_treatments	= {}
@@ -226,7 +229,7 @@ function love.mousepressed(x, y, button, isTouch)
 	end
 
 	if page == "END_SCREEN" then
-		end_screen:mousepressed(x,y)
+		end_screen:mousepressed(x, y)
 	end
 
 end
@@ -270,7 +273,7 @@ function loadNewStage(stage_num)
 		hospital:load(stage_num)
 
 	--end game
-	elseif stage_num == 7 then
+	elseif stage_num == 8 then --for testing purposes
 		page = "END_SCREEN"
 	end
 end

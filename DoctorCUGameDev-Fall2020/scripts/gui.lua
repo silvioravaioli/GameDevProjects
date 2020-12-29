@@ -310,8 +310,18 @@ function gui:mousepressed(x,y)
 
 	-- move to next stage using the tick button - for testing purposes, will change later
 	if stage_num_patients_untreated==0 and util.withinObj(x, y, confirmButton) then
-		evaluateStage()
-		page = "STAGE_EVALUATION"
+		if trigger_end then
+			page = "END_SCREEN"
+			print("triggered")
+		else
+			print("also")
+			evaluateStage()
+			if stage == 8 then
+				page = "END_SCREEN"
+			else
+				page = "STAGE_EVALUATION"
+			end
+		end 
 		--page = "MAIN"
 	end	
 	-- move to next stage using the large confirm button (only if all patients have been treated)

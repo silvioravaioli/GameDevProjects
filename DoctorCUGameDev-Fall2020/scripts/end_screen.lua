@@ -24,9 +24,15 @@ function end_screen:draw()
 end
 
 function end_screen:mousepressed(x,y)
-	if x >= reset_button_X and x <= reset_button_X + button_width and y >= reset_button_Y and y <= reset_button_Y + button_height then
-		love.load()
-		--print("clicked")
+	if x and y then 
+		if x >= reset_button_X and x <= reset_button_X + button_width and y >= reset_button_Y and y <= reset_button_Y + button_height then
+			love.load()
+
+			--print("clicked")
+		end
 	end
+	print(x)
+	print(y)
+	print(button_width)
 end
 return end_screen
