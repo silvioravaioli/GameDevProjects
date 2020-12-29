@@ -312,9 +312,9 @@ function gui:mousepressed(x,y)
 	if stage_num_patients_untreated==0 and util.withinObj(x, y, confirmButton) then
 		if trigger_end then
 			page = "END_SCREEN"
-			print("triggered")
+			--print("triggered")
 		else
-			print("also")
+			--print("also")
 			evaluateStage()
 			if stage == 8 then
 				page = "END_SCREEN"

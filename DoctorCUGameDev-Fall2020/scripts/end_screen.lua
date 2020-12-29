@@ -31,8 +31,8 @@ function end_screen:mousepressed(x,y)
 			--print("clicked")
 		end
 	end
-	print(x)
-	print(y)
-	print(button_width)
+	--print(x)
+	--print(y)
+	--print(button_width)
 end
 return end_screen
