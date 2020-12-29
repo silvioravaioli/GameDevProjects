@@ -21,6 +21,9 @@ love.graphics.setDefaultFilter("nearest")
 
 -- FUNCTION LOAD
 function love.load()
+	mouseX = 0
+	mouseY = 0
+
 	page = "HELP"
 	DEFAULT_FONT = "assets/nokiafc22.ttf"
 	DEFAULT_FONT_SIZE = 30
