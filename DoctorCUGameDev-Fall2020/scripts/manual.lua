@@ -8,7 +8,7 @@ manual.probstoWords = {
 	[0.0] = "never",
 	[0.2] = "rarely",
 	[0.5] = "sometimes",
-	[0.8] = "very often",
+	[0.8] = "often",
 	[1.0] = "always"
 }
 
